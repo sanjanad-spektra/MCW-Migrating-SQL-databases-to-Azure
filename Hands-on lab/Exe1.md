@@ -19,28 +19,52 @@ In this exercise, you will complete the following tasks:
 
 In this task, you connect to the **<inject key="SQLVM Name" enableCopy="false"/>** VM, confirm the SQL Server build, and configure the `WideWorldImporters` database for migration.
 
-1. On the **Azure portal**, in the **Search resources** box, search for **Resource groups (1)** and then select **Resource groups (2)** from the results.
+1. On the **Azure portal**, in the **Search resources** box at the top, search for **Resource groups (1)** and then select **Resource groups (2)** from the results.
 
-1. On the **Resource groups** page, select the resource group **<inject key="Resource Group Name" enableCopy="false"/>**.
+   ![](media/gs-g-et-4.png)
 
-1. In the list of resources, select the **<inject key="SQLVM Name" enableCopy="false"/>** virtual machine.
+1. On the **Resource groups** page, select the resource group **<inject key="Resource Group Name" enableCopy="false"/>** from the list.
 
-1. On the virtual machine **Overview** page, click **Connect (1)** and then select **Connect (2)**.
+   ![](media/gs-g-et-5.png)
 
-1. On the **Connect** page, click **Download RDP file** under **Native RDP**.
+1. In the list of resources for your resource group, select the **sql2022-<inject key="Suffix" enableCopy="false"/>** Virtual Machine.
 
-1. Click **Keep** on the Downloads pop-up, then click **Open file** to open the RDP session.
+    ![](media/sql50-1.png)
 
-1. On the RDP pop-up, check "I understand and want to allow RDP files to open on this device for my account," and then click **OK**.
+1. On the **sql2022-<inject key="Suffix" enableCopy="false"/>** virtual machine **Overview** page, click **Connect (1)** and then select **Connect (2)** from the drop-down menu.
 
-1. On the RDP tab, ensure the **Clipboard** option is enabled, and then select **Connect**.
+    ![](media/gs-g-et-6.png)
+
+1. On the **sql2022-<inject key="Suffix" enableCopy="false"/> | Connect** page, click on **Download RDP file** under **Native RDP**. 
+  
+    ![](media/E1T1S6-1809.png)
+
+1. Click on **Keep**, on the Downloads pop-up. 
+
+    ![](media/E1T1S7-0701.png)
+
+1. Click on **Open file** to open the RDP session.
+
+    ![](media/E1T1S8-0701.png)
+
+1. On the RDP pop-up, **check (1)** "I understand and want to allow RDP files to open on this device for my account" and then click **OK (2)**.
+
+    ![](media/E1T1S8-0701-1.png)
+
+1. Next, on RDP tab, ensure that the **Clipboard** option is enabled, and then select **Connect**.
+
+   ![The Passed tab is highlighted, and VA1219 is entered into the search filter. VA1219 with a status of PASS is highlighted in the results.](media/datamod17.png "Passed")
 
 1. Enter the following credentials when prompted, and then select **OK**:
 
    - **Username**: `sqlmiuser`
    - **Password**: `Password.1234567890`
 
-1. On **The identity of the remote computer cannot be verified** pop-up, click **Yes**.
+      ![The credentials specified above are entered into the Enter your credentials dialog.](media/E1T1S10-1809.png "Enter your credentials")
+
+1. On **The identity of the remote computer cannot be verified** pop-up window, click **Yes** to confirm and proceed with connecting to your virtual machine.
+
+    ![](media/sql56.png)
 
 1. On the VM, open **SQL Server Management Studio (SSMS)** from the Start menu.
 
