@@ -19,52 +19,28 @@ In this exercise, you will complete the following tasks:
 
 In this task, you connect to the **<inject key="SQLVM Name" enableCopy="false"/>** VM, confirm the SQL Server build, and configure the `WideWorldImporters` database for migration.
 
-1. On the **Azure portal**, in the **Search resources** box at the top, search for **Resource groups (1)** and then select **Resource groups (2)** from the results.
+1. On the **Azure portal**, in the **Search resources** box, search for **Resource groups (1)** and then select **Resource groups (2)** from the results.
 
-   ![](media/gs-g-et-4.png)
+1. On the **Resource groups** page, select the resource group **<inject key="Resource Group Name" enableCopy="false"/>**.
 
-1. On the **Resource groups** page, select the resource group **<inject key="Resource Group Name" enableCopy="false"/>** from the list.
+1. In the list of resources, select the **<inject key="SQLVM Name" enableCopy="false"/>** virtual machine.
 
-   ![](media/gs-g-et-5.png)
+1. On the virtual machine **Overview** page, click **Connect (1)** and then select **Connect (2)**.
 
-1. In the list of resources for your resource group, select the **sql2022-<inject key="Suffix" enableCopy="false"/>** Virtual Machine.
+1. On the **Connect** page, click **Download RDP file** under **Native RDP**.
 
-    ![](media/sql50-1.png)
+1. Click **Keep** on the Downloads pop-up, then click **Open file** to open the RDP session.
 
-1. On the **sql2022-<inject key="Suffix" enableCopy="false"/>** virtual machine **Overview** page, click **Connect (1)** and then select **Connect (2)** from the drop-down menu.
+1. On the RDP pop-up, check "I understand and want to allow RDP files to open on this device for my account," and then click **OK**.
 
-    ![](media/gs-g-et-6.png)
-
-1. On the **sql2022-<inject key="Suffix" enableCopy="false"/> | Connect** page, click on **Download RDP file** under **Native RDP**. 
-  
-    ![](media/E1T1S6-1809.png)
-
-1. Click on **Keep**, on the Downloads pop-up. 
-
-    ![](media/E1T1S7-0701.png)
-
-1. Click on **Open file** to open the RDP session.
-
-    ![](media/E1T1S8-0701.png)
-
-1. On the RDP pop-up, **check (1)** "I understand and want to allow RDP files to open on this device for my account" and then click **OK (2)**.
-
-    ![](media/E1T1S8-0701-1.png)
-
-1. Next, on RDP tab, ensure that the **Clipboard** option is enabled, and then select **Connect**.
-
-   ![The Passed tab is highlighted, and VA1219 is entered into the search filter. VA1219 with a status of PASS is highlighted in the results.](media/datamod17.png "Passed")
+1. On the RDP tab, ensure the **Clipboard** option is enabled, and then select **Connect**.
 
 1. Enter the following credentials when prompted, and then select **OK**:
 
    - **Username**: `sqlmiuser`
    - **Password**: `Password.1234567890`
 
-      ![The credentials specified above are entered into the Enter your credentials dialog.](media/E1T1S10-1809.png "Enter your credentials")
-
-1. On **The identity of the remote computer cannot be verified** pop-up window, click **Yes** to confirm and proceed with connecting to your virtual machine.
-
-    ![](media/sql56.png)
+1. On **The identity of the remote computer cannot be verified** pop-up, click **Yes**.
 
 1. On the VM, open **SQL Server Management Studio (SSMS)** from the Start menu.
 
@@ -118,13 +94,11 @@ In this task, you turn on **Query Store** on the source database and run a sampl
     USE WideWorldImporters;
     GO
 
-    -- Leaderboard query used by the web application
     SELECT TOP (50) GamerTag, Name, GamerScore, GamesPlayed
     FROM dbo.Leaderboard
     ORDER BY GamerScore DESC;
     GO 50
 
-    -- Catalog query
     SELECT Title, Rating
     FROM dbo.Game
     WHERE IsOnlineMultiplayer = 1
@@ -142,7 +116,7 @@ The lab environment has already connected the SQL Server 2016 VM to Azure throug
 
 1. Under **Data services**, select **SQL Server instances**, and then select the **<inject key="SQLVM Name" enableCopy="false"/>** instance.
 
-1. On the **Overview** page, review the instance details: **Version** (SQL Server 2016), **Edition**, **License type**, and **Host**.
+1. On the **Overview** page, review the instance details: version (SQL Server 2016), edition, license type, and host.
 
 1. In the left menu, select **Databases** and confirm that **WideWorldImporters** is listed.
 
@@ -150,19 +124,23 @@ The lab environment has already connected the SQL Server 2016 VM to Azure throug
 
 ## Task 4: Run the Azure Arc migration assessment
 
-In this task, you run a migration assessment and review the database's readiness for **Azure SQL Database** and **Azure SQL Managed Instance**.
+In this task, you run a migration assessment and review the database's readiness for Azure SQL Managed Instance and Azure SQL Database.
 
-1. On the **<inject key="SQLVM Name" enableCopy="false"/>** Arc-enabled SQL Server resource, under **Migration** in the left menu, select **Database migration**.
+1. On the **<inject key="SQLVM Name" enableCopy="false"/>** Arc-enabled SQL Server resource, in the left menu under **Migration**, select **Assessments**.
 
-1. On the **Assessment** tab, select **Run assessment** if there are no results yet. The assessment takes about 5–10 minutes.
+1. On the **Assessments** page, select **Run assessment** from the toolbar. The assessment takes a few minutes to complete.
 
-   >**Note:** If an assessment already ran automatically, its results appear immediately.
+   >**Note:** Azure Arc also runs assessments automatically on a weekly schedule. The **Run assessment** button runs one on demand, which is what this task needs. If the page shows "No assessment run yet," select **Run assessment** and wait.
 
-1. Review the **Azure SQL Database** readiness for **WideWorldImporters**. The assessment flags features that Azure SQL Database doesn't support, including **Service Broker**, so the database isn't ready for Azure SQL Database.
+1. When the assessment completes, the **Assessment results** open with a **Migration strategy** of **Modernize to PaaS** and an **Overview** showing three target options side by side:
 
-1. Review the **Azure SQL Managed Instance** readiness. The database is **Ready** for SQL MI with no blocking issues.
+   - **Azure SQL MI** — **Ready** (0 migration issues)
+   - **SQL Server on Azure VM** — Ready
+   - **Azure SQL DB** — **Not ready**
 
-1. Review the **SKU recommendation** for SQL MI — service tier, hardware, vCores and storage — based on the performance data collected from the source server.
+1. Under the **Azure SQL DB** card, select **View assessment details**. In **Migration target type**, ensure **Azure SQL DB** is selected, and open the **Compatibility** tab. Under **Database compatibility**, note the blocking finding: **"Service Broker feature is not supported in Azure SQL Database"** (Issue). This is why Azure SQL Database is ruled out.
+
+1. Change **Migration target type** to **Azure SQL Managed Instance** and confirm it shows **Ready** with no blocking issues. Then review the **SKU Recommendation** tab for the recommended service tier, vCores and storage, based on the source server's performance data.
 
    >**Note:** The database, including the Service Broker feature, can be migrated as-is, giving WWI a fully managed PaaS database with _near 100% compatibility_, including the features that prevented them from using Azure SQL Database.
 
