@@ -4,7 +4,7 @@
 
 ## Lab Scenario
 
-In this exercise, you connect to the on-premises SQL Server 2016 database, prepare it for migration, optionally capture a Query Store performance baseline, and assess its readiness for Azure SQL Managed Instance using **Azure Arc**. The Azure Arc migration assessment replaces the retired Data Migration Assistant. It runs from the Arc-enabled SQL Server resource in the Azure portal and gives you compatibility findings and a SKU recommendation.
+In this exercise, you connect to the on-premises SQL Server 2016 database, prepare it for migration, optionally capture a Query Store performance baseline, and assess its readiness for Azure SQL Managed Instance using **Azure Arc**. The Azure Arc migration assessment is used in place of the retired Data Migration Assistant workflow. It runs from the Arc-enabled SQL Server resource in the Azure portal and gives you compatibility findings and a SKU recommendation.
 
 ## Lab Objectives
 
