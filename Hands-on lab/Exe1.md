@@ -156,12 +156,20 @@ The lab environment has already connected the SQL Server 2016 VM to Azure throug
 
 1. In the **Azure portal**, search for **Azure Arc** and select it.
 
+    ![](media/MG-image12.png)
+   
 1. Under **Data services**, select **SQL Server instances**, and then select the **<inject key="SQLVM Name" enableCopy="false"/>** instance.
 
+    ![](media/MG-image13.png)
+   
 1. On the **Overview** page, review the instance details: version (SQL Server 2016), edition, license type, and host.
 
-1. In the left menu, select **Databases** and confirm that **WideWorldImporters** is listed.
+    ![](media/MG-image14.png)
+   
+1. In the left menu, select **Databases** and confirm that **WideWorldImporters<inject key="deploymentID" enableCopy="false"></inject>** is listed.
 
+    ![](media/MG-image15.png)
+   
    >**Note:** Azure Arc gives you one place to manage SQL Server outside Azure — inventory, best-practices and migration assessments, and Extended Security Updates for out-of-support versions such as SQL Server 2016.
 
 ## Task 4: Run the Azure Arc migration assessment
