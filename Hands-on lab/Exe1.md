@@ -196,11 +196,11 @@ In this task, you run a migration assessment and review the database's readiness
    
 1. Change **Migration target type** to **Azure SQL Managed Instance**.
 
-   ![](media/MG-image19.png)
+   ![](media/MG-image20.png)
    
 1. Confirm it shows **Ready** with no blocking issues. Then review the **SKU Recommendation** tab for the recommended service tier, vCores and storage, based on the source server's performance data.
 
-    ![](media/MG-image20.png)  
+    ![](media/MG-image21.png)  
 
    >**Note:** The database, including the Service Broker feature, can be migrated as-is, giving WWI a fully managed PaaS database with _near 100% compatibility_, including the features that prevented them from using Azure SQL Database.
 
