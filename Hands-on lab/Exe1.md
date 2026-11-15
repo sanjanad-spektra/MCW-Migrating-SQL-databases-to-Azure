@@ -29,19 +29,19 @@ In this task, you connect to the **<inject key="SQLVM Name" enableCopy="false"/>
 
 1. On the **Resource groups** page, select the resource group **<inject key="Resource Group Name" enableCopy="false"/>** from the list.
 
-   ![](media/gs-g-et-5.png)
+    ![](media/MG-image1.png)
 
-1. In the list of resources for your resource group, select the **sql2022-<inject key="Suffix" enableCopy="false"/>** Virtual Machine.
+1. In the list of resources for your resource group, select the **sql2016-<inject key="Suffix" enableCopy="false"/>** Virtual Machine.
 
-    ![](media/sql50-1.png)
+    ![](media/MG-image2.png)
 
-1. On the **sql2022-<inject key="Suffix" enableCopy="false"/>** virtual machine **Overview** page, click **Connect (1)** and then select **Connect (2)** from the drop-down menu.
+1. On the **sql2016-<inject key="Suffix" enableCopy="false"/>** virtual machine **Overview** page, click **Connect (1)** and then select **Connect (2)** from the drop-down menu.
 
-    ![](media/gs-g-et-6.png)
+    ![](media/MG-image3.png)
 
 1. On the **sql2016-<inject key="Suffix" enableCopy="false"/> | Connect** page, click on **Download RDP file** under **Native RDP**. 
   
-    ![](media/E1T1S6-1809.png)
+    ![](media/MG-image4.png)
 
 1. Click on **Keep**, on the Downloads pop-up. 
 
@@ -72,11 +72,21 @@ In this task, you connect to the **<inject key="SQLVM Name" enableCopy="false"/>
 
 1. On the VM, open **SQL Server Management Studio (SSMS)** from the Start menu.
 
+    ![](media/MG-image5.png)
+   
 1. In the **Connect to Server** dialog, enter `<inject key="SQLVM Name" enableCopy="false"/>` into the **Server name** box, ensure **Windows Authentication** is selected, check **Trust server certificate**, and then select **Connect**.
 
-1. Expand **Databases** in Object Explorer and verify that the **WideWorldImporters** database is listed.
+   ![](media/MG-image6.png)
+   
+1. Expand **Databases** in Object Explorer and verify that the **WideWorldImporters<inject key="deploymentID" enableCopy="false"></inject>** database is listed.
 
-1. Select **New Query**, paste the following script, and then select **Execute**. The script confirms the SQL Server build, sets the recovery model to **FULL**, and enables **Service Broker**.
+    ![](media/MG-image7.png)
+
+1. In SQL Server Management Studio (SSMS), right-click the **SQL Server instance (1)** in Object Explorer and select **New Query (2)**.
+
+   ![](media/MG-image8.png)
+   
+1. Paste the following script, and then select **Execute**. The script confirms the SQL Server build, sets the recovery model to **FULL**, and enables **Service Broker**.
 
     ```sql
     -- Build 13.0.7xxx = SQL Server 2016 SP3 with the Azure Connect pack (required for the Managed Instance link)
@@ -96,6 +106,8 @@ In this task, you connect to the **<inject key="SQLVM Name" enableCopy="false"/>
 
 1. In the results, confirm that **ProductVersion** starts with **13.0.7** and **ProductLevel** is **SP3**.
 
+    ![](media/MG-image9.png)
+   
    >**Note:** SQL Server 2016 SP3 alone is build 13.0.6300. The **Azure Connect pack for SQL Server 2016** raises the build to 13.0.7000 or later and adds the components the Managed Instance link needs.
 
 ## Task 2: Capture a Query Store performance baseline (optional)
