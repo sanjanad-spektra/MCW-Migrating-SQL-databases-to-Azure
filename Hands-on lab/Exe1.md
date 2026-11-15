@@ -89,26 +89,26 @@ In this task, you connect to the **<inject key="SQLVM Name" enableCopy="false"/>
 1. Paste the following script, and then select **Execute**. The script confirms the SQL Server build, sets the recovery model to **FULL**, and enables **Service Broker**.
 
     ```sql
-    -- Build 13.0.7xxx = SQL Server 2016 SP3 with the Azure Connect pack (required for the Managed Instance link)
+    -- Build 13.0.7xxx = SQL Server 2016 SP3 + Azure Connect pack; Edition must be Developer/Standard/Enterprise
     SELECT SERVERPROPERTY('ProductVersion') AS ProductVersion,
            SERVERPROPERTY('ProductLevel')   AS ProductLevel,
            SERVERPROPERTY('Edition')        AS Edition;
     GO
-
+    
     USE master;
     GO
-
-    ALTER DATABASE WideWorldImporters SET
+    
+    ALTER DATABASE WideWorldImporters<inject key="deploymentID" enableCopy="false"></inject> SET
     RECOVERY FULL,
     ENABLE_BROKER WITH ROLLBACK IMMEDIATE;
     GO
     ```
 
-1. In the results, confirm that **ProductVersion** starts with **13.0.7** and **ProductLevel** is **SP3**.
+1. Confirm Edition = Developer (or Standard/Enterprise), ProductVersion starts with 13.0.7, ProductLevel = SP3.
 
-    ![](media/MG-image9.png)
+   ![](media/MG-image9.png)
    
-   >**Note:** SQL Server 2016 SP3 alone is build 13.0.6300. The **Azure Connect pack for SQL Server 2016** raises the build to 13.0.7000 or later and adds the components the Managed Instance link needs.
+     >**Note:**  SP3 alone is 13.0.6300; the Azure Connect pack raises it to 13.0.7000+. The MI link requires Developer/Standard/Enterprise — Evaluation is not supported. If it shows Evaluation, upgrade via Installation Center > Maintenance > Edition Upgrade.
 
 ## Task 2: Capture a Query Store performance baseline (optional)
 
