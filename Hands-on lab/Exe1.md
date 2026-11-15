@@ -119,26 +119,24 @@ In this task, you turn on **Query Store** on the source database and run a sampl
     ```sql
     USE master;
     GO
-
-    ALTER DATABASE WideWorldImporters SET QUERY_STORE = ON;
-    ALTER DATABASE WideWorldImporters SET QUERY_STORE (
-        OPERATION_MODE = READ_WRITE,
-        QUERY_CAPTURE_MODE = ALL,
-        INTERVAL_LENGTH_MINUTES = 5);
+    ALTER DATABASE WideWorldImporters<inject key="deploymentID" enableCopy="false"></inject> SET QUERY_STORE = ON;
+    ALTER DATABASE WideWorldImporters<inject key="deploymentID" enableCopy="false"></inject> SET QUERY_STORE (
+        OPERATION_MODE = READ_WRITE, QUERY_CAPTURE_MODE = ALL, INTERVAL_LENGTH_MINUTES = 5);
     GO
     ```
-
+   ![](media/MG-image33.png)
+    
 1. Select **New Query**, paste the following sample workload, and then select **Execute**. The `GO 50` batch separator runs each query 50 times.
 
     ```sql
-    USE WideWorldImporters;
+    USE WideWorldImporters<inject key="deploymentID" enableCopy="false"></inject>;
     GO
-
-    SELECT TOP (50) GamerTag, Name, GamerScore, GamesPlayed
+    -- Leaderboard query
+    SELECT TOP (50) GamerId, GamerScore, GamesPlayed
     FROM dbo.Leaderboard
     ORDER BY GamerScore DESC;
     GO 50
-
+    -- Catalog query
     SELECT Title, Rating
     FROM dbo.Game
     WHERE IsOnlineMultiplayer = 1
@@ -146,7 +144,11 @@ In this task, you turn on **Query Store** on the source database and run a sampl
     GO 50
     ```
 
-1. In Object Explorer, expand **WideWorldImporters** > **Query Store**, and then double-click **Top Resource Consuming Queries**. Note the **duration** and **CPU time** of the Leaderboard query — you compare these values after the migration.
+    ![](media/MG-image34.png)
+   
+1. In Object Explorer, expand **WideWorldImporters** > **Query Store**, and then double-click **Top Resource Consuming Queries**. Note the **duration** and **CPU time** of the Leaderboard query - you compare these values after the migration.
+
+   ![](media/MG-image34.png)
 
 ## Task 3: Review the Azure Arc-enabled SQL Server
 
