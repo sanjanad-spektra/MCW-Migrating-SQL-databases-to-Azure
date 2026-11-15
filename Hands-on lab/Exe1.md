@@ -176,21 +176,31 @@ The lab environment has already connected the SQL Server 2016 VM to Azure throug
 
 In this task, you run a migration assessment and review the database's readiness for Azure SQL Managed Instance and Azure SQL Database.
 
-1. On the **<inject key="SQLVM Name" enableCopy="false"/>** Arc-enabled SQL Server resource, in the left menu under **Migration**, select **Assessments**.
+1. On the **<inject key="SQLVM Name" enableCopy="false"/>** Arc-enabled SQL Server resource, in the left menu, under **Migration**, select **Assessments**. From the toolbar, select **Run assessment**. The assessment may take a few minutes to complete.
 
-1. On the **Assessments** page, select **Run assessment** from the toolbar. The assessment takes a few minutes to complete.
+     ![](media/MG-image15.png) 
 
    >**Note:** Azure Arc also runs assessments automatically on a weekly schedule. The **Run assessment** button runs one on demand, which is what this task needs. If the page shows "No assessment run yet," select **Run assessment** and wait.
 
 1. When the assessment completes, the **Assessment results** open with a **Migration strategy** of **Modernize to PaaS** and an **Overview** showing three target options side by side:
 
-   - **Azure SQL MI** — **Ready** (0 migration issues)
-   - **SQL Server on Azure VM** — Ready
-   - **Azure SQL DB** — **Not ready**
+   - **Azure SQL MI** - **Ready** (0 migration issues)
+   - **SQL Server on Azure VM** - Ready
+   - **Azure SQL DB** - **Not ready**
 
+      ![](media/MG-image17.png)
+      
 1. Under the **Azure SQL DB** card, select **View assessment details**. In **Migration target type**, ensure **Azure SQL DB** is selected, and open the **Compatibility** tab. Under **Database compatibility**, note the blocking finding: **"Service Broker feature is not supported in Azure SQL Database"** (Issue). This is why Azure SQL Database is ruled out.
 
-1. Change **Migration target type** to **Azure SQL Managed Instance** and confirm it shows **Ready** with no blocking issues. Then review the **SKU Recommendation** tab for the recommended service tier, vCores and storage, based on the source server's performance data.
+   ![](media/MG-image18.png)
+   
+1. Change **Migration target type** to **Azure SQL Managed Instance**.
+
+   ![](media/MG-image19.png)
+   
+1. Confirm it shows **Ready** with no blocking issues. Then review the **SKU Recommendation** tab for the recommended service tier, vCores and storage, based on the source server's performance data.
+
+    ![](media/MG-image20.png)  
 
    >**Note:** The database, including the Service Broker feature, can be migrated as-is, giving WWI a fully managed PaaS database with _near 100% compatibility_, including the features that prevented them from using Azure SQL Database.
 
