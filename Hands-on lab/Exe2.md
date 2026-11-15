@@ -12,8 +12,12 @@ The Managed Instance link uses **distributed availability groups** to replicate 
 
 1. In the Azure portal, select the **Cloud Shell** icon in the top menu, and choose **PowerShell**.
 
+    ![](media/MG-image37.png)
+   
 1. On the **Getting started** pane, select **No storage account required**, select your subscription, and select **Apply**.
 
+    ![](media/MG-image36.png)
+   
 1. Run the following to get the SQL MI details in the **SQLMI-Shared-RG** resource group:
 
    ```PowerShell
@@ -22,6 +26,8 @@ The Managed Instance link uses **distributed availability groups** to replicate 
    ```
 
 1. Copy the **fqdn** value into Notepad. You use it in later steps and exercises.
+
+   ![](media/MG-image38.png)
 
 ### Task 2: Check the Managed Instance link prerequisites
 
@@ -50,8 +56,12 @@ The Managed Instance link requires, on the source SQL Server: SQL Server 2016 SP
     GO
     ```
 
+    ![](media/MG-image39.png)
+   
 1. Confirm **Edition** is **Developer/Standard/Enterprise** (not Evaluation), **IsHadrEnabled** is **1**, and the backup completes successfully.
 
+    ![](media/MG-image40.png)
+   
    >**Note:** If **IsHadrEnabled** is **0**, open **SQL Server Configuration Manager**, right-click **SQL Server (MSSQLSERVER)** > **Properties**, and on the **AlwaysOn High Availability** tab, check **Enable AlwaysOn Availability Groups**, select **OK**, and restart the SQL Server service.
 
 1. On the VM, open **Windows PowerShell** and run the following, replacing `<sqlmi-fqdn>` with the FQDN from Task 1:
@@ -60,7 +70,11 @@ The Managed Instance link requires, on the source SQL Server: SQL Server 2016 SP
     Test-NetConnection -ComputerName <sqlmi-fqdn> -Port 5022
     ```
 
+     ![](media/MG-image42.png)
+   
 1. Confirm that **TcpTestSucceeded** is **True**.
+
+    ![](media/MG-image43.png)
 
 ### Task 3: Select the target and start the Managed Instance link migration
 
