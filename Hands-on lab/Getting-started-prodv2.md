@@ -98,7 +98,7 @@ To adjust the zoom level for the environment page, click the **A↕ : 100%** ico
 
 Use the **slider (three vertical dots)** located between the **Virtual Machine** and the **Lab Guide** panes to adjust the display size, allowing you to customize the layout based on your preference.
 
-   ![](media/mcp-image151.png)
+   ![](media/pmcp-image151.png)
  
 ## 📞 Support Contact
  
