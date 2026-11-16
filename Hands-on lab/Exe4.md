@@ -1,17 +1,21 @@
 ## Exercise 4: Connect the web application and compare performance
 
-### Estimated Duration: 40 Minutes
+**Duration: 40 Minutes**
 
-In this exercise, you publish the WideWorldImporters web application to Azure App Service and point it at the database you migrated with the Managed Instance link (Path A). You connect the app to the MI's network with **regional VNet integration** on a delegated subnet, then use **Query Store** to compare performance on SQL MI with the baseline from Exercise 1.
+### Overview
 
-## Lab Objectives
+In this exercise, you will publish the WideWorldImporters web application to Azure App Service and point it at the database you migrated with the Managed Instance link (Path A). Because SQL Managed Instance has a private IP address inside its virtual network, you will connect the app to that network with **regional VNet integration**, then use **Query Store** to compare the workload's performance on SQL MI with the baseline captured on SQL Server 2016.
 
-- Task 1: Deploy the web app to Azure
-- Task 2: Update the App Service connection strings
-- Task 3: Configure regional VNet integration and open the web app
-- Task 4: Compare performance with Query Store (optional)
+### Objectives
+
+- **Task 1:** Deploy the web app to Azure
+- **Task 2:** Update the App Service connection strings
+- **Task 3:** Configure regional VNet integration and open the web app
+- **Task 4:** Compare performance with Query Store (optional)
 
 ## Task 1: Deploy the web app to Azure
+
+In this task, you will use Visual Studio 2022 to publish the WideWorldImporters web application to Azure App Service.
 
 1. On the **JumpBox** VM, in File Explorer, go to `C:\hands-on-lab\MCW-Migrating-SQL-databases-to-Azure-master\Hands-on lab\lab-files`. Double-click **WideWorldImporters.sln** to open it in Visual Studio.
 
@@ -38,6 +42,8 @@ In this exercise, you publish the WideWorldImporters web application to Azure Ap
 
 ## Task 2: Update the App Service connection strings
 
+In this task, you will update the App Service connection strings to point the application at the migrated database on SQL Managed Instance.
+
 1. In the portal, open **<inject key="Resource Group Name" enableCopy="false"/>** > **wwi-web-<inject key="Suffix" enableCopy="false"/>**.
 
 1. Under **Settings**, select **Environment variables** > **Connection strings** tab > **Advanced edit**.
@@ -55,6 +61,8 @@ In this exercise, you publish the WideWorldImporters web application to Azure Ap
 1. Select **Apply**, then **Confirm**.
 
 ## Task 3: Configure regional VNet integration and open the web app
+
+In this task, you will configure regional VNet integration so the web app can reach the managed instance’s private IP address, then open the running site.
 
 SQL MI has only a private IP. Regional VNet integration routes the app's outbound traffic into the MI's network, using an **empty subnet delegated to `Microsoft.Web/serverFarms`** (the environment provides **webapp-subnet**).
 
@@ -76,6 +84,8 @@ SQL MI has only a private IP. Regional VNet integration routes the app's outboun
    >**Note:** The network change can take a few minutes. If you see an error, refresh a few times or **Restart** the web app.
 
 ## Task 4: Compare performance with Query Store (optional)
+
+In this task, you will run the same workload on SQL Managed Instance and use Query Store to compare performance before and after the migration.
 
 > Do this only if you completed **Exercise 1, Task 2**.
 
