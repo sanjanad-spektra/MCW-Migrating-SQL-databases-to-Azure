@@ -45,11 +45,7 @@ In this task, you connect to the **<inject key="SQLVM Name" enableCopy="false"/>
 
 1. Click on **Keep**, on the Downloads pop-up. 
 
-    ![](media/E1T1S7-0701.png)
-
 1. Click on **Open file** to open the RDP session.
-
-    ![](media/E1T1S8-0701.png)
 
 1. On the RDP pop-up, **check (1)** "I understand and want to allow RDP files to open on this device for my account" and then click **OK (2)**.
 
