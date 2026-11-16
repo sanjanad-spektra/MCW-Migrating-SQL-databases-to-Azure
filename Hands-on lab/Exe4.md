@@ -1,12 +1,21 @@
 ## Exercise 4: Connect the web application and compare performance
 
-Duration: 40 minutes
+**Duration: 40 Minutes**
 
-In this exercise, you publish the WideWorldImporters web application to Azure App Service and point it at the database you migrated with the Managed Instance link (Path A). SQL MI has a private IP address inside its virtual network, so you connect the app to that network with **regional VNet integration** on a delegated subnet. Finally, you use **Query Store** to compare the workload's performance on SQL MI with the baseline you captured on SQL Server 2016.
+### Overview
+
+In this exercise, you will publish the WideWorldImporters web application to Azure App Service and point it at the database you migrated with the Managed Instance link (Path A). Because SQL Managed Instance has a private IP address inside its virtual network, you will connect the app to that network with **regional VNet integration** on a subnet delegated to `Microsoft.Web/serverFarms` — the modern replacement for the gateway-based point-to-site connection. Finally, you will use **Query Store** to compare the workload's performance on SQL MI with the baseline captured on SQL Server 2016.
+
+### Objectives
+
+- **Task 1:** Deploy the web app to Azure
+- **Task 2:** Update the App Service connection strings
+- **Task 3:** Configure regional VNet integration and open the web app
+- **Task 4:** Compare performance with Query Store (optional)
 
 ### Task 1: Deploy the web app to Azure
 
-In this task, you use the JumpBox VM and Visual Studio 2022 to publish the `WideWorldImporters` web application to the App Service in Azure.
+In this task, you will use Visual Studio 2022 on the JumpBox VM to publish the `WideWorldImporters` web application to Azure App Service.
 
 1. On the **JumpBox** VM, in File Explorer, navigate to `C:\hands-on-lab\MCW-Migrating-SQL-databases-to-Azure-master\Hands-on lab\lab-files`. Double-click **WideWorldImporters.sln** to open the solution in Visual Studio.
 
@@ -39,6 +48,8 @@ In this task, you use the JumpBox VM and Visual Studio 2022 to publish the `Wide
 
 ### Task 2: Update the App Service connection strings
 
+In this task, you will update the App Service connection strings to point the application at the migrated database on SQL Managed Instance.
+
 1. In the Azure portal, open the **<inject key="Resource Group Name" enableCopy="false"/>** resource group and select the **wwi-web-<inject key="Suffix" enableCopy="false"/>** App Service.
 
 1. Under **Settings**, select **Environment variables**, select the **Connection strings** tab, and select **Advanced edit**.
@@ -56,6 +67,8 @@ In this task, you use the JumpBox VM and Visual Studio 2022 to publish the `Wide
 1. Select **Apply**, then **Confirm** when told the app will restart.
 
 ### Task 3: Configure regional VNet integration and open the web app
+
+In this task, you will configure regional VNet integration so the web app can reach the managed instance's private IP address, then open the running site. This replaces the gateway-based point-to-site connection used in earlier versions of the lab.
 
 SQL MI has only a private IP address in its virtual network. Regional VNet integration routes the web app's outbound traffic into that network. It needs a **subnet delegated to `Microsoft.Web/serverFarms`** — the lab environment provides one in the `sqlmi-vnet` virtual network.
 
@@ -80,7 +93,9 @@ SQL MI has only a private IP address in its virtual network. Regional VNet integ
 
 ### Task 4: Compare performance with Query Store (optional)
 
-Query Store data is stored inside the database, so the baseline you captured on SQL Server 2016 in Exercise 1 moved to SQL MI with the database. In this task you run the same workload on SQL MI and compare.
+In this task, you will run the same workload on SQL Managed Instance and use Query Store to compare performance before and after the migration.
+
+Query Store data is stored inside the database, so the baseline you captured on SQL Server 2016 in Exercise 1 moved to SQL MI with the database.
 
 > **Note:** Do this task only if you completed **Exercise 1, Task 2**.
 
