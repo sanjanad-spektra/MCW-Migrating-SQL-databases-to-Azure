@@ -1,18 +1,20 @@
 ## Exercise 5: Improve the security posture with Data Discovery & Classification and Microsoft Defender for SQL
 
-### Estimated Duration: 30 Minutes
+**Duration: 30 Minutes**
 
-In this exercise, you use the built-in security features of Azure SQL Managed Instance: **Microsoft Defender for SQL**, **Data Discovery & Classification**, and **Transparent Data Encryption (TDE)**.
+### Overview
 
-> **Note:** Microsoft Defender for SQL was previously called *Azure Defender for SQL*.
+In this exercise, you will use the built-in security features of Azure SQL Managed Instance on the migrated database. You will classify sensitive data with **Data Discovery & Classification**, review database vulnerabilities with **Microsoft Defender for SQL**, and enable **Transparent Data Encryption (TDE)** to encrypt the database at rest.
 
-## Lab Objectives
+### Objectives
 
-- Task 1: Configure Data Discovery & Classification
-- Task 2: Review the Microsoft Defender for SQL vulnerability assessment
-- Task 3: Enable Transparent Data Encryption and rescan
+- **Task 1:** Configure Data Discovery & Classification
+- **Task 2:** Review the Microsoft Defender for SQL vulnerability assessment
+- **Task 3:** Enable Transparent Data Encryption and rescan
 
 ## Task 1: Configure Data Discovery & Classification
+
+In this task, you will discover and classify sensitive columns in the migrated database and review the classification report.
 
 1. Navigate to the **SQLMI-Shared-RG** resource group and select the SQL managed instance. From **Overview**, select the managed database **WideWorldImporters<inject key="Suffix" enableCopy="false"/>**.
 
@@ -38,6 +40,8 @@ In this exercise, you use the built-in security features of Azure SQL Managed In
 
 ## Task 2: Review the Microsoft Defender for SQL vulnerability assessment
 
+In this task, you will run the Microsoft Defender for SQL vulnerability assessment and review the findings, including that TDE is not enabled.
+
 With the **express configuration** (default), scan results are stored by the service — no storage account needed.
 
 1. On the database blade, under **Security**, select **Microsoft Defender for Cloud**. Confirm **Microsoft Defender for SQL** is **Enabled**.
@@ -51,6 +55,8 @@ With the **express configuration** (default), scan results are stored by the ser
    > **Why is TDE off?** New databases on SQL MI are encrypted by default, but databases that arrive through a migration keep the source's encryption state. WideWorldImporters wasn't encrypted on SQL Server 2016, so it isn't on SQL MI.
 
 ## Task 3: Enable Transparent Data Encryption and rescan
+
+In this task, you will enable Transparent Data Encryption and rerun the vulnerability scan to confirm the finding is resolved.
 
 1. On the **JumpBox** VM, in SSMS on the **SQL MI** connection, run (replace **SUFFIX**):
 
