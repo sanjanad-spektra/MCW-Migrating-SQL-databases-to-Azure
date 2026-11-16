@@ -4,7 +4,7 @@
     "Language": "English",
     "Files": [
       {
-        "RawFilePath": "https://raw.githubusercontent.com/CloudLabs-MCW/MCW-Migrating-SQL-databases-to-Azure/refs/heads/ads-migration/Hands-on%20lab/HOL-step-by-step-Migrating-SQL-databases-to-azure-new.md",
+        "RawFilePath": "https://raw.githubusercontent.com/sanjanad-spektra/MCW-Migrating-SQL-databases-to-Azure/refs/heads/prod-v2/Hands-on%20lab/Getting-started-prodv2.md",
         "Order": 1 
       },
       {
@@ -25,11 +25,11 @@
       },
       {
         "RawFilePath": "https://raw.githubusercontent.com/sanjanad-spektra/MCW-Migrating-SQL-databases-to-Azure/refs/heads/prod-v2/Hands-on%20lab/Exe5.md",
-        "Order": 5
+        "Order": 6
       },
       {
         "RawFilePath": "https://raw.githubusercontent.com/sanjanad-spektra/MCW-Migrating-SQL-databases-to-Azure/refs/heads/prod-v2/Hands-on%20lab/Exe6.md",
-        "Order": 5
+        "Order": 7
       }
     ]
   } 
