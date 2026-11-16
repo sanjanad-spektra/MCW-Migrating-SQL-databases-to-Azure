@@ -1,4 +1,4 @@
-## Exercise 2: Path A — Migrate with Azure Arc and the Managed Instance link
+## Exercise 2: Migrate with Azure Arc and the Managed Instance link
 
 Duration: 60 minutes
 
@@ -88,31 +88,54 @@ The Managed Instance link requires, on the source SQL Server: SQL Server 2016 SP
    - **Resource group:** **SQLMI-Shared-RG**
    - **Region:** the region of the managed instance (Central US)
    - **Managed Instance:** select the shared instance (for example **sqlmi--cus**)
+   - Then select **Select target**.
 
-   Then select **Select target**.
-
+      ![](media/MG-image47.png)
+     
 1. **Start the migration.** Back on the **Database migration** pane, select the **Migrate data** tile (Step 3).
 
+      ![](media/MG-image48.png)
+   
 1. On the **New data migration** pane, under **Migration method**, choose **Migrate using real-time replication - MI link** (the most performant option, recommended for SQL Server 2016 and above), and select **Select**.
 
+      ![](media/MG-image49.png)
+   
 1. On the **Select source databases** tab, check **WideWorldImporters<inject key="Suffix" enableCopy="false"/>** (it should show **Migration readiness: Ready** and **Status: Online**), then select **Next: Settings**.
 
-1. On the **Settings** tab, under **Link parameters**, leave the auto-generated **MI link name** (`DAG_WideWorldImporters<Suffix>`) and **Source availability group name** (`AG_WideWorldImporters<Suffix>`). Leave **Automatic detection** on for the **Source SQL Server Instance IP address** — it detects the VM's private IP automatically. Select **Test connection** and confirm it succeeds, then select **Next: Review + create**.
+    ![](media/MG-image50.png)
+   
+1. On the **Settings** tab, under **Link parameters**, leave the auto-generated **MI link name** (`DAG_WideWorldImporters<Suffix>`) and **Source availability group name** (`AG_WideWorldImporters<Suffix>`). Leave **Automatic detection** on for the **Source SQL Server Instance IP address** - it detects the VM's private IP automatically. Select **Test connection**.
 
-1. On the **Review + create** tab, review the **Validations**. **SQL Server configuration**, **SQL Server AG name**, **SQL MI storage size**, and **SQL MI permissions** should all show **Success**. The remaining items are warnings you can proceed past — the Always On mirroring endpoint, its certificate, and encryption are **created automatically during link creation**, and the recommended trace flags `-T1800`/`-T9567` are optional performance tuning. Select **Start data migration**.
+    ![](media/MG-image51.png)
+   
+1. Confirm it succeeds, then select **Next: Review + create**.
 
+   ![](media/MG-image52.png)
+
+1. On the **Review + create** tab, review the **Validations**. **SQL Server configuration**, **SQL Server AG name**, **SQL MI storage size**, and **SQL MI permissions** should all show **Success**. The remaining items are warnings you can proceed past - the Always On mirroring endpoint, its certificate, and encryption are **created automatically during link creation**, and the recommended trace flags `-T1800`/`-T9567` are optional performance tuning. Select **Start data migration**.
+
+   ![](media/MG-image53.png)
+   
    >**Note:** If **SQL Server configuration** shows **Not ready** with *"unsupported edition"*, the source is running SQL Server **Evaluation** edition. Upgrade it to **Developer/Standard/Enterprise** (**SQL Server Installation Center** > **Maintenance** > **Edition Upgrade**), then select **Revalidate**.
 
    >**Note:** Azure Arc grants just-in-time permissions, creates the distributed availability group, and seeds the database to SQL MI. Creating the link can take up to about 10 minutes.
 
 1. On the **Database migration** pane, select the **Monitor and cutover** tile. On the **Monitoring the migration** tab, **Refresh** until the **Migration status** for your database shows **Ready for cutover** and **Connection status** is **Healthy** (for a small database this takes only a few minutes).
 
+     ![](media/MG-image54.png)
+
+     ![](media/MG-image61.png) 
    > **Alternative:** You can create the same link from SSMS — right-click **WideWorldImporters<inject key="Suffix" enableCopy="false"/>** > **Azure SQL Managed Instance link** > **New...** — and follow the wizard.
 
 ### Task 4: Verify near real-time replication
 
-1. In SSMS, select **Connect** > **Database Engine**. Enter the SQL MI **FQDN** from Task 1, select **SQL Server Authentication**, log in as `contosoadmin` / `IAE5fAijit0w^rDM`, check **Trust server certificate**, and select **Connect**.
+1. In SSMS, select **Connect** > **Database Engine**.
+   ![](media/MG-image57.png)
 
+3. Enter the SQL MI **FQDN** from Task 1, select **SQL Server Authentication**, log in as `contosoadmin` / `IAE5fAijit0w^rDM`, check **Trust server certificate**, and select **Connect**.
+
+   ![](media/MG-image58.png)
+   
 1. On the **<inject key="SQLVM Name" enableCopy="false"/>** connection, select **New Query** and run the following to insert a record on the source (replace **SUFFIX** with **<inject key="Suffix" />**):
 
    ```sql
@@ -158,31 +181,6 @@ The Managed Instance link requires, on the source SQL Server: SQL Server 2016 SP
    ```
 
 1. Observe that **Updateability** is now **READ_WRITE** — the database on SQL MI is the primary, and the migration is complete.
-
-### Troubleshooting
-
-> **"The database is read-only" when inserting in Task 4.** Make sure you run the INSERT on the **source** SQL Server connection (the VM, `<inject key="SQLVM Name" enableCopy="false"/>`), **not** the SQL MI connection. While the link is active, the SQL MI copy is a read-only secondary — writes go to the source and replicate across.
-
-> **"Database name is already in use" when selecting the source database.** A database with that name already exists on the shared managed instance. Confirm your source database uses your unique deployment-ID suffix (`WideWorldImporters<inject key="Suffix" enableCopy="false"/>`).
-
-> **Complete cutover fails with "Conflict" / "Failed to delete MI Link".** The shared managed instance may be briefly busy — click **Refresh** and select **Complete cutover** again. If it still fails after a couple of tries, the link can be recovered from the source side (replace **SUFFIX** with **<inject key="Suffix" />**):
->
-> ```sql
-> USE master;
-> GO
-> -- Review the availability groups, then drop the distributed AG first, then the local AG
-> SELECT name, is_distributed FROM sys.availability_groups;
-> GO
-> DROP AVAILABILITY GROUP [DAG_WideWorldImportersSUFFIX];
-> GO
-> DROP AVAILABILITY GROUP [AG_WideWorldImportersSUFFIX];
-> GO
-> -- Return the source database to read-write
-> ALTER DATABASE WideWorldImportersSUFFIX SET READ_WRITE WITH ROLLBACK IMMEDIATE;
-> GO
-> ```
->
-> Then, on **Monitor and cutover**, select the migration and choose **Delete migration** to clear it. If the managed instance still shows a leftover database or distributed availability group, ask your lab administrator to remove it (it's a shared resource).
 
 ## Summary
 
