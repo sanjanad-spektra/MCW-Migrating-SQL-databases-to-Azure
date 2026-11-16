@@ -130,6 +130,7 @@ The Managed Instance link requires, on the source SQL Server: SQL Server 2016 SP
 ### Task 4: Verify near real-time replication
 
 1. In SSMS, select **Connect** > **Database Engine**.
+
    ![](media/MG-image57.png)
 
 3. Enter the SQL MI **FQDN** from Task 1, select **SQL Server Authentication**, log in as `contosoadmin` / `IAE5fAijit0w^rDM`, check **Trust server certificate**, and select **Connect**.
