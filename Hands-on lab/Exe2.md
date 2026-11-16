@@ -1,14 +1,22 @@
 ## Exercise 2: Migrate with Azure Arc and the Managed Instance link
 
-Duration: 60 minutes
+**Duration: 60 Minutes**
 
-In this exercise, you migrate the `WideWorldImporters<inject key="Suffix" enableCopy="false"/>` database to Azure SQL Managed Instance using the **Managed Instance link**, starting from the Azure Arc-enabled SQL Server.
+### Overview
 
-> **Note:** The source database is named `WideWorldImporters<inject key="Suffix" enableCopy="false"/>` (with your deployment ID). The Managed Instance link keeps the same name on SQL MI, and because the managed instance is shared by all attendees, this suffix keeps your database unique on it.
+In this exercise, you will migrate the `WideWorldImporters<Suffix>` database to Azure SQL Managed Instance using the **Managed Instance link**, starting from the Azure Arc-enabled SQL Server. The link uses distributed availability groups to replicate the database in near real time; when you are ready, you cut over with only seconds of downtime.
 
-The Managed Instance link uses **distributed availability groups** to replicate the database to SQL MI in near real time. While the link is active, the source database stays online and the copy on SQL MI is readable. When you're ready, you cut over, and the application downtime is only the few seconds the cutover takes. This is the recommended online migration path for SQL Server 2016 SP3 and later. For a SQL Server 2016 source, the link is one-way: once you cut over to SQL MI, you cannot fail back to SQL Server 2016.
+### Objectives
+
+- **Task 1:** Retrieve the SQL MI connection information
+- **Task 2:** Check the Managed Instance link prerequisites
+- **Task 3:** Select the target and start the Managed Instance link migration
+- **Task 4:** Verify near real-time replication
+- **Task 5:** Cut over to SQL MI
 
 ### Task 1: Retrieve the SQL MI connection information
+
+In this task, you will use Cloud Shell to retrieve the fully qualified domain name (FQDN) of the shared Azure SQL Managed Instance.
 
 1. In the Azure portal, select the **Cloud Shell** icon in the top menu, and choose **PowerShell**.
 
@@ -31,7 +39,7 @@ The Managed Instance link uses **distributed availability groups** to replicate 
 
 ### Task 2: Check the Managed Instance link prerequisites
 
-The Managed Instance link requires, on the source SQL Server: SQL Server 2016 SP3 with the Azure Connect pack (confirmed in Exercise 1); a **supported edition** (**Developer**, **Standard**, or **Enterprise** — *not* Evaluation); the **Always On availability groups** feature enabled; a **database master key** in `master`; the FULL recovery model with a full backup; and network connectivity to SQL MI (TCP **5022** both directions, **11000–11999** from SQL Server to SQL MI). The lab environment has the supported edition installed, the availability groups feature enabled, and the ports opened. In this task you verify them and prepare the database.
+In this task, you will verify the source SQL Server prerequisites and prepare the database (master key and a full backup) for the Managed Instance link.
 
 1. On the **<inject key="SQLVM Name" enableCopy="false"/>** VM, in SSMS, select **New Query**, paste the following (replace **SUFFIX** with **<inject key="Suffix" />**), and select **Execute**:
 
@@ -77,6 +85,8 @@ The Managed Instance link requires, on the source SQL Server: SQL Server 2016 SP
     ![](media/MG-image43.png)
 
 ### Task 3: Select the target and start the Managed Instance link migration
+
+In this task, you will select the managed instance as the target and start the Managed Instance link migration from the Azure Arc portal.
 
 1. In the Azure portal, go to **Azure Arc** > **SQL Server instances** > **<inject key="SQLVM Name" enableCopy="false"/>** > under **Migration**, select **Database migration**.
 
@@ -129,6 +139,8 @@ The Managed Instance link requires, on the source SQL Server: SQL Server 2016 SP
 
 ### Task 4: Verify near real-time replication
 
+In this task, you will confirm that changes made on the source database replicate to the read-only copy on SQL Managed Instance in near real time.
+
 1. In SSMS, select **Connect** > **Database Engine**.
 
    ![](media/MG-image57.png)
@@ -161,7 +173,9 @@ The Managed Instance link requires, on the source SQL Server: SQL Server 2016 SP
 
 ### Task 5: Cut over to SQL MI
 
-1. In a production migration you would stop the application's writes to the source database first (at the application layer). **Do not set the source database to `READ_ONLY`** — while the database is part of the Managed Instance link, that can block the cutover from completing. The cutover itself coordinates the switch of the write workload to SQL MI.
+In this task, you will cut over to SQL Managed Instance, making it the read-write primary and completing the migration.
+
+1. In a production migration you would stop the application's writes to the source database first (at the application layer). **Do not set the source database to `READ_ONLY`** - while the database is part of the Managed Instance link, that can block the cutover from completing. The cutover itself coordinates the switch of the write workload to SQL MI.
 
 1. In the Azure portal, return to **<inject key="SQLVM Name" enableCopy="false"/>** > **Database migration**, and select the **Monitor and cutover** tile.
 
@@ -181,7 +195,7 @@ The Managed Instance link requires, on the source SQL Server: SQL Server 2016 SP
    SELECT COUNT(*) AS Games FROM dbo.Game;
    ```
 
-1. Observe that **Updateability** is now **READ_WRITE** — the database on SQL MI is the primary, and the migration is complete.
+1. Observe that **Updateability** is now **READ_WRITE** - the database on SQL MI is the primary, and the migration is complete.
 
 ## Summary
 
