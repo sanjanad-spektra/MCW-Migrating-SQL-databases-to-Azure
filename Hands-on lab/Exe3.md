@@ -112,13 +112,13 @@ In this task, you will deploy an Azure Database Migration Service instance.
 
      ![](media/MG-image78.png)
 
-7. On the **Review + create** tab, select **Create**. Wait for the deployment to complete, then select **Go to resource**.
+1. On the **Review + create** tab, select **Create**. Wait for the deployment to complete, then select **Go to resource**.
 
     ![](media/MG-image79.png)
 
     ![](media/MG-image80.png)
 
-1. On the **Azure Database Migration Service** resource page, select **New Migration**.
+1. On the **Azure Database Migration Service** resource page, select **+ New Migration**.
 
     ![](media/MG-image81.png)
 
@@ -137,57 +137,99 @@ In this task, you will deploy an Azure Database Migration Service instance.
    - Select **Yes (1)** for **Is your source SQL Server instance tracked in Azure?**
    - **Resource group:** Select the required **<inject key="Resource Group Name" enableCopy="false"/> (2)**.
    - **Location:** Select **Central US (3)**.
-   - **SQL Server Instance:** Select **sql2016-<inject key="Suffix" enableCopy="false"/>**.
+   - **SQL Server Instance:** Select **sqlvm2016-sp3**.
    - Select **Next: Select migration target >>**.
 
-      ![](media/MG-image89.png)
+      ![](media/MG-image162.png)
 
+1. On the **Select migration target** page:
 
+    - Under **Resource group**, select **SQLMI-shared-RG (1)**
+    - under **Target SQL Managed Instance**, select **sqlmi--cus (2)**.
+    - select **Next: Data source configuration >> (3)**.
 
+        ![](media/MG-image90.png)
 
+3. On the **Data source configuration** page:
+
+   - **Resource group:** Select **<inject key="Resource Group Name" enableCopy="false"/>**.
+   - **Storage account:** Select **sqlmistore<inject key="Suffix" enableCopy="false"/>**.
+   - **Blob container:** Select **migration**.
+   - **Folder:** Select **wwi-b**.
+   - **Target database:** Select **WideWorldImportersB<inject key="Suffix" enableCopy="false"/>**.
+   - Select **I confirm the Managed Identity has read access to the above blob container(s)**.
+   - Select **Next: Database migration summary >>**.
+
+       ![](media/MG-image91.png)
+
+4. On the **Database migration summary** page:
+
+   - Review the migration details.
+   - Select **Start migration**.
+
+     ![](media/MG-image92.png)
      
-1. Source server type **SQL Server**, target **Azure SQL Managed Instance**, pricing **Database Migration Service**, then **Select**.
-1. Resource group **<inject key="Resource Group Name" enableCopy="false"/>**, name **wwi-dms-<inject key="Suffix" enableCopy="false"/>**, same region, then **Review + create** > **Create** > **Go to resource**.
+1. On the Migrations tab, select **Refresh** until the **Migration** status for **WideWorldImportersB** shows **Ready for cutover** (the full-backup restore takes a few minutes).
 
-## Task 4: Create and run an online migration from Blob Storage
+    ![](media/MG-image164.png)
+   
+### Task 5: Complete the cutover
 
-In this task, you will create and start an online migration that restores the backup from Blob Storage to the managed instance.
+In this task, you will optionally capture an incremental change with a transaction-log backup, then complete the cutover to finish the migration.
 
-1. On **wwi-dms-<inject key="Suffix" enableCopy="false"/>**, select **+ New migration**.
-1. Set source **SQL Server**, target **Azure SQL Managed Instance**, mode **Online migration**, backup location **Azure Blob Storage**, then **Select**.
-1. On **Target**, select your subscription, **SQLMI-Shared-RG**, and the managed instance; **Next**.
-1. On **Database and backup**, enter: source **WideWorldImporters**, target **WideWorldImportersB<inject key="Suffix" enableCopy="false"/>**, storage account **sqlmistore<inject key="Suffix" enableCopy="false"/>**, container **migration**, folder **wwi-b**; **Next**.
-1. Review and **Start migration**.
-1. On **Migrations**, **Refresh** until the full backup shows **Restored** and status is **Ready for cutover** (~10–15 min).
-
-## Task 5: Back up the transaction log and cut over
-
-In this task, you will back up the transaction log and complete the cutover to finish the migration.
-
-1. On the source connection, run (replace **SUFFIX**):
+1. In SSMS, on the **source** connection, run the following (replace **SUFFIX** with **<inject key="Suffix" />**):
 
    ```sql
-   USE WideWorldImporters;
+   USE WideWorldImportersSUFFIX;
    GO
+
    INSERT [dbo].[Game] (Title, Description, Rating, IsOnlineMultiplayer)
    VALUES ('Ocean Odyssey', 'Dive into an underwater world full of hidden treasures.', 'E', 1);
    GO
-   BACKUP LOG WideWorldImporters
-   TO URL = 'https://sqlmistoreSUFFIX.blob.core.windows.net/migration/wwi-b/WideWorldImporters_log1.trn'
+
+   BACKUP LOG WideWorldImportersSUFFIX
+   TO URL = 'https://sqlmistoreSUFFIX.blob.core.windows.net/migration/wwi-b/WideWorldImportersSUFFIX_log1.trn'
    WITH CHECKSUM, COMPRESSION, MAXTRANSFERSIZE = 4194304, BLOCKSIZE = 65536;
    GO
    ```
 
-1. In the portal, **Refresh** until **WideWorldImporters_log1.trn** shows **Restored**.
-1. Select **Complete cutover**, confirm **0** pending log backups, check the box, and **Complete cutover**.
-1. **Refresh** until the status is **Succeeded**.
-1. On the SQL MI connection, verify (replace **SUFFIX**):
+   ![](media/MG-image166.png)
+   
+1. Naviagte back to **wwi-dms-<inject key="Suffix" enableCopy="false"/>** migration service, select the **Migrations** tab.
+
+   - In the migration row, select the **Source name** to open the migration details.
+
+       ![](media/MG-image94.png)
+      
+2. On the migration details page, select **Complete cutover**.
+
+    ![](media/MG-image95.png)
+
+   - In the **Complete cutover** pane, verify **Log backups pending restore** is **0**.
+   - Select **I confirm there are no additional log backups to provide and want to complete cutover**.
+   - Select **Complete cutover**.
+
+     ![](media/MG-image96.png)
+     
+1. **Refresh** until the migration status is **Succeeded**.
+
+     ![](media/MG-image97.png)
+
+1. In SSMS, on the **SQL MI** connection, run the following (replace **SUFFIX** with **<inject key="Suffix" />**):
 
    ```sql
+   SELECT DATABASEPROPERTYEX('WideWorldImportersBSUFFIX','Updateability') AS Updateability;
+
    USE WideWorldImportersBSUFFIX;
    GO
-   SELECT Title FROM dbo.Game WHERE Title IN ('Space Adventure', 'Ocean Odyssey');
+   SELECT Title, Rating FROM dbo.Game WHERE Title IN ('Space Adventure', 'Ocean Odyssey');
    ```
+
+1. Observe that **Updateability** is **READ_WRITE** and the data migrated.
+
+    ![](media/MG-image165.png)
+    
+  > **Exercise 2 vs. Exercise 3:** The Managed Instance link replicates continuously, so cutover typically takes only a few seconds. However, it requires Always On availability groups and network connectivity to SQL Managed Instance. DMS from Blob Storage requires only outbound HTTPS connectivity from SQL Server to Azure Storage, while downtime depends on how long the final log backup takes to restore.
 
 ## Summary
 
