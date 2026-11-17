@@ -64,7 +64,7 @@ In this task, you connect to the **<inject key="SQLVM Name" enableCopy="false"/>
 
 1. On **The identity of the remote computer cannot be verified** pop-up window, click **Yes** to confirm and proceed with connecting to your virtual machine.
 
-    ![](media/sql56.png)
+    ![](media/MG-image129.png)
 
 1. On the VM, open **SQL Server Management Studio (SSMS)** from the Start menu.
 
@@ -100,9 +100,11 @@ In this task, you connect to the **<inject key="SQLVM Name" enableCopy="false"/>
     GO
     ```
 
+    ![](media/MG-image132.png)
+   
 1. Confirm Edition = Developer (or Standard/Enterprise), ProductVersion starts with 13.0.7, ProductLevel = SP3.
 
-   ![](media/MG-image9.png)
+   ![](media/MG-image130.png)
    
      >**Note:**  SP3 alone is 13.0.6300; the Azure Connect pack raises it to 13.0.7000+. The MI link requires Developer/Standard/Enterprise — Evaluation is not supported. If it shows Evaluation, upgrade via Installation Center > Maintenance > Edition Upgrade.
 
