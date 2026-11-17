@@ -148,13 +148,85 @@ In this task, you turn on **Query Store** on the source database and run a sampl
 
    ![](media/MG-image35.png)
 
-## Task 3: Review the Azure Arc-enabled SQL Server
+
+## Task 3: Connect the SQL Server 2016 VM to Azure Arc
+
+In this task, you connect the SQL Server 2016 VM to Azure through Azure Arc. Because the SQL Server runs on an Azure virtual machine, you first apply the settings Azure Arc requires on an Azure VM, then onboard the machine. Azure Arc then automatically installs the SQL Server extension.
+
+1. Select Start, type **PowerShell (1)**, right-click **Windows PowerShell ISE (2)**, and select **Run as administrator (3)**.
+
+   ![](media/MG-image133.png)
+
+1. In the PowerShell ISE script pane, click **Show Script Pane (1)**, then paste the following script **(2)** and select **Run Script (3)** (the green ▶ arrow). These settings are required because the machine is an Azure VM — they allow the Azure Connected Machine agent to run instead of the built-in Azure VM agent:
+
+   ```powershell
+   [System.Environment]::SetEnvironmentVariable("MSFT_ARC_TEST", "true", [System.EnvironmentVariableTarget]::Machine)
+   Set-Service WindowsAzureGuestAgent -StartupType Disabled
+   Stop-Service WindowsAzureGuestAgent -Force
+   New-NetFirewallRule -Name "BlockAzureIMDS" -DisplayName "Block Azure IMDS" -Enabled True -Profile Any -Direction Outbound -Action Block -RemoteAddress 169.254.169.254
+   ```
+    
+   ![](media/MG-image134.png)
+
+### Generate and download the onboarding script  
+
+1. In the Azure portal, search for **Azure Arc** and select it.
+
+    ![](media/MG-image12.png)
+
+1. In the left menu, under **Infrastructure**, select **Machines**. On the toolbar, select **+ Onboard/Create**, then select **Onboard existing machines**.
+
+    ![](media/MG-image135.png)
+   
+1. On the **Resource details** tab, set the following:
+
+   - **Resource group**: **<inject key="Resource Group Name" enableCopy="false"/>**
+   - **Region**: **(US) Central US**
+   - **Operating system**: **Windows**
+   - Select **Download and run script**,
+
+     ![](media/MG-image136.png)
+
+1. Click **Download** to download the script. When the pop-up appears, click **Keep**.
+
+   ![](media/MG-image137.png)
+
+   ![](media/MG-image141.png)
+
+1. Once the script is downloaded, click **Close** at the top-right corner of the portal.
+
+    ![](media/MG-image142.png)
+
+### Run the onboarding script on the SQL Server VM
+
+1. Navigate back to **PowerShell ISE**, click **New Script** from the toolbar.
+
+    ![](media/MG-image138.png)
+   
+3.  Paste the script below, and select **Run Script**.
+
+    ![](media/MG-image139.png)
+
+   ```powershell
+   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+   & "$HOME\Downloads\OnboardingScript.ps1"
+   ```
+
+1. The script installs the Azure Connected Machine agent and then displays a message such as **"Please login using the pop-up browser to authenticate."** Minimize the PowerShell ISE script pane, select the **ODL_User** account in the pop-up browser, and then navigate back to **PowerShell ISE** to monitor the running script.
+
+   ![](media/MG-image140.png)
+    
+### Review the Azure Arc-enabled SQL Server
 
 The lab environment has already connected the SQL Server 2016 VM to Azure through **Azure Arc**. In this task, you review the Arc-enabled SQL Server resource.
 
 1. In the **Azure portal**, search for **Azure Arc** and select it.
 
     ![](media/MG-image12.png)
+
+1. Azure Arc > Machines and confirm the machine shows Connected.
+
+
    
 1. Under **Data services**, select **SQL Server instances**, and then select the **<inject key="SQLVM Name" enableCopy="false"/>** instance.
 
