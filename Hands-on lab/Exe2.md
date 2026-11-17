@@ -16,24 +16,24 @@ In this exercise, you will migrate the `WideWorldImporters<Suffix>` database to 
 
 ### Task 1: Retrieve the SQL MI connection information
 
-In this task, you will use Cloud Shell to retrieve the fully qualified domain name (FQDN) of the shared Azure SQL Managed Instance.
+In this task, you will use **Azure Cloud Shell** to retrieve the fully qualified domain name (FQDN) of the shared Azure SQL Managed Instance.
 
-1. In the Azure portal, select the **Cloud Shell** icon in the top menu, and choose **PowerShell**.
+1. In the Azure portal, select the **Cloud Shell (1)** icon in the top menu, and select **PowerShell (2)**.
 
     ![](media/MG-image37.png)
    
-1. On the **Getting started** pane, select **No storage account required**, select your subscription, and select **Apply**.
+1. In the **Getting started** pane, select **No storage account required (1)**, select your **Subscription (2)**, and select **Apply (3)**.
 
     ![](media/MG-image36.png)
    
-1. Run the following to get the SQL MI details in the **SQLMI-Shared-RG** resource group:
+1. Run the following command to retrieve the **SQL Managed Instance** details from the **SQLMI-Shared-RG** resource group:
 
    ```PowerShell
    $resourceGroup = "SQLMI-Shared-RG"
    az sql mi list --resource-group $resourceGroup --query "[].{name:name, fqdn:fullyQualifiedDomainName, tier:sku.tier}" -o table
    ```
-
-1. Copy the **fqdn** value into Notepad. You use it in later steps and exercises.
+   
+1. In the command output, locate the **fqdn** value and copy it to **Notepad**. You will use this value in later steps and exercises.
 
    ![](media/MG-image38.png)
 
