@@ -129,10 +129,8 @@ In this task, you will select the managed instance as the target and start the M
 
     ![](media/MG-image54.png)
 
-1. On the **Monitoring the migration** tab, **Refresh** until the **Migration status** for your database shows **Ready for cutover** and **Connection status** is **Healthy**. This typically takes less than **2–3 minutes** 
-
-     ![](media/MG-image54.png)
-
+1. On the **Monitoring the migration** tab, **Refresh** until the **Migration status** for your database shows **Ready for cutover** and **Connection status** is **Healthy**. This typically takes less than **2–3 minutes**
+   
      ![](media/MG-image61.png)
    
 ### Task 4: Verify near real-time replication
@@ -147,7 +145,11 @@ In this task, you will confirm that changes made on the source database replicat
 
    ![](media/MG-image58.png)
    
-1. On the **<inject key="SQLVM Name" enableCopy="false"/>** connection, select **New Query** and run the following to insert a record on the source (replace **SUFFIX** with **<inject key="Suffix" />**):
+1. In **SQL Server Management Studio (SSMS)**, on the **SQLVM 2016 source connection**, right-click the **sqlvm2016-sp3** server connection and select **New Query**.
+
+    ![](media/MG-image149.png)
+   
+1. Run the following to insert a record on the source. Replace **SUFFIX** with **<inject key="Suffix" />**:
 
    ```sql
    USE WideWorldImportersSUFFIX;
@@ -157,7 +159,13 @@ In this task, you will confirm that changes made on the source database replicat
    VALUES ('Space Adventure', 'Explore the universe with our newest online multiplayer gaming experience.', 'T', 1);
    ```
 
-1. On the **SQL MI** connection, select **New Query** and run the following (replace **SUFFIX** with **<inject key="Suffix" />**):
+   ![](media/MG-image150.png)
+
+1. On the **SQL MI connection** (`sqlmi--cus`), right-click the connection and select **New Query**.
+
+    ![](media/MG-image151.png)
+
+1. Run the following and replace **SUFFIX** with **<inject key="Suffix" />**:
 
    ```sql
    USE WideWorldImportersSUFFIX;
@@ -167,7 +175,9 @@ In this task, you will confirm that changes made on the source database replicat
    SELECT DATABASEPROPERTYEX(DB_NAME(), 'Updateability') AS Updateability;
    ```
 
-1. Observe that the **Space Adventure** row is already on SQL MI and **Updateability** is **READ_ONLY** — while the link is active, the SQL MI copy is a readable secondary.
+   ![](media/MG-image152.png)
+
+1. Observe that the **Space Adventure** row is already on SQL MI and **Updateability** is **READ_ONLY**, while the link is active, the SQL MI copy is a readable secondary.
 
 ### Task 5: Cut over to SQL MI
 
