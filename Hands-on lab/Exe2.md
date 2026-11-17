@@ -37,40 +37,20 @@ In this task, you will use Cloud Shell to retrieve the fully qualified domain na
 
    ![](media/MG-image38.png)
 
-### Task 2: Check the Managed Instance link prerequisites
+## Task 2: Prepare the database for the Managed Instance link
 
-In this task, you will verify the source SQL Server prerequisites and prepare the database (master key and a full backup) for the Managed Instance link.
+The source SQL Server prerequisites for the Managed Instance link are already configured in the lab environment (built into the SQL Server VM image): a supported edition + SP3 with the Azure Connect pack (confirmed in Exercise 1), Always On availability groups enabled, a database master key in master, the required NT AUTHORITY\SYSTEM availability-group grants, and the network ports (5022 and 11000–11999). The only step you perform here is a full backup, which establishes the log chain the link's automatic seeding needs.
 
-1. On the **<inject key="SQLVM Name" enableCopy="false"/>** VM, in SSMS, select **New Query**, paste the following (replace **SUFFIX** with **<inject key="Suffix" />**), and select **Execute**:
+1. On the VM, in SSMS (connected to localhost), select New Query, paste the following (replace SUFFIX with ), and select Execute:
 
-    ```sql
-    -- Edition must be Developer, Standard, or Enterprise (NOT Evaluation) for the MI link
-    SELECT SERVERPROPERTY('Edition') AS Edition;
-    -- 1 = the Always On availability groups feature is enabled
-    SELECT SERVERPROPERTY('IsHadrEnabled') AS IsHadrEnabled;
-    GO
-
-    USE master;
-    GO
-
-    IF NOT EXISTS (SELECT 1 FROM sys.symmetric_keys WHERE name = '##MS_DatabaseMasterKey##')
-        CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'MiLink-Pa55w.rd-2026!';
-    GO
-
-    -- Full backup to establish the log chain (written to the default backup folder)
+    ```
+    -- Full backup to establish the log chain for the link's automatic seeding
     BACKUP DATABASE WideWorldImportersSUFFIX
     TO DISK = 'WideWorldImportersSUFFIX_full.bak'
     WITH CHECKSUM, INIT, COMPRESSION;
     GO
     ```
-
-    ![](media/MG-image39.png)
-   
-1. Confirm **Edition** is **Developer/Standard/Enterprise** (not Evaluation), **IsHadrEnabled** is **1**, and the backup completes successfully.
-
-    ![](media/MG-image40.png)
-   
-   >**Note:** If **IsHadrEnabled** is **0**, open **SQL Server Configuration Manager**, right-click **SQL Server (MSSQLSERVER)** > **Properties**, and on the **AlwaysOn High Availability** tab, check **Enable AlwaysOn Availability Groups**, select **OK**, and restart the SQL Server service.
+1. Confirm the backup completes successfully.
 
 1. On the VM, open **Windows PowerShell** and run the following, replacing `<sqlmi-fqdn>` with the FQDN from Task 1:
 
