@@ -146,7 +146,7 @@ In this task, you turn on **Query Store** on the source database and run a sampl
    
 1. In Object Explorer, expand **WideWorldImporters** > **Query Store**, and then double-click **Top Resource Consuming Queries**. Note the **duration** and **CPU time** of the Leaderboard query - you compare these values after the migration.
 
-   ![](media/MG-image34.png)
+   ![](media/MG-image35.png)
 
 ## Task 3: Review the Azure Arc-enabled SQL Server
 
