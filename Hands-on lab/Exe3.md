@@ -82,12 +82,70 @@ In this task, you will back up the database directly to Azure Blob Storage using
 
     ![](media/MG-image161.png)
 
+
 ## Task 3: Create the Azure Database Migration Service
 
 In this task, you will deploy an Azure Database Migration Service instance.
 
+1. In the Azure portal, search for **Azure Database Migration Services** and select **Azure Database Migration Services**.
 
-1. Portal > search **Azure Database Migration Services** > **+ Create**.
+    ![](media/MG-image75.png)
+   
+3. On the **Azure Database Migration Service** page, under **Azure Database Migration Service**, select **Start a new migration**.
+
+   ![](media/MG-image76.png)
+
+1. On the **Select migration scenario and Database Migration Service** page, set:
+
+   - **Source server type:** **SQL Server (1)**
+   - **Target server type:** **Azure SQL Managed Instance (2)**
+   - **Database Migration Service:** **Database Migration Service (3)**
+   - Then select **Select (4)**.
+
+     ![](media/MG-image77.png)
+
+4. On the **Create Data Migration Service** page:
+   - **Resource group:** Select the required **<inject key="Resource Group Name" enableCopy="false"/> (1)**.
+   - **Location:** Select **Central US (2)**.
+   - **Migration service name:** Enter **wwi-dms-<inject key="Suffix" enableCopy="false"/>  (3)**.
+   - Select **Review + create (4)**.
+
+     ![](media/MG-image78.png)
+
+7. On the **Review + create** tab, select **Create**. Wait for the deployment to complete, then select **Go to resource**.
+
+    ![](media/MG-image79.png)
+
+    ![](media/MG-image80.png)
+
+1. On the **Azure Database Migration Service** resource page, select **New Migration**.
+
+    ![](media/MG-image81.png)
+
+2. On the **Select new migration scenario** page, set:
+
+   - **Source server type:** **SQL Server (1)**
+   - **Target server type:** **Azure SQL Managed Instance (2)**
+   - **Backup file storage location:** **Blob storage (3)**
+   - **Migration mode:** **Online (4)**
+   - Then select **Select (5)**.
+
+     ![](media/MG-image88.png)
+
+2. On the **Source details** page:
+
+   - Select **Yes (1)** for **Is your source SQL Server instance tracked in Azure?**
+   - **Resource group:** Select the required **<inject key="Resource Group Name" enableCopy="false"/> (2)**.
+   - **Location:** Select **Central US (3)**.
+   - **SQL Server Instance:** Select **sql2016-<inject key="Suffix" enableCopy="false"/>**.
+   - Select **Next: Select migration target >>**.
+
+      ![](media/MG-image89.png)
+
+
+
+
+     
 1. Source server type **SQL Server**, target **Azure SQL Managed Instance**, pricing **Database Migration Service**, then **Select**.
 1. Resource group **<inject key="Resource Group Name" enableCopy="false"/>**, name **wwi-dms-<inject key="Suffix" enableCopy="false"/>**, same region, then **Review + create** > **Create** > **Go to resource**.
 
