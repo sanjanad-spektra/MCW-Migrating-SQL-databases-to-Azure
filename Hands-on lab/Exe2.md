@@ -183,17 +183,27 @@ In this task, you will confirm that changes made on the source database replicat
 
 In this task, you will cut over to SQL Managed Instance, making it the read-write primary and completing the migration.
 
-1. In a production migration you would stop the application's writes to the source database first (at the application layer). **Do not set the source database to `READ_ONLY`** - while the database is part of the Managed Instance link, that can block the cutover from completing. The cutover itself coordinates the switch of the write workload to SQL MI.
+1. Navigate back to the **Azure portal** browser page where the **Monitoring the migration** tab is open.
 
-1. In the Azure portal, return to **<inject key="SQLVM Name" enableCopy="false"/>** > **Database migration**, and select the **Monitor and cutover** tile.
+2. On the **Monitoring the migration** tab, confirm the **WideWorldImporters<inject key="Suffix" enableCopy="false"/>** row shows **Migration status: Ready for cutover** and **Connection status: Healthy**.
 
-1. On the **Monitoring the migration** tab, confirm the **WideWorldImporters<inject key="Suffix" enableCopy="false"/>** row shows **Migration status: Ready for cutover** and **Connection status: Healthy**. Select the migration (check its box), then select **Complete cutover** from the toolbar.
+   ![](media/MG-image156.png)
 
-1. In the **Complete cutover** dialog, confirm **Lag** shows **--** (zero). Check **I confirm that I have stopped all incoming traffic to the source database** and **I want to do a forced failover**, then select **Complete cutover**. (The forced failover is safe when Lag is 0; the link is removed and SQL Server 2016 doesn't support failback.)
+1. On the **Monitor and cutover** page, select the **WideWorldImporters<inject key="Suffix" enableCopy="false"/>** database row.
 
-1. **Refresh** until the migration status shows it has completed (1–2 minutes).
+2. Select **Complete cutover** and, in the **Complete cutover** dialog, select **I confirm that I have stopped all incoming traffic to the source database** and **I want to do a forced failover**. Then select **Complete cutover** to start the cutover.
 
-1. On the **SQL MI** connection, run the following again (replace **SUFFIX** with **<inject key="Suffix" />**):
+    ![](media/MG-image154.png)
+   
+1. Wait for the cutover to complete, and monitor the Notifications pane for a Cutover completed notification.
+
+   ![](media/MG-image157.png)
+
+1. On the **SQL MI connection** (`sqlmi--cus`), right-click the connection and select **New Query**.
+
+    ![](media/MG-image151.png)
+   
+1. Run the following again (replace **SUFFIX** with **<inject key="Suffix" />**):
 
    ```sql
    USE WideWorldImportersSUFFIX;
@@ -205,6 +215,8 @@ In this task, you will cut over to SQL Managed Instance, making it the read-writ
 
 1. Observe that **Updateability** is now **READ_WRITE** - the database on SQL MI is the primary, and the migration is complete.
 
+    ![](media/MG-image158.png)
+   
 ## Summary
 
 In this exercise, you used Azure Arc and the Managed Instance link to replicate the `WideWorldImporters<inject key="Suffix" enableCopy="false"/>` database from SQL Server 2016 to Azure SQL Managed Instance, confirmed near-real-time replication, and cut over with only seconds of downtime.
