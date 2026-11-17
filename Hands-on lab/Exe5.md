@@ -16,15 +16,39 @@ In this exercise, you will use the built-in security features of Azure SQL Manag
 
 In this task, you will discover and classify sensitive columns in the migrated database and review the classification report.
 
-1. Navigate to the **SQLMI-Shared-RG** resource group and select the SQL managed instance. From **Overview**, select the managed database **WideWorldImporters<inject key="Suffix" enableCopy="false"/>**.
+1. In the **Azure portal**, use the search bar to search for **`SQLMI-shared-RG`**.
+
+     ![](media/MG-image98.png)
+   
+3. Under **Resource Groups**, select **`SQLMI-shared-RG`**.
+
+     ![](media/MG-image99.png)
+
+4. In the **Resources** section, locate and select the SQL Managed Instance **`sqlmi--cus`**.
+
+    ![](media/MG-image100.png)
+   
+6. In the SQL Managed Instance page, expand **Data management (1)** from the left navigation menu. Select **Databases (2)** and in the database search and select  **`WideWorldImporters`**.
 
 1. On the database blade, under **Security**, select **Data Discovery & Classification**.
 
-1. Select the info link showing the columns with classification recommendations.
+    ![](media/MG-image101.png)
 
-1. Review the recommendations, then select the recommendation for **Sales - CreditCard - CardNumber**.
+1. In the **WideWorldImporters** database, select the **Classification** tab and expand the **columns with classification recommendations** section by selecting the expand arrow.
 
-1. Select **+ Add classification**, enter the following, and **Add classification**:
+    ![](media/MG-image102.png)
+   
+3. Review the classification recommendations displayed for the database.
+
+1. Review the recommendation for **Sales - CreditCard - CardNumber**.
+
+   ![](media/MG-image127.png)
+
+1. Select **Sales CreditCard - CardNumber** and click **+ Add classification**.
+
+    ![](media/MG-image103.png)
+
+1. Enter the following, and **Add classification**:
 
    - **Schema name**: **Sales**
    - **Table name**: **CreditCard**
@@ -32,12 +56,28 @@ In this task, you will discover and classify sensitive columns in the migrated d
    - **Information type**: **Credit Card**
    - **Sensitivity label**: **Highly Confidential**
 
+      ![](media/MG-image104.png)
+     
 1. Select **Save**.
 
+    ![](media/MG-image105.png)
+   
 1. Review the **HumanResources - Employee** recommendations (NationalIDNumber, BirthDate) flagged **Confidential - GDPR**. Check **Select all**, select **Accept selected recommendations**, then **Save**.
 
-1. When the save completes, select the **Overview** tab to view the classification summary report.
+    ![](media/MG-image106.png)
 
+1. Select the **Select all** checkbox to select all available classification recommendations. Select **Accept selected recommendations** to accept the selected classification recommendations.
+
+    ![](media/MG-image107.png)
+
+1. Select **Save** on the toolbar of the Data Classification window.
+
+     ![](media/MG-image108.png)
+
+1. When the save completes, select the **Overview** tab on the Data Discovery & Classification blade to view a report with a full summary of the database classification state.
+
+    ![](media/MG-image109.png)
+   
 ## Task 2: Review the Microsoft Defender for SQL vulnerability assessment
 
 In this task, you will run the Microsoft Defender for SQL vulnerability assessment and review the findings, including that TDE is not enabled.
