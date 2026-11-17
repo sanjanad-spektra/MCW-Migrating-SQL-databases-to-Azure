@@ -86,12 +86,22 @@ With the **express configuration** (default), scan results are stored by the ser
 
 1. On the database blade, under **Security**, select **Microsoft Defender for Cloud**. Confirm **Microsoft Defender for SQL** is **Enabled**.
 
-1. Scroll down and select **View additional findings in Vulnerability Assessment**.
+   ![](media/MG-image110.png)
 
+1. Scroll down and under **Vulnerabilities on this database**, select **View database vulnerability summary**.
+
+    ![](media/MG-image111.png)
+   
 1. Select **Scan** on the toolbar and wait for it to complete.
+
+   ![](media/MG-image112.png)
 
 1. In the **Unhealthy** list, find the **Transparent data encryption** check (**VA1219**) and select it to view the details.
 
+     ![](media/MG-image113.png)
+
+     ![](media/MG-image114.png)
+   
    > **Why is TDE off?** New databases on SQL MI are encrypted by default, but databases that arrive through a migration keep the source's encryption state. WideWorldImporters wasn't encrypted on SQL Server 2016, so it isn't on SQL MI.
 
 ## Task 3: Enable Transparent Data Encryption and rescan
@@ -107,18 +117,25 @@ In this task, you will enable Transparent Data Encryption and rerun the vulnerab
    GO
    ```
 
+   ![](media/MG-image115.png)
+
 1. Check the encryption state:
 
     ```sql
     SELECT DB_NAME(database_id) AS database_name, encryption_state, encryptor_type, percent_complete
     FROM sys.dm_database_encryption_keys;
     ```
-
+    ![](media/MG-image116.png)
+   
 1. Confirm **encryption_state** is **3** (encrypted). If **2**, wait and re-run.
 
 1. Return to the **Vulnerability Assessment** page and select **Scan** again.
+  
+1. When complete, search **VA1219** it's no longer in **Unhealthy**.
 
-1. When complete, search **VA1219** — it's no longer in **Unhealthy**. Select the **Healthy** tab and confirm **VA1219** passed.
+1. Select the **Passed** tab and confirm **VA1219** passed.
+
+   ![](media/MG-image117.png)
 
 ## Summary
 
