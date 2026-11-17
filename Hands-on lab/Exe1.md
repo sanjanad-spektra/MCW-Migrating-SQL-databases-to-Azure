@@ -248,7 +248,7 @@ In this task, you run a migration assessment and review the database's readiness
 
 1. On the **<inject key="SQLVM Name" enableCopy="false"/>** Arc-enabled SQL Server resource, in the left menu, under **Migration**, select **Assessments**. From the toolbar, select **Run assessment**. The assessment may take a few minutes to complete.
 
-     ![](media/MG-image15.png) 
+     ![](media/MG-image16.png) 
 
    >**Note:** Azure Arc also runs assessments automatically on a weekly schedule. The **Run assessment** button runs one on demand, which is what this task needs. If the page shows "No assessment run yet," select **Run assessment** and wait.
 
