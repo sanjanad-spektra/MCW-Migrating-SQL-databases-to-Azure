@@ -18,34 +18,69 @@ In this exercise, you will migrate a second copy of the database to Azure SQL Ma
 
 In this task, you will create a container and generate a Shared Access Signature (SAS) token so SQL Server can write backups to Azure Blob Storage.
 
-1. In the portal, open **Storage accounts** > **sqlmistore<inject key="Suffix" enableCopy="false"/>**.
-1. Under **Data storage**, select **Containers** > **+ Container**, name it **migration**, and **Create**.
-1. Select the **migration** container > **Settings** > **Shared access tokens**.
-1. Set **Permissions** to Read, Add, Create, Write, Delete, List; set an **Expiry** one day out; select **Generate SAS token and URL**.
-1. Copy the **Blob SAS token** into Notepad (drop the leading `?` when you use it).
+1. In the Azure portal, search for and select **Storage accounts**.
 
+   ![](media/MG-image62.png)
+
+1. Select sqlmistore<inject key="Suffix" enableCopy="false"/>.
+
+    ![](media/MG-image65.png)
+
+1. Expand **Data storage (1)**, select **Containers (2)**, then select **+ Add container (3)**.
+
+   ![](media/MG-image66.png)
+    
+3. On the New container pane, enter **migration** as the container name **(1)**, then select **Create (2)**.
+
+   ![](media/MG-image67.png)
+   
+1. Select the **migration** container, then go to **Settings (1)** > **Shared access tokens (2)**.
+
+    ![](media/MG-image68.png)
+
+    ![](media/MG-image69.png)
+   
+1. Under **Permissions**, select **Read**, **Add**, **Create**, **Write**, **Delete**, and **List**.
+
+    ![](media/MG-image70.png)
+   
+4. Set the **Expiry** to **two days from now (1)**, select **HTTPS** and **HTTP (2)**, then select **Generate SAS token and URL (3)**.
+
+    ![](media/MG-image71.png)
+
+5. Copy the **Blob SAS token** into Notepad.
+
+    ![](media/MG-image159.png)
+   
 ## Task 2: Back up the database to Azure Blob Storage
 
 In this task, you will back up the database directly to Azure Blob Storage using BACKUP ... TO URL.
 
 1. On the **<inject key="SQLVM Name" enableCopy="false"/>** VM, in SSMS on the source connection, paste the following (replace **SUFFIX** with **<inject key="Suffix" />** and `<SAS-token>`), and **Execute**:
-
+   
     ```sql
     USE master;
     GO
-
+    
+    -- credential name must match the container URL exactly
     CREATE CREDENTIAL [https://sqlmistoreSUFFIX.blob.core.windows.net/migration]
     WITH IDENTITY = 'SHARED ACCESS SIGNATURE',
          SECRET = '<SAS-token>';
     GO
-
-    BACKUP DATABASE WideWorldImporters
-    TO URL = 'https://sqlmistoreSUFFIX.blob.core.windows.net/migration/wwi-b/WideWorldImporters_full.bak'
+    
+    BACKUP DATABASE WideWorldImporters2474952
+    TO URL = 'https://sqlmistoreSUFFIX.blob.core.windows.net/migration/wwi-b/WideWorldImportersSUFFIX_full.bak'
     WITH CHECKSUM, COMPRESSION, MAXTRANSFERSIZE = 4194304, BLOCKSIZE = 65536;
     GO
     ```
 
-1. Confirm the backup succeeds and the **wwi-b** folder contains the file in the portal.
+    ![](media/MG-image160.png)
+   
+1. Navigate back to the migration container and select the **wwi-b** folder. Confirm that the backup file is present in the folder.
+
+    ![](media/MG-image73.png)
+
+    ![](media/MG-image161.png)
 
 ## Task 3: Create the Azure Database Migration Service
 
