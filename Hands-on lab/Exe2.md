@@ -39,9 +39,13 @@ In this task, you will use **Azure Cloud Shell** to retrieve the fully qualified
 
 ## Task 2: Prepare the database for the Managed Instance link
 
-The source SQL Server prerequisites for the Managed Instance link are already configured in the lab environment (built into the SQL Server VM image): a supported edition + SP3 with the Azure Connect pack (confirmed in Exercise 1), Always On availability groups enabled, a database master key in master, the required NT AUTHORITY\SYSTEM availability-group grants, and the network ports (5022 and 11000–11999). The only step you perform here is a full backup, which establishes the log chain the link's automatic seeding needs.
+The source SQL Server prerequisites for the Managed Instance link are already configured in the lab environment (built into the SQL Server VM image): a supported edition + SP3 with the Azure Connect pack (confirmed in Exercise 1), Always On availability groups enabled, a database master key in master, the required NT AUTHORITY\SYSTEM availability-group grants, and the network ports (5022 and 11000–11999). The only step you perform here is a full backup, which establishes the log chain required for the link's automatic seeding.
 
-1. On the VM, in SSMS (connected to localhost), select New Query, paste the following (replace SUFFIX with ), and select Execute:
+1. On the VM, in SSMS (connected to Source/localhost), select **New Query**.
+
+     ![](media/MG-image149.png)
+   
+1. Paste the following (replace SUFFIX with ), and select **Execute**:
 
     ```
     -- Full backup to establish the log chain for the link's automatic seeding
@@ -50,9 +54,9 @@ The source SQL Server prerequisites for the Managed Instance link are already co
     WITH CHECKSUM, INIT, COMPRESSION;
     GO
     ```
-1. Confirm the backup completes successfully.
-
-1. On the VM, open **Windows PowerShell** and run the following, replacing `<sqlmi-fqdn>` with the FQDN from Task 1:
+    ![](media/MG-image144.png)
+    
+1. On the VM, open **Windows PowerShell** and run the following command, replacing **<sqlmi-fqdn>** with the **FQDN** retrieved in Task 1:
 
     ```PowerShell
     Test-NetConnection -ComputerName <sqlmi-fqdn> -Port 5022
@@ -68,32 +72,47 @@ The source SQL Server prerequisites for the Managed Instance link are already co
 
 In this task, you will select the managed instance as the target and start the Managed Instance link migration from the Azure Arc portal.
 
-1. In the Azure portal, go to **Azure Arc** > **SQL Server instances** > **<inject key="SQLVM Name" enableCopy="false"/>** > under **Migration**, select **Database migration**.
+1. In the Azure portal, search for **Azure Arc (1)**, select **Azure Arc (2)**.
 
-1. **Select the target.** On the **Database migration** pane, select the **Select target** tile (Step 2). On the **Create or select target** pane, set:
+    ![](media/MG-image12.png)
 
-   - **Target exists:** **Yes, I have already created a target**
-   - **Target type:** **Azure SQL Managed Instance**
-   - **Subscription:** your subscription
-   - **Resource group:** **SQLMI-Shared-RG**
-   - **Region:** the region of the managed instance (Central US)
-   - **Managed Instance:** select the shared instance (for example **sqlmi--cus**)
-   - Then select **Select target**.
+1. On the **Azure Arc** page, expand **Data services (1)** and select **SQL Server instances (2)**. On the **SQL Server instances** page, select your **<inject key="Resource Group Name" enableCopy="false"/>** in the **Resource group** filter, and then select **sqlvm2016-sp3 (4)**.
 
-      ![](media/MG-image47.png)
+   ![](media/MG-image145.png)
+   
+1. On the **SQL Server instance** page, expand **Migration (1)** and select **Database migration (2)**.
+
+     ![](media/MG-image45.png)
+   
+1. Click on **Select the target**.
+
+     ![](media/MG-image46.png)
+   
+3. On the **Create or select target** pane, configure the following settings:
+
+   - **Target exists:** **Yes, I have already created a target (1)**
+   - **Target type:** **Azure SQL Managed Instance (2)**
+   - **Subscription:** **Select your Subscription (3)**.
+   - **Resource group:** Select **SQLMI-Shared-RG (4)**.
+   - **Region:** Select **Central US (5)**.
+   - **Managed Instance:** **Select the shared managed instance (for example, **sqlmi--cus**) (6)**.
+   - Select **Select target (7)**.
+
+   ![](media/MG-image155.png)
      
-1. **Start the migration.** Back on the **Database migration** pane, select the **Migrate data** tile (Step 3).
+1. Back on the **Database migration** pane, select the **Migrate data** tile (Step 3).
 
       ![](media/MG-image48.png)
-   
-1. On the **New data migration** pane, under **Migration method**, choose **Migrate using real-time replication - MI link** (the most performant option, recommended for SQL Server 2016 and above), and select **Select**.
 
-      ![](media/MG-image49.png)
-   
-1. On the **Select source databases** tab, check **WideWorldImporters<inject key="Suffix" enableCopy="false"/>** (it should show **Migration readiness: Ready** and **Status: Online**), then select **Next: Settings**.
 
-    ![](media/MG-image50.png)
-   
+1. On the **New data migration** pane, under **Migration method**, select **Migrate using real-time replication - MI link**. This is the recommended and most performant option for SQL Server 2016 and later. Select **Select**.
+
+   ![](media/MG-image49.png)
+
+1. On the **Select source databases** tab, select **WideWorldImporters<inject key="Suffix" enableCopy="false"/>**. Verify that **Migration readiness** is **Ready** and **Status** is **Online**, then select **Next: Settings**.
+
+   ![](media/MG-image50.png)
+
 1. On the **Settings** tab, under **Link parameters**, leave the auto-generated **MI link name** (`DAG_WideWorldImporters<Suffix>`) and **Source availability group name** (`AG_WideWorldImporters<Suffix>`). Leave **Automatic detection** on for the **Source SQL Server Instance IP address** - it detects the VM's private IP automatically. Select **Test connection**.
 
     ![](media/MG-image51.png)
@@ -102,21 +121,20 @@ In this task, you will select the managed instance as the target and start the M
 
    ![](media/MG-image52.png)
 
-1. On the **Review + create** tab, review the **Validations**. **SQL Server configuration**, **SQL Server AG name**, **SQL MI storage size**, and **SQL MI permissions** should all show **Success**. The remaining items are warnings you can proceed past - the Always On mirroring endpoint, its certificate, and encryption are **created automatically during link creation**, and the recommended trace flags `-T1800`/`-T9567` are optional performance tuning. Select **Start data migration**.
+1. On the **Review + create** tab, review the **Validations**. Verify that **SQL Server configuration**, **SQL Server AG name**, **SQL MI storage size**, and **SQL MI permissions** all show **Success**. Then select **Start data migration**.
 
    ![](media/MG-image53.png)
    
-   >**Note:** If **SQL Server configuration** shows **Not ready** with *"unsupported edition"*, the source is running SQL Server **Evaluation** edition. Upgrade it to **Developer/Standard/Enterprise** (**SQL Server Installation Center** > **Maintenance** > **Edition Upgrade**), then select **Revalidate**.
+1. On the **Database migration** pane, select the **Monitor and cutover** tile.
 
-   >**Note:** Azure Arc grants just-in-time permissions, creates the distributed availability group, and seeds the database to SQL MI. Creating the link can take up to about 10 minutes.
+    ![](media/MG-image54.png)
 
-1. On the **Database migration** pane, select the **Monitor and cutover** tile. On the **Monitoring the migration** tab, **Refresh** until the **Migration status** for your database shows **Ready for cutover** and **Connection status** is **Healthy** (for a small database this takes only a few minutes).
+1. On the **Monitoring the migration** tab, **Refresh** until the **Migration status** for your database shows **Ready for cutover** and **Connection status** is **Healthy**. This typically takes less than **2–3 minutes** 
 
      ![](media/MG-image54.png)
 
-     ![](media/MG-image61.png) 
-   > **Alternative:** You can create the same link from SSMS — right-click **WideWorldImporters<inject key="Suffix" enableCopy="false"/>** > **Azure SQL Managed Instance link** > **New...** — and follow the wizard.
-
+     ![](media/MG-image61.png)
+   
 ### Task 4: Verify near real-time replication
 
 In this task, you will confirm that changes made on the source database replicate to the read-only copy on SQL Managed Instance in near real time.
