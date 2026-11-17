@@ -70,11 +70,11 @@ In this task, you connect to the **<inject key="SQLVM Name" enableCopy="false"/>
 
     ![](media/MG-image5.png)
    
-1. In the **Connect to Server** dialog, enter `<inject key="SQLVM Name" enableCopy="false"/>` into the **Server name** box, ensure **Windows Authentication** is selected, check **Trust server certificate**, and then select **Connect**.
+1. In the **Connect to Server** dialog, enter `sqlvm2016-sp3` **(1)** into the **Server name** box, ensure **Windows Authentication (2)** is selected, check **Trust server certificate (3)**, and then select **Connect (4)**.
 
-   ![](media/MG-image6.png)
+   ![](media/MG-image131.png)
    
-1. Expand **Databases** in Object Explorer and verify that the **WideWorldImporters<inject key="deploymentID" enableCopy="false"></inject>** database is listed.
+1. Expand **Databases (1)** in Object Explorer and verify that the **WideWorldImporters<inject key="deploymentID" enableCopy="false"></inject> (2)** database is listed.
 
     ![](media/MG-image7.png)
 
