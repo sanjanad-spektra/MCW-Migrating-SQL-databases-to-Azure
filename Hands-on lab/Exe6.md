@@ -16,8 +16,14 @@ In this exercise, you will protect sensitive columns with **Dynamic Data Masking
 
 In this task, you will apply a dynamic data mask to the credit card number column and confirm a non-privileged user sees only the last four digits.
 
-1. On the **JumpBox** VM, in SSMS on the **SQL MI** connection, expand **Databases** > **WideWorldImporters<inject key="Suffix" enableCopy="false"/>** > **Tables**, right-click **Sales.CreditCard** > **Select Top 1000 Rows**. Note `CardNumber` is in plain text.
+1. In **SQL Server Management Studio (SSMS)**, expand **Databases**, expand **WideWorldImporters**, and then expand **Tables**.
 
+   ![](media/MG-image118.png)
+
+1. Find **Sales.CreditCard**, right-click it, and select **Select Top 1000 Rows**.
+
+    ![](media/MG-image119.png)
+   
 1. Create a test user (replace **SUFFIX**):
 
    ```sql
@@ -27,6 +33,8 @@ In this task, you will apply a dynamic data mask to the credit card number colum
    GRANT SELECT ON [Sales].[CreditCard] TO DDMUser;
    ```
 
+   ![](media/MG-image120.png)
+   
 1. Run as the test user — card numbers still in plain text:
 
    ```sql
@@ -37,6 +45,8 @@ In this task, you will apply a dynamic data mask to the credit card number colum
    REVERT;
    ```
 
+    ![](media/MG-image121.png)
+   
 1. Add a mask to the `CardNumber` column:
 
    ```sql
@@ -46,8 +56,13 @@ In this task, you will apply a dynamic data mask to the credit card number colum
    ALTER COLUMN [CardNumber] NVARCHAR(25) MASKED WITH (FUNCTION = 'partial(0,"xxx-xxx-xxx-",4)');
    ```
 
+    ![](media/MG-image122.png)
+
 1. Run the test-user query again — only the last four digits show.
 
+    ![](media/MG-image123.png)
+
+   ![](media/MG-image124.png)
 ## Task 2: Apply DDM to email addresses
 
 In this task, you will apply the built-in email mask to the login email column and confirm it is masked for a non-privileged user.
@@ -63,6 +78,8 @@ In this task, you will apply the built-in email mask to the login email column a
    ALTER COLUMN [LoginEmail] NVARCHAR(250) MASKED WITH (FUNCTION = 'email()');
    ```
 
+   ![](media/MG-image125.png)
+   
 1. Run as the test user and look at `LoginEmail`:
 
    ```sql
@@ -72,7 +89,8 @@ In this task, you will apply the built-in email mask to the login email column a
    SELECT TOP 10 * FROM [dbo].[Gamer];
    REVERT;
    ```
-
+  ![](media/MG-image126.png)
+  
    > The `email()` function shows the first letter and replaces the rest with `XXX@XXXX.com`.
 
 ## Task 3: Route read-only queries to a secondary replica with read scale-out
