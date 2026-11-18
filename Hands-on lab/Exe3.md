@@ -259,4 +259,4 @@ In this task, you will back up the latest transaction log, complete the **DMS cu
 
 In this exercise, you backed up the `WideWorldImporters` database to **Azure Blob Storage** and used **Azure Database Migration Service (DMS)** to perform an online migration to **Azure SQL Managed Instance**. You configured the required storage access, started the migration, provided the final transaction-log backup, and completed the cutover.
 
-#### You have successfully completed the exercise. Now click on **Next >>** from the lower right corner to move on to the next exercise..
+#### You have successfully completed the exercise. Select Next >> to continue.
