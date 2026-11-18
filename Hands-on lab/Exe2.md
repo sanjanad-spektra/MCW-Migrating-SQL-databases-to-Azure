@@ -96,7 +96,7 @@ In this task, you will select the Azure SQL Managed Instance as the migration ta
 
      ![](media/MG-image46.png)
    
-3. On the **Create or select target** pane, configure the following settings:
+1. On the **Create or select target** pane, configure the following settings:
 
    - **Target exists:** **Yes, I have already created a target (1)**
    - **Target type:** **Azure SQL Managed Instance (2)**
@@ -148,7 +148,7 @@ In this task, you will verify that changes made to the source database are repli
 
    ![](media/MG-image57.png)
 
-3. Enter the SQL MI **FQDN** from Task 1, select **SQL Server Authentication**, log in as `contosoadmin` / `IAE5fAijit0w^rDM`, check **Trust server certificate**, and select **Connect**.
+1. Enter the SQL MI **FQDN** from Task 1, select **SQL Server Authentication**, log in as `contosoadmin` / `IAE5fAijit0w^rDM`, check **Trust server certificate**, and select **Connect**.
 
    ![](media/MG-image58.png)
    
@@ -192,7 +192,7 @@ In this task, you will complete the cutover to **Azure SQL Managed Instance**, m
 
 1. Navigate back to the **Azure portal** browser page where the **Monitoring the migration** tab is open.
 
-2. On the **Monitoring the migration** tab, confirm the **<inject key="Database Name" enableCopy="false"/>** row shows **Migration status: Ready for cutover** and **Connection status: Healthy**.
+1. On the **Monitoring the migration** tab, confirm the **<inject key="Database Name" enableCopy="false"/>** row shows **Migration status: Ready for cutover** and **Connection status: Healthy**.
 
    ![](media/MG-image156.png)
 
