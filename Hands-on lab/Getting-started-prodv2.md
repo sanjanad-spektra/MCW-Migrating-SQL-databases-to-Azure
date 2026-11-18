@@ -18,7 +18,7 @@ In this lab, you will:
 
 - Connect a SQL Server 2016 instance to Azure with **Azure Arc** and run a **migration assessment**
 
-- Migrate the database with the **Azure Arc + Managed Instance link** (Path A — minimal downtime)
+- Migrate the database with the **Azure Arc + Managed Instance link** (Path A - minimal downtime)
 
 - Migrate the database with **Azure Database Migration Service** using backups stored in **Azure Blob Storage** (Path B)
 
@@ -118,6 +118,6 @@ Learner Support Contacts:
 
 Now, click on **Next** from the lower right corner to move on to the next page.
 
-   ![](./media/GS4.png)
+   ![](media/MG-image209.png)
 
 ### Happy Learning!!
