@@ -1,22 +1,23 @@
 ## Exercise 3: Migrate with Azure DMS from Azure Blob Storage
 
-**Duration: 45 Minutes**
+### Duration: 45 Minutes
 
-### Overview
+## 📖 Overview
 
-In this exercise, you will migrate a second copy of the database to Azure SQL Managed Instance using **Azure Database Migration Service (DMS)** from backups stored in **Azure Blob Storage**. SQL Server 2016 writes backups directly to Blob Storage with `BACKUP ... TO URL`, and DMS restores them to the managed instance — with no file share or self-hosted integration runtime required.
+In this exercise, you will migrate a second copy of the WideWorldImporters database from SQL Server 2016 to Azure SQL Managed Instance using Azure Database Migration Service (DMS) and backups stored in Azure Blob Storage. You will first create the required storage and access configuration, back up the database directly to Blob Storage, and configure an online migration in DMS.
 
-### Objectives
+You will then monitor the migration, provide the final transaction-log backup, and complete the cutover to Azure SQL Managed Instance. This approach uses Blob Storage for the backup files and does not require a file share or self-hosted integration runtime.
+
+## 🎯 Objectives
 
 - **Task 1:** Create the backup container, generate a SAS token, and grant storage access
 - **Task 2:** Back up the database to Azure Blob Storage
 - **Task 3:** Create the Azure Database Migration Service
-- **Task 4:** Create and run an online migration from Blob Storage
-- **Task 5:** Back up the transaction log and cut over
+- **Task 4:** Back up the transaction log and cut over
 
 ## Task 1: Create the backup container, generate a SAS token, and grant storage access
 
-In this task, you will create a container and generate a Shared Access Signature (SAS) token so SQL Server can write backups to Azure Blob Storage.
+In this task, you will prepare **Azure Blob Storage** for the migration by creating a container, generating a SAS token, and granting the SQL Managed Instance access to the storage account.
 
 1. In the Azure portal, search for and select **Storage accounts**.
 
@@ -76,7 +77,7 @@ In this task, you will create a container and generate a Shared Access Signature
    
 ## Task 2: Back up the database to Azure Blob Storage
 
-In this task, you will back up the database directly to Azure Blob Storage using BACKUP ... TO URL.
+In this task, you will create a SQL Server credential and back up the **<inject key="Database Name" enableCopy="false"/>** database directly to **Azure Blob Storage**. You will then verify that the backup file is available in the storage container.
 
 1. On the **<inject key="SQLVM Name" enableCopy="false"/>** VM, in SSMS on the source connection, paste the following (replace **SUFFIX** with **<inject key="Suffix" />** and `<SAS-token>`), and **Execute**:
    
@@ -90,7 +91,7 @@ In this task, you will back up the database directly to Azure Blob Storage using
          SECRET = '<SAS-token>';
     GO
     
-    BACKUP DATABASE WideWorldImporters2474952
+    BACKUP DATABASE WideWorldImportersSUFFIX
     TO URL = 'https://sqlmistoreSUFFIX.blob.core.windows.net/migration/wwi-b/WideWorldImportersSUFFIX_full.bak'
     WITH CHECKSUM, COMPRESSION, MAXTRANSFERSIZE = 4194304, BLOCKSIZE = 65536;
     GO
@@ -104,10 +105,9 @@ In this task, you will back up the database directly to Azure Blob Storage using
 
     ![](media/MG-image161.png)
 
-
 ## Task 3: Create the Azure Database Migration Service
 
-In this task, you will deploy an Azure Database Migration Service instance.
+In this task, you will create **Azure Database Migration Service (DMS)** and configure an online migration from SQL Server to **Azure SQL Managed Instance** using the database backup stored in Azure Blob Storage. You will start the migration and monitor it until it is ready for cutover.
 
 1. In the Azure portal, search for **Azure Database Migration Services** and select **Azure Database Migration Services**.
 
@@ -195,9 +195,9 @@ In this task, you will deploy an Azure Database Migration Service instance.
 
     ![](media/MG-image164.png)
    
-### Task 5: Complete the cutover
+### Task 4: Complete the cutover
 
-In this task, you will optionally capture an incremental change with a transaction-log backup, then complete the cutover to finish the migration.
+In this task, you will back up the latest transaction log, complete the **DMS cutover**, and verify that the migrated database on Azure SQL Managed Instance is available for read and write operations.
 
 1. In SSMS, on the **source** connection, run the following (replace **SUFFIX** with **<inject key="Suffix" />**):
 
@@ -253,8 +253,8 @@ In this task, you will optionally capture an incremental change with a transacti
     
   > **Exercise 2 vs. Exercise 3:** The Managed Instance link replicates continuously, so cutover typically takes only a few seconds. However, it requires Always On availability groups and network connectivity to SQL Managed Instance. DMS from Blob Storage requires only outbound HTTPS connectivity from SQL Server to Azure Storage, while downtime depends on how long the final log backup takes to restore.
 
-## Summary
+### 🧾 Summary
 
-You backed up a SQL Server 2016 database directly to Azure Blob Storage and used Azure DMS to run an online migration to SQL MI, with no file share or self-hosted integration runtime.
+In this exercise, you backed up the `WideWorldImporters` database to **Azure Blob Storage** and used **Azure Database Migration Service (DMS)** to perform an online migration to **Azure SQL Managed Instance**. You configured the required storage access, started the migration, provided the final transaction-log backup, and completed the cutover.
 
-### You have successfully completed the exercise. Now click on **Next >>** from the lower right corner to move on to the next exercise.
+#### You have successfully completed the exercise. Now click on **Next >>** from the lower right corner to move on to the next exercise..
