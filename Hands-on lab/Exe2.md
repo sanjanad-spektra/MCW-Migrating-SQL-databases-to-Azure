@@ -1,12 +1,12 @@
 ## Exercise 2: Migrate with Azure Arc and the Managed Instance link
 
-**Duration: 60 Minutes**
+### Duration: 60 Minutes
 
-### Overview
+## 📖 Overview
 
 In this exercise, you will migrate the `WideWorldImporters<Suffix>` database to Azure SQL Managed Instance using the **Managed Instance link**, starting from the Azure Arc-enabled SQL Server. The link uses distributed availability groups to replicate the database in near real time; when you are ready, you cut over with only seconds of downtime.
 
-### Objectives
+## 🎯 Objectives
 
 - **Task 1:** Retrieve the SQL MI connection information
 - **Task 2:** Check the Managed Instance link prerequisites
@@ -16,7 +16,7 @@ In this exercise, you will migrate the `WideWorldImporters<Suffix>` database to 
 
 ### Task 1: Retrieve the SQL MI connection information
 
-In this task, you will use **Azure Cloud Shell** to retrieve the fully qualified domain name (FQDN) of the shared Azure SQL Managed Instance.
+In this task, you will retrieve the **SQL Managed Instance FQDN** that you will use to connect to the target database during the migration.
 
 1. In the Azure portal, select the **Cloud Shell (1)** icon in the top menu, and select **PowerShell (2)**.
 
@@ -38,6 +38,8 @@ In this task, you will use **Azure Cloud Shell** to retrieve the fully qualified
    ![](media/MG-image38.png)
 
 ## Task 2: Prepare the database for the Managed Instance link
+
+In this task, you will prepare the source database for the **Managed Instance link** by taking a full backup and verifying connectivity to the SQL Managed Instance.
 
 The source SQL Server prerequisites for the Managed Instance link are already configured in the lab environment (built into the SQL Server VM image): a supported edition + SP3 with the Azure Connect pack (confirmed in Exercise 1), Always On availability groups enabled, a database master key in master, the required NT AUTHORITY\SYSTEM availability-group grants, and the network ports (5022 and 11000–11999). The only step you perform here is a full backup, which establishes the log chain required for the link's automatic seeding.
 
@@ -70,7 +72,7 @@ The source SQL Server prerequisites for the Managed Instance link are already co
 
 ### Task 3: Select the target and start the Managed Instance link migration
 
-In this task, you will select the managed instance as the target and start the Managed Instance link migration from the Azure Arc portal.
+In this task, you will select the Azure SQL Managed Instance as the migration target and start the **Managed Instance link** migration.
 
 1. In the Azure portal, search for **Azure Arc (1)**, select **Azure Arc (2)**.
 
@@ -135,7 +137,7 @@ In this task, you will select the managed instance as the target and start the M
    
 ### Task 4: Verify near real-time replication
 
-In this task, you will confirm that changes made on the source database replicate to the read-only copy on SQL Managed Instance in near real time.
+In this task, you will verify that changes made to the source database are replicated to SQL Managed Instance in near real time.
 
 1. In SSMS, select **Connect** > **Database Engine**.
 
@@ -181,7 +183,7 @@ In this task, you will confirm that changes made on the source database replicat
 
 ### Task 5: Cut over to SQL MI
 
-In this task, you will cut over to SQL Managed Instance, making it the read-write primary and completing the migration.
+In this task, you will complete the cutover to **Azure SQL Managed Instance**, making it the primary read-write database and completing the migration.
 
 1. Navigate back to the **Azure portal** browser page where the **Monitoring the migration** tab is open.
 
@@ -217,8 +219,8 @@ In this task, you will cut over to SQL Managed Instance, making it the read-writ
 
     ![](media/MG-image158.png)
    
-## Summary
+### 🧾 Summary
 
-In this exercise, you used Azure Arc and the Managed Instance link to replicate the `WideWorldImporters<inject key="Suffix" enableCopy="false"/>` database from SQL Server 2016 to Azure SQL Managed Instance, confirmed near-real-time replication, and cut over with only seconds of downtime.
+In this exercise, you migrated the `WideWorldImporters` database from SQL Server 2016 to **Azure SQL Managed Instance** using the Managed Instance link. You configured the migration, verified near-real-time replication, and completed the cutover with minimal downtime.
 
-### You have successfully completed the exercise. Now click on **Next >>** from the lower right corner to move on to the next exercise.
+#### You have successfully completed the exercise. Select **Next >>** to continue.
