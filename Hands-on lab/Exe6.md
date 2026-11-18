@@ -93,31 +93,39 @@ In this task, you will apply the built-in email mask to the login email column a
   
    > The `email()` function shows the first letter and replaces the rest with `XXX@XXXX.com`.
 
-## Task 3: Route read-only queries to a secondary replica with read scale-out
+### Task 3: Route read-only reporting to a secondary replica with read scale-out
 
-In this task, you will route the web application’s read-only reporting queries to a read-only secondary replica using read scale-out.
+In this task, you enable **read scale-out** for the web app's read-only reporting queries and observe the result. Read scale-out sends read-only connections to a **readable secondary replica** instead of the primary — so reporting queries don't compete with the transactional workload — with a single connection-string setting and no code change.
 
-Each database in the SQL MI **Business Critical** tier has built-in replicas. **Read scale-out** lets read-only connections use one, at no extra cost, by adding `ApplicationIntent=ReadOnly` to the connection string.
+1. Open the web application from the **Overview** page of **wwi-web-<inject key="Suffix" enableCopy="false"/>** (**Default domain**) and select **Leaderboard**. Note the status shown on the page — this is the `Updateability` of the database the app is connected to, and it currently shows **`READ_WRITE`** (the primary).
 
-> **Note:** Read scale-out is available only in the **Business Critical** service tier (not General Purpose).
+1. On the **wwi-web-<inject key="Suffix" enableCopy="false"/>** App Service, under **Settings**, select **Environment variables**, select the **Connection strings** tab, and select **Advanced edit**.
 
-1. Open the web app from **wwi-web-<inject key="Suffix" enableCopy="false"/>** (**Default domain**) and select **Leaderboard**. The page shows `READ_WRITE` — the `Updateability` property of the connected database.
-
-1. In the portal, on the App Service, select **Environment variables** > **Connection strings** > **WwiReadOnlyContext**.
-
-1. Add to the end of the **Value**, and **OK**:
+1. For **`WwiReadOnlyContext`**, add the following to the **end** of the connection string **Value**, and select **OK**:
 
    ```
    ApplicationIntent=ReadOnly;
    ```
+    ![](media/MG-image197.png)
 
-1. Select **Apply**, then **Confirm**.
+    ![](media/MG-image198.png)
+   
+1. Select **Apply**, then **Confirm** when told the app will restart.
 
-1. Return to the web app and refresh the **Leaderboard** page — it now shows `READ_ONLY`, meaning the reporting queries run on a read-only replica.
+1. Return to the web application and refresh the **Leaderboard** page. Observe the status it now shows:
+
+    ![](media/MG-image196.png)
+   
+   - On a **Business Critical** managed instance → the page shows **`READ_ONLY`** — the reporting queries are now served by a read-only secondary replica, leaving the primary free for the live workload.
+   - On a **General Purpose** managed instance → the page remains **`READ_WRITE`** — see the note below.
+  
+   > **Note — read scale-out and service tiers:** Read scale-out uses the always-up secondary replicas that are built into the **Business Critical** service tier (the same replicas that provide its high-availability SLA), and it's available at **no extra cost** there. **General Purpose** has a single replica and no readable secondary, so the connection stays on the primary (`READ_WRITE`) even with `ApplicationIntent=ReadOnly`. To see read scale-out route reporting to a secondary replica live, the managed instance must be **Business Critical**.
+
+> **Takeaway:** With one connection-string setting (`ApplicationIntent=ReadOnly`), a Business Critical managed instance offloads read-only reporting to a secondary replica, improving both reporting *and* transactional performance with no extra infrastructure.
 
 ## Summary
 
-You masked sensitive columns with Dynamic Data Masking and used read scale-out to run the leaderboard report on a read-only replica.
+In this exercise, you masked sensitive columns with Dynamic Data Masking and learned how read scale-out routes read-only reporting queries to a secondary replica on the Business Critical tier.
 
 ## You have successfully completed the lab!
 
