@@ -44,13 +44,35 @@ In this task, you will create a container and generate a Shared Access Signature
 
     ![](media/MG-image70.png)
    
-4. Set the **Expiry** to **two days from now (1)**, select **HTTPS** and **HTTP (2)**, then select **Generate SAS token and URL (3)**.
+1. Set the **Expiry** to **two days from now (1)**, select **HTTPS** and **HTTP (2)**, then select **Generate SAS token and URL (3)**.
 
     ![](media/MG-image71.png)
 
-5. Copy the **Blob SAS token** into Notepad.
+1. Copy the **Blob SAS token** into Notepad.
 
     ![](media/MG-image159.png)
+
+1. Select **sqlmistore<inject key="Suffix" enableCopy="false"/> | Containers** to navigate back to the storage account page, then select **Access Control (IAM)** from the left navigation pane.
+
+    ![](media/MG-image200.png)
+   
+1. Select **+ Add**, then select **Add role assignment**.
+
+   ![](media/MG-image201.png)
+
+1. On the **Role** tab of the **Add role assignment** page, enter **Storage Blob Data Contributor (1)** in the search box, select **Storage Blob Data Contributor (2)** from the results, and then click on **Next (3)**.
+
+   ![](media/MG-image82.png)
+
+1. On the **Members** tab, **Assign access to:** Select **Managed identity (1)**, then under **Members**, select **+ Select members (2)**, choose **SQL managed instance (3)**, and select the **sqlmi--cus (4)** managed instance. then click on the **Select (5)** button.
+
+    ![](media/MG-image83.png)
+   
+1. Then click on the **Review + assign** button.
+
+   ![](media/MG-image84.png)
+
+   > **Note:** A notification confirming that the role assignment was added appears in the top-right corner of the portal. Role assignments can take up to five minutes to take effect.
    
 ## Task 2: Back up the database to Azure Blob Storage
 
@@ -91,7 +113,7 @@ In this task, you will deploy an Azure Database Migration Service instance.
 
     ![](media/MG-image75.png)
    
-3. On the **Azure Database Migration Service** page, under **Azure Database Migration Service**, select **Start a new migration**.
+1. On the **Azure Database Migration Service** page, under **Azure Database Migration Service**, select **Start a new migration**.
 
    ![](media/MG-image76.png)
 
@@ -104,7 +126,7 @@ In this task, you will deploy an Azure Database Migration Service instance.
 
      ![](media/MG-image77.png)
 
-4. On the **Create Data Migration Service** page:
+1. On the **Create Data Migration Service** page:
    - **Resource group:** Select the required **<inject key="Resource Group Name" enableCopy="false"/> (1)**.
    - **Location:** Select **Central US (2)**.
    - **Migration service name:** Enter **wwi-dms-<inject key="Suffix" enableCopy="false"/>  (3)**.
@@ -122,7 +144,7 @@ In this task, you will deploy an Azure Database Migration Service instance.
 
     ![](media/MG-image81.png)
 
-2. On the **Select new migration scenario** page, set:
+1. On the **Select new migration scenario** page, set:
 
    - **Source server type:** **SQL Server (1)**
    - **Target server type:** **Azure SQL Managed Instance (2)**
@@ -132,7 +154,7 @@ In this task, you will deploy an Azure Database Migration Service instance.
 
      ![](media/MG-image88.png)
 
-2. On the **Source details** page:
+1. On the **Source details** page:
 
    - Select **Yes (1)** for **Is your source SQL Server instance tracked in Azure?**
    - **Resource group:** Select the required **<inject key="Resource Group Name" enableCopy="false"/> (2)**.
@@ -150,7 +172,7 @@ In this task, you will deploy an Azure Database Migration Service instance.
 
         ![](media/MG-image90.png)
 
-3. On the **Data source configuration** page:
+1. On the **Data source configuration** page:
 
    - **Resource group:** Select **<inject key="Resource Group Name" enableCopy="false"/>**.
    - **Storage account:** Select **sqlmistore<inject key="Suffix" enableCopy="false"/>**.
@@ -162,7 +184,7 @@ In this task, you will deploy an Azure Database Migration Service instance.
 
        ![](media/MG-image91.png)
 
-4. On the **Database migration summary** page:
+1. On the **Database migration summary** page:
 
    - Review the migration details.
    - Select **Start migration**.
@@ -201,7 +223,7 @@ In this task, you will optionally capture an incremental change with a transacti
 
        ![](media/MG-image94.png)
       
-2. On the migration details page, select **Complete cutover**.
+1. On the migration details page, select **Complete cutover**.
 
     ![](media/MG-image95.png)
 
