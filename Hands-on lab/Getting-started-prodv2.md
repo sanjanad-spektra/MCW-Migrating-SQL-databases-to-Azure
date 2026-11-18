@@ -42,7 +42,7 @@ Participants should have basic knowledge of the following:
 
 ## 🏗️ Architecture
 
-![](media/MG-image202.png)
+![](media/MG-image208.png)
 
 ## 🔍 Explanation of Components
 
