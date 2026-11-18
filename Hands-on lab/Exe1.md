@@ -43,7 +43,7 @@ In this task, you will connect to the **<inject key="SQLVM Name" enableCopy="fal
 
     ![](media/MG-image3.png)
 
-1. On the **<inject key="Sqlvm Name" enableCopy="false"/> | Connect** page, click on **Download RDP file** under **Native RDP**. 
+1. On the **<inject key="Sqlvm Name" enableCopy="false"/>| Connect** page, click on **Download RDP file** under **Native RDP**. 
   
     ![](media/MG-image4.png)
 
@@ -86,7 +86,7 @@ In this task, you will connect to the **<inject key="SQLVM Name" enableCopy="fal
 
    ![](media/MG-image8.png)
    
-1. Paste the following script, and then select **Execute**. The script confirms the SQL Server build, sets the recovery model to **FULL**, and enables **Service Broker**.
+1. Paste the following script and (replace SUFFIX with <inject key="Suffix" enableCopy="false"/>) and then select **Execute**. The script confirms the SQL Server build, sets the recovery model to **FULL**, and enables **Service Broker**.
 
     ```sql
     -- Build 13.0.7xxx = SQL Server 2016 SP3 + Azure Connect pack; Edition must be Developer/Standard/Enterprise
@@ -98,7 +98,7 @@ In this task, you will connect to the **<inject key="SQLVM Name" enableCopy="fal
     USE master;
     GO
     
-    ALTER DATABASE WideWorldImporters<inject key="deploymentID" enableCopy="false"></inject> SET
+    ALTER DATABASE WideWorldImportersSUFFIX SET
     RECOVERY FULL,
     ENABLE_BROKER WITH ROLLBACK IMMEDIATE;
     GO
@@ -116,22 +116,22 @@ In this task, you will connect to the **<inject key="SQLVM Name" enableCopy="fal
 
 In this optional task, you will enable **Query Store** and capture a performance baseline to compare query performance before and after migration.
 
-1. In SSMS, select **New Query**, paste the following script, and then select **Execute** to enable Query Store:
+1. In SSMS, select **New Query**, paste the following script and(replace SUFFIX with <inject key="Suffix" enableCopy="false"/>) then select **Execute** to enable Query Store:
 
     ```sql
     USE master;
     GO
-    ALTER DATABASE WideWorldImporters<inject key="deploymentID" enableCopy="false"></inject> SET QUERY_STORE = ON;
-    ALTER DATABASE WideWorldImporters<inject key="deploymentID" enableCopy="false"></inject> SET QUERY_STORE (
+    ALTER DATABASE WideWorldImportersSUFFIX SET QUERY_STORE = ON;
+    ALTER DATABASE WideWorldImportersSUFFIX SET QUERY_STORE (
         OPERATION_MODE = READ_WRITE, QUERY_CAPTURE_MODE = ALL, INTERVAL_LENGTH_MINUTES = 5);
     GO
     ```
    ![](media/MG-image33.png)
     
-1. Select **New Query**, paste the following sample workload, and then select **Execute**. The `GO 50` batch separator runs each query 50 times.
+1. Select **New Query**, paste the following sample workload, and (replace SUFFIX with <inject key="Suffix" enableCopy="false"/>) then select **Execute**. The `GO 50` batch separator runs each query 50 times.
 
     ```sql
-    USE WideWorldImporters<inject key="deploymentID" enableCopy="false"></inject>;
+    USE WideWorldImportersSUFFIX;
     GO
     -- Leaderboard query
     SELECT TOP (50) GamerId, GamerScore, GamesPlayed
@@ -148,7 +148,7 @@ In this optional task, you will enable **Query Store** and capture a performance
 
     ![](media/MG-image34.png)
    
-1. In Object Explorer, expand **WideWorldImporters** > **Query Store**, and then double-click **Top Resource Consuming Queries**. Note the **duration** and **CPU time** of the Leaderboard query - you compare these values after the migration.
+1. In Object Explorer, expand **WideWorldImporters**<inject key="Database Name" enableCopy="false"/>** ** > **Query Store**, and then double-click **Top Resource Consuming Queries**. Note the **duration** and **CPU time** of the Leaderboard query - you compare these values after the migration.
 
    ![](media/MG-image35.png)
 
