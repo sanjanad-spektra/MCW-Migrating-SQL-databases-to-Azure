@@ -17,7 +17,7 @@ In this exercise, you will complete the following tasks:
 
 ## Task 1: Connect to the SQL Server 2016 VM and prepare the database
 
-In this task, you connect to the **<inject key="SQLVM Name" enableCopy="false"/>** VM, confirm the SQL Server build, and configure the `<inject key="Database Name" enableCopy="false"/>` database for migration.
+In this task, you connect to the **<inject key="SQLVM Name" enableCopy="false"/>** VM, confirm the SQL Server build, and configure the **<inject key="Database Name" enableCopy="false"/>** database for migration.
 
 1. On the lab VM desktop, double-click the **Azure Portal** shortcut.
 
@@ -35,11 +35,11 @@ In this task, you connect to the **<inject key="SQLVM Name" enableCopy="false"/>
 
     ![](media/MG-image2.png)
 
-1. On the **sql2016-<inject key="Suffix" enableCopy="false"/>** virtual machine. On the **Overview** page, select **Connect (1)**, and then select **Connect (2)** from the drop-down menu.
+1. On the **<inject key="Sqlvm Name" enableCopy="false"/>** virtual machine. On the **Overview** page, select **Connect (1)**, and then select **Connect (2)** from the drop-down menu.
 
     ![](media/MG-image3.png)
 
-1. On the **sql2016-<inject key="Suffix" enableCopy="false"/> | Connect** page, click on **Download RDP file** under **Native RDP**. 
+1. On the **<inject key="Sqlvm Name" enableCopy="false"/> | Connect** page, click on **Download RDP file** under **Native RDP**. 
   
     ![](media/MG-image4.png)
 
@@ -74,7 +74,7 @@ In this task, you connect to the **<inject key="SQLVM Name" enableCopy="false"/>
 
    ![](media/MG-image131.png)
    
-1. Expand **Databases (1)** in Object Explorer and verify that the **WideWorldImporters<inject key="deploymentID" enableCopy="false"></inject> (2)** database is listed.
+1. Expand **Databases (1)** in Object Explorer and verify that the **<inject key="Database Name" enableCopy="false"/>** (2)** database is listed.
 
     ![](media/MG-image7.png)
 
