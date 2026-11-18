@@ -1,6 +1,6 @@
 # Exercise 1: Assess the SQL Server 2016 database with Azure Arc
 
-### Estimated Duration: 30 Minutes
+### Duration: 30 Minutes
 
 ## 📖 Overview
 
