@@ -2,7 +2,7 @@
 
 ### Estimated Duration: 30 Minutes
 
-## Lab Scenario
+## 📖  Lab Scenario
 
 In this exercise, you will prepare an on-premises SQL Server 2016 database for migration and use Azure Arc to evaluate its readiness for Azure.
 
@@ -10,7 +10,7 @@ You will first connect to the SQL Server environment and prepare the **<inject k
 
 The assessment will help you understand whether the database can be migrated to Azure SQL Managed Instance, SQL Server on Azure VM, or Azure SQL Database, and will provide a SKU recommendation for the selected target.
 
-## Lab Objectives
+## 🎯 Lab Objectives
 
 In this exercise, you will complete the following tasks:
 
@@ -212,7 +212,7 @@ In this task, you will run an **Azure Arc migration assessment**, review compati
 
    > **Alternative:** If Azure Arc isn't available in your environment, you can assess the database with **Azure Migrate** instead (discovery and assessment using the Azure Migrate appliance).
 
-### Summary
+### 🧾 Summary
 
 In this exercise, you prepared the WideWorldImporters database, reviewed its Azure Arc connection, and assessed its migration readiness. The assessment identified Azure SQL Managed Instance as the suitable target and provided a recommended SKU based on the workload.
 
