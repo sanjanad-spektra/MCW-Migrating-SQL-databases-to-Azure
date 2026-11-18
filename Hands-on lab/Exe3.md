@@ -12,7 +12,7 @@ You will then monitor the migration, provide the final transaction-log backup, a
 
 - **Task 1:** Create the backup container, generate a SAS token, and grant storage access
 - **Task 2:** Back up the database to Azure Blob Storage
-- **Task 3:** Create the Azure Database Migration Service
+- **Task 3:** Create the DMS and run the online migration
 - **Task 4:** Back up the transaction log and cut over
 
 ## Task 1: Create the backup container, generate a SAS token, and grant storage access
@@ -105,7 +105,7 @@ In this task, you will create a SQL Server credential and back up the **<inject 
 
     ![](media/MG-image161.png)
 
-## Task 3: Create the Azure Database Migration Service
+## Task 3: Create the DMS and run the online migration
 
 In this task, you will create **Azure Database Migration Service (DMS)** and configure an online migration from SQL Server to **Azure SQL Managed Instance** using the database backup stored in Azure Blob Storage. You will start the migration and monitor it until it is ready for cutover.
 
