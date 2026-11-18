@@ -1,4 +1,4 @@
-## Exercise 2: Migrate with Azure Arc and the Managed Instance link
+# Exercise 2: Migrate with Azure Arc and the Managed Instance link
 
 ### Duration: 60 Minutes
 
