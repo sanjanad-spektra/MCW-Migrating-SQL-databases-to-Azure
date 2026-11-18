@@ -110,7 +110,7 @@ In this task, you will connect to the **<inject key="SQLVM Name" enableCopy="fal
 
    ![](media/MG-image130.png)
    
-     >**Note:**  SP3 alone is 13.0.6300; the Azure Connect pack raises it to 13.0.7000+. The MI link requires Developer/Standard/Enterprise — Evaluation is not supported. If it shows Evaluation, upgrade via Installation Center > Maintenance > Edition Upgrade.
+     >**Note:**  SP3 alone is 13.0.6300; the Azure Connect pack raises it to 13.0.7000+. The MI link requires Developer/Standard/Enterprise - Evaluation is not supported. If it shows Evaluation, upgrade via Installation Center > Maintenance > Edition Upgrade.
 
 ## Task 2: Capture a Query Store performance baseline (optional)
 
@@ -148,7 +148,7 @@ In this optional task, you will enable **Query Store** and capture a performance
 
     ![](media/MG-image34.png)
    
-1. In Object Explorer, expand **WideWorldImporters**<inject key="Database Name" enableCopy="false"/>** ** > **Query Store**, and then double-click **Top Resource Consuming Queries**. Note the **duration** and **CPU time** of the Leaderboard query - you compare these values after the migration.
+1. In Object Explorer, expand **<inject key="Database Name" enableCopy="false"/>** > **Query Store**, and then double-click **Top Resource Consuming Queries**. Note the **duration** and **CPU time** of the Leaderboard query - you compare these values after the migration.
 
    ![](media/MG-image35.png)
 
@@ -160,11 +160,11 @@ In this task, you will review the SQL Server instance connected through **Azure 
 
     ![](media/MG-image12.png)
 
-1. Under **Infrastructure**, select **Machines**, then select **sqlvm2016-sp3**.
+1. Under **Infrastructure**, select **Machines**, then verify the Arc agent status and click **sqlvm2016-sp3**.
 
    ![](media/MG-image143.png)
 
-1. 1. On the **Azure Arc** page, expand **Data services (1)** and select **SQL Server instances (2)**. On the **SQL Server instances** page, select your **<inject key="Resource Group Name" enableCopy="false"/>** in the **Resource group** filter, and then select **sqlvm2016-sp3 (4)**.
+1. On the **Azure Arc** page, expand **Data services (1)** and select **SQL Server instances (2)**. On the **SQL Server instances** page, select your **<inject key="Resource Group Name" enableCopy="false"/>** in the **Resource group** filter, and then select **sqlvm2016-sp3 (4)**.
 
      ![](media/MG-image145.png)
    
@@ -176,7 +176,7 @@ In this task, you will review the SQL Server instance connected through **Azure 
 
     ![](media/MG-image15.png)
    
-   >**Note:** Azure Arc gives you one place to manage SQL Server outside Azure — inventory, best-practices and migration assessments, and Extended Security Updates for out-of-support versions such as SQL Server 2016.
+   >**Note:** Azure Arc gives you one place to manage SQL Server outside Azure - inventory, best-practices and migration assessments, and Extended Security Updates for out-of-support versions such as SQL Server 2016.
 
 ## Task 4: Run the Azure Arc migration assessment
 
