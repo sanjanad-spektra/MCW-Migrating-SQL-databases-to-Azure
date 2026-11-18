@@ -119,8 +119,8 @@ In this task, you will learn how **read scale-out** can route read-only reportin
 
     ![](media/MG-image196.png)
    
-     - If the managed instance **has a readable secondary replica** (Business Critical tier), the page shows **`READ_ONLY`** — the reporting query is now served by a read-only secondary replica, leaving the primary free for the transactional workload.
-     - If the managed instance **does not have a readable secondary replica** (for example, General Purpose), the page remains **`READ_WRITE`** — the connection stays on the primary. This is expected behavior.
+     - If the managed instance **has a readable secondary replica** (Business Critical tier), the page shows **`READ_ONLY`** - the reporting query is now served by a read-only secondary replica, leaving the primary free for the transactional workload.
+     - If the managed instance **does not have a readable secondary replica** (for example, General Purpose), the page remains **`READ_WRITE`** - the connection stays on the primary. This is expected behavior.
 
      > **Takeaway:** Read scale-out uses a single connection-string setting (`ApplicationIntent=ReadOnly`) to request a read-only connection. When a readable secondary replica is available, read-only reporting queries can be routed to the secondary replica, helping reduce the reporting workload on the primary.
 
