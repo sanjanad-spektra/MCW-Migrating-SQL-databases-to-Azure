@@ -78,7 +78,7 @@ In this task, you will connect to the **<inject key="SQLVM Name" enableCopy="fal
 
    ![](media/MG-image131.png)
    
-1. Expand **Databases (1)** in **Object Explorer** and verify that the **<inject key="Database Name" enableCopy="false"/>** (2)** database is listed.
+1. Expand **Databases (1)** in **Object Explorer** and verify that the **<inject key="Database Name" enableCopy="false"/>(2)** database is listed.
 
     ![](media/MG-image7.png)
 
