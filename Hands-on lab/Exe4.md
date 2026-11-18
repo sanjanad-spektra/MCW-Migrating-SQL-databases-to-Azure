@@ -1,21 +1,22 @@
-## Exercise 4: Connect the web application and compare performance
+# Exercise 4: Connect the web application and compare performance
 
-**Duration: 40 Minutes**
+### Duration: 40 Minutes
 
-### Overview
+## 📖 Overview
 
-In this exercise, you will publish the WideWorldImporters web application to Azure App Service and point it at the database you migrated with the Managed Instance link (Path A). Because SQL Managed Instance has a private IP address inside its virtual network, you will connect the app to that network with **regional VNet integration** on a subnet delegated to `Microsoft.Web/serverFarms` — the modern replacement for the gateway-based point-to-site connection. Finally, you will use **Query Store** to compare the workload's performance on SQL MI with the baseline captured on SQL Server 2016.
+In this exercise, you will publish the **<inject key="Database Name" enableCopy="false"/>**web application to Azure App Service and connect it to the database migrated to **Azure SQL Managed Instance**. You will configure the managed instance endpoint, update the App Service connection strings, and verify that the web application can connect to and display data from the migrated database.
 
-### Objectives
+You will first publish the web application, then configure the SQL Managed Instance endpoint and update the application connection settings before verifying the application connection.
 
-- **Task 1:** Deploy the web app to Azure
-- **Task 2:** Update the App Service connection strings
-- **Task 3:** Configure regional VNet integration and open the web app
-- **Task 4:** Compare performance with Query Store (optional)
+## 🎯 Objectives
 
-## Task 1: Deploy the web app to Azure
+- **Task 1:** Deploy the WideWorldImporters web application to Azure.
+- **Task 2:** Enable the SQL Managed Instance public endpoint.
+- **Task 3:** Update the App Service connection strings and open the web application.
 
-In this task, you will publish the **WideWorldImporters** web application from Visual Studio to an existing Azure App Service.
+### Task 1: Deploy the web app to Azure
+
+In this task, you will publish the **WideWorldImporters** web application from Visual Studio to the existing Azure App Service.
 
 1. Navigate to your **Lab VM** desktop.
 
@@ -85,7 +86,7 @@ In this task, you will publish the **WideWorldImporters** web application from V
 
 ### Task 2: Enable the SQL Managed Instance public endpoint
 
-In this task, you will enable the managed instance's public endpoint so the App Service can connect to it on port 3342, and note the public host name you will use in the connection string.
+In this task, you will enable the **public endpoint** on the SQL Managed Instance and retrieve the endpoint information required to connect the web application to the database.
 
 1. In the Azure portal, search and select **sqlmi--cus**.
 
@@ -104,7 +105,7 @@ In this task, you will enable the managed instance's public endpoint so the App 
 
 ### Task 3: Update the connection strings and open the web app
 
-In this task, you will point the App Service at the managed instance's public endpoint and open the running site.
+In this task, you will update the App Service connection strings to point to the migrated database on **Azure SQL Managed Instance** and verify that the web application loads successfully.
 
 1. In the Azure portal, search for **App Services (1)** and select **App Services (2)** from the search results.
 
@@ -146,9 +147,8 @@ In this task, you will point the App Service at the managed instance's public en
 
    >**Note:** The restart can take a minute. If you see an error, refresh a few times, or select **Restart** on the web app's toolbar.
 
-## Summary
+## 🧾 Summary
 
-In this exercise, you published the web application, connected it to the migrated database through the managed instance's public endpoint, and used Query Store to compare the workload's performance before and after the migration.
+In this exercise, you published the **<inject key="Database Name" enableCopy="false"/>** web application to Azure App Service, configured the SQL Managed Instance public endpoint, and updated the App Service connection strings to connect to the migrated database.
 
 ### You have successfully completed the exercise. Now click on **Next >>** from the lower right corner to move on to the next exercise.
-
