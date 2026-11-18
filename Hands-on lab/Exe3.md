@@ -8,13 +8,13 @@ In this exercise, you will migrate a second copy of the database to Azure SQL Ma
 
 ### Objectives
 
-- **Task 1:** Create a SAS token for the backup container
+- **Task 1:** Create the backup container, generate a SAS token, and grant storage access
 - **Task 2:** Back up the database to Azure Blob Storage
 - **Task 3:** Create the Azure Database Migration Service
 - **Task 4:** Create and run an online migration from Blob Storage
 - **Task 5:** Back up the transaction log and cut over
 
-## Task 1: Create a SAS token for the backup container
+## Task 1: Create the backup container, generate a SAS token, and grant storage access
 
 In this task, you will create a container and generate a Shared Access Signature (SAS) token so SQL Server can write backups to Azure Blob Storage.
 
