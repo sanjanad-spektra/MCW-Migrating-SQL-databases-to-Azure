@@ -49,7 +49,7 @@ The source SQL Server prerequisites for the Managed Instance link are already co
 
      ![](media/MG-image149.png)
    
-1. Paste the following (replace SUFFIX with <inject key="Suffix" enableCopy="false"/>), and select **Execute**:
+1. Paste the following (replace SUFFIX with **<inject key="Suffix" />**), and select **Execute**:
 
     ```
     -- Full backup to establish the log chain for the link's automatic seeding
@@ -116,7 +116,7 @@ In this task, you will select the Azure SQL Managed Instance as the migration ta
 
    ![](media/MG-image49.png)
 
-1. On the **Select source databases** tab, select **WideWorldImporters<inject key="Suffix" enableCopy="false"/>**. Verify that **Migration readiness** is **Ready** and **Status** is **Online**, then select **Next: Settings**.
+1. On the **Select source databases** tab, select **<inject key="Database Name" enableCopy="false"/>**. Verify that **Migration readiness** is **Ready** and **Status** is **Online**, then select **Next: Settings**.
 
    ![](media/MG-image50.png)
 
@@ -136,7 +136,7 @@ In this task, you will select the Azure SQL Managed Instance as the migration ta
 
     ![](media/MG-image54.png)
 
-1. On the **Monitoring the migration** tab, **Refresh** until the **Migration status** for your database shows **Ready for cutover** and **Connection status** is **Healthy**. This typically takes less than **2–3 minutes**
+1. On the **Monitor and cutover** tab, **Refresh** until the **Migration status** for your database shows **Ready for cutover** and **Connection status** is **Healthy**. This typically takes less than **2–3 minutes**
    
      ![](media/MG-image61.png)
    
@@ -156,7 +156,7 @@ In this task, you will verify that changes made to the source database are repli
 
     ![](media/MG-image149.png)
    
-1. Run the following to insert a record on the source. Replace **SUFFIX** with **<inject key="Suffix" enableCopy="false"/>**:
+1. Run the following to insert a record on the source. Replace **SUFFIX** with **<inject key="Suffix" />**:
 
    ```sql
    USE WideWorldImportersSUFFIX;
@@ -172,7 +172,7 @@ In this task, you will verify that changes made to the source database are repli
 
     ![](media/MG-image151.png)
 
-1. Run the following and replace **SUFFIX** with **<inject key="Suffix" enableCopy="false"/>**:
+1. Run the following and replace **SUFFIX** with **<inject key="Suffix" />**:
 
    ```sql
    USE WideWorldImportersSUFFIX;
@@ -190,15 +190,15 @@ In this task, you will verify that changes made to the source database are repli
 
 In this task, you will complete the cutover to **Azure SQL Managed Instance**, making it the primary read-write database and completing the migration.
 
-1. Navigate back to the **Azure portal** browser page where the **Monitoring the migration** tab is open.
+1. Navigate back to the **Azure portal** browser page where the **Monitor and cutover** tab is open.
 
-1. On the **Monitoring the migration** tab, confirm the **<inject key="Database Name" enableCopy="false"/>** row shows **Migration status: Ready for cutover** and **Connection status: Healthy**.
+1. On the **Monitor and cutover** tab, confirm the **<inject key="Database Name" enableCopy="false"/>** row shows **Migration status: Ready for cutover** and **Connection status: Healthy**.
 
    ![](media/MG-image156.png)
 
 1. On the **Monitor and cutover** page, select the **<inject key="Database Name" enableCopy="false"/>** database row.
 
-2. Select **Complete cutover** and, in the **Complete cutover** dialog, select **I confirm that I have stopped all incoming traffic to the source database** and **I want to do a forced failover**. Then select **Complete cutover** to start the cutover.
+1. Select **Complete cutover (1)** and, in the **Complete cutover** dialog, select **I confirm that I have stopped all incoming traffic to the source database** and **I want to do a forced failover (2)**. Then select **Complete cutover (3)** to start the cutover.
 
     ![](media/MG-image154.png)
    
