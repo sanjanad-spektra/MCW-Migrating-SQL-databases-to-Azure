@@ -16,7 +16,7 @@ Adding online gameplay dramatically increased demand, which made the current on-
 
 Below is a diagram of the solution architecture you implement in this lab. Study it carefully to understand the overall solution as you work through the components.
 
- ![](media/MG-image202.png)
+ ![](media/MG-image208.png)
 
 The solution begins with an **Azure Arc migration assessment** of the on-premises SQL Server 2016 database. The assessment checks feature compatibility and migration considerations for Azure SQL Database and Azure SQL Managed Instance and provides a SKU recommendation for SQL MI. The goal is to migrate the `WideWorldImporters` database to an Azure PaaS offering with minimal application changes.
 
