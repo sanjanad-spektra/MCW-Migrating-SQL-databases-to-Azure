@@ -146,47 +146,6 @@ In this task, you will point the App Service at the managed instance's public en
 
    >**Note:** The restart can take a minute. If you see an error, refresh a few times, or select **Restart** on the web app's toolbar.
 
-### Task 4: Compare performance with Query Store (optional)
-
-In this task, you will run the same workload on SQL Managed Instance and use Query Store to compare performance before and after the migration.
-
-Query Store data is stored inside the database, so the baseline you captured on SQL Server 2016 in Exercise 1 moved to SQL MI with the database.
-
-> **Note:** Do this task only if you completed **Exercise 1, Task 2**.
-
-1. On the **JumpBox** VM, in SSMS, select the **SQL MI** connection, select **New Query**, paste the following (replace **SUFFIX** with **<inject key="Suffix" />**), and select **Execute**:
-
-    ```sql
-    USE WideWorldImportersSUFFIX;
-    GO
-
-    SELECT TOP (50) GamerId, GamerScore, GamesPlayed
-    FROM dbo.Leaderboard
-    ORDER BY GamerScore DESC;
-    GO 50
-
-    SELECT Title, Rating
-    FROM dbo.Game
-    WHERE IsOnlineMultiplayer = 1
-    ORDER BY Title;
-    GO 50
-    ```
-
-1. In Object Explorer, under the SQL MI connection, expand **Databases** > **WideWorldImporters<inject key="Suffix" enableCopy="false"/>** > **Query Store**, and double-click **Top Resource Consuming Queries**.
-
-1. Select **Configure**, set the time interval to cover both runs, and select **OK**. Select the Leaderboard query and compare the average **duration** and **CPU time** between SQL Server 2016 (before) and SQL MI (after).
-
-1. The migrated database keeps compatibility level **130** (SQL Server 2016). Run the following to raise it, then run the workload again and check **Regressed Queries** under Query Store:
-
-    ```sql
-    SELECT name, compatibility_level FROM sys.databases WHERE name = DB_NAME();
-    GO
-    ALTER DATABASE CURRENT SET COMPATIBILITY_LEVEL = 160;
-    GO
-    ```
-
-   > Query Store lets you compare performance before and after migration with one tool. If a query regresses after the compatibility change, you can force its earlier plan from the plan summary pane until it's fixed.
-
 ## Summary
 
 In this exercise, you published the web application, connected it to the migrated database through the managed instance's public endpoint, and used Query Store to compare the workload's performance before and after the migration.
