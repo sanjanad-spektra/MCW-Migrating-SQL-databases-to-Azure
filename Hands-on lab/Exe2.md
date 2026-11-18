@@ -45,7 +45,7 @@ The source SQL Server prerequisites for the Managed Instance link are already co
 
      ![](media/MG-image149.png)
    
-1. Paste the following (replace SUFFIX with ), and select **Execute**:
+1. Paste the following (replace SUFFIX with <inject key="Suffix" enableCopy="false"/>), and select **Execute**:
 
     ```
     -- Full backup to establish the log chain for the link's automatic seeding
@@ -149,7 +149,7 @@ In this task, you will confirm that changes made on the source database replicat
 
     ![](media/MG-image149.png)
    
-1. Run the following to insert a record on the source. Replace **SUFFIX** with **<inject key="Suffix" />**:
+1. Run the following to insert a record on the source. Replace **SUFFIX** with **<inject key="Suffix" enableCopy="false"/>**:
 
    ```sql
    USE WideWorldImportersSUFFIX;
@@ -165,7 +165,7 @@ In this task, you will confirm that changes made on the source database replicat
 
     ![](media/MG-image151.png)
 
-1. Run the following and replace **SUFFIX** with **<inject key="Suffix" />**:
+1. Run the following and replace **SUFFIX** with **<inject key="Suffix" enableCopy="false"/>**:
 
    ```sql
    USE WideWorldImportersSUFFIX;
