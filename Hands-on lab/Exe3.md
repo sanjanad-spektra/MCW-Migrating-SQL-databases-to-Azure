@@ -1,4 +1,4 @@
-## Exercise 3: Migrate with Azure DMS from Azure Blob Storage
+# Exercise 3: Migrate with Azure DMS from Azure Blob Storage
 
 ### Duration: 45 Minutes
 
@@ -15,7 +15,7 @@ You will then monitor the migration, provide the final transaction-log backup, a
 - **Task 3:** Create the DMS and run the online migration
 - **Task 4:** Back up the transaction log and cut over
 
-## Task 1: Create the backup container, generate a SAS token, and grant storage access
+### Task 1: Create the backup container, generate a SAS token, and grant storage access
 
 In this task, you will prepare **Azure Blob Storage** for the migration by creating a container, generating a SAS token, and granting the SQL Managed Instance access to the storage account.
 
@@ -75,7 +75,7 @@ In this task, you will prepare **Azure Blob Storage** for the migration by creat
 
    > **Note:** A notification confirming that the role assignment was added appears in the top-right corner of the portal. Role assignments can take up to five minutes to take effect.
    
-## Task 2: Back up the database to Azure Blob Storage
+### Task 2: Back up the database to Azure Blob Storage
 
 In this task, you will create a SQL Server credential and back up the **<inject key="Database Name" enableCopy="false"/>** database directly to **Azure Blob Storage**. You will then verify that the backup file is available in the storage container.
 
@@ -105,7 +105,7 @@ In this task, you will create a SQL Server credential and back up the **<inject 
 
     ![](media/MG-image161.png)
 
-## Task 3: Create the DMS and run the online migration
+### Task 3: Create the DMS and run the online migration
 
 In this task, you will create **Azure Database Migration Service (DMS)** and configure an online migration from SQL Server to **Azure SQL Managed Instance** using the database backup stored in Azure Blob Storage. You will start the migration and monitor it until it is ready for cutover.
 
