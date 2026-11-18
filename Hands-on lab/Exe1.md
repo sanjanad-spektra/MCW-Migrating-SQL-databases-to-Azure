@@ -4,7 +4,11 @@
 
 ## Lab Scenario
 
-In this exercise, you connect to the on-premises SQL Server 2016 database, prepare it for migration, optionally capture a Query Store performance baseline, and assess its readiness for Azure SQL Managed Instance using **Azure Arc**. The Azure Arc migration assessment is used in place of the retired Data Migration Assistant workflow. It runs from the Arc-enabled SQL Server resource in the Azure portal and gives you compatibility findings and a SKU recommendation.
+In this exercise, you will prepare an on-premises SQL Server 2016 database for migration and use Azure Arc to evaluate its readiness for Azure.
+
+You will first connect to the SQL Server environment and prepare the **<inject key="Database Name" enableCopy="false"/>**. You will then review the SQL Server instance through Azure Arc and run a migration assessment to identify compatibility considerations and determine the most suitable Azure target.
+
+The assessment will help you understand whether the database can be migrated to Azure SQL Managed Instance, SQL Server on Azure VM, or Azure SQL Database, and will provide a SKU recommendation for the selected target.
 
 ## Lab Objectives
 
@@ -17,7 +21,7 @@ In this exercise, you will complete the following tasks:
 
 ## Task 1: Connect to the SQL Server 2016 VM and prepare the database
 
-In this task, you connect to the **<inject key="SQLVM Name" enableCopy="false"/>** VM, confirm the SQL Server build, and configure the **<inject key="Database Name" enableCopy="false"/>** database for migration.
+In this task, you will connect to the **<inject key="SQLVM Name" enableCopy="false"/>** VM, verify the SQL Server configuration, and prepare the **<inject key="Database Name" enableCopy="false"/>** database for migration.
 
 1. On the lab VM desktop, double-click the **Azure Portal** shortcut.
 
@@ -74,7 +78,7 @@ In this task, you connect to the **<inject key="SQLVM Name" enableCopy="false"/>
 
    ![](media/MG-image131.png)
    
-1. Expand **Databases (1)** in Object Explorer and verify that the **<inject key="Database Name" enableCopy="false"/>** (2)** database is listed.
+1. Expand **Databases (1)** in **Object Explorer** and verify that the **<inject key="Database Name" enableCopy="false"/>** (2)** database is listed.
 
     ![](media/MG-image7.png)
 
@@ -110,7 +114,7 @@ In this task, you connect to the **<inject key="SQLVM Name" enableCopy="false"/>
 
 ## Task 2: Capture a Query Store performance baseline (optional)
 
-In this task, you turn on **Query Store** on the source database and run a sample workload. Query Store data is stored inside the database, so it travels with the database to SQL MI. In Exercise 4, you run the same workload on SQL MI and compare the results.
+In this optional task, you will enable **Query Store** and capture a performance baseline to compare query performance before and after migration.
 
 1. In SSMS, select **New Query**, paste the following script, and then select **Execute** to enable Query Store:
 
@@ -148,20 +152,19 @@ In this task, you turn on **Query Store** on the source database and run a sampl
 
    ![](media/MG-image35.png)
 
-
 ### Task 3: Review the Azure Arc-enabled SQL Server
 
-The lab environment has already connected the SQL Server 2016 VM to Azure through **Azure Arc**. In this task, you review the Arc-enabled SQL Server resource.
+In this task, you will review the SQL Server instance connected through **Azure Arc** and verify that the database is available for assessment.
 
 1. In the **Azure portal**, search for **Azure Arc** and select it.
 
     ![](media/MG-image12.png)
 
-1. Azure Arc > Machines and confirm the machine shows Connected.
+1. Under **Infrastructure**, select **Machines**, then select **sqlvm2016-sp3**.
 
+   ![](media/MG-image143.png)
 
-   
-1. Under **Data services**, select **SQL Server instances**, and then select the **<inject key="SQLVM Name" enableCopy="false"/>** instance.
+1. Under **Data services**, select **SQL Server instances**, and then select the **sqlvm2016-sp3** instance.
 
     ![](media/MG-image13.png)
    
@@ -169,7 +172,7 @@ The lab environment has already connected the SQL Server 2016 VM to Azure throug
 
     ![](media/MG-image14.png)
    
-1. In the left menu, select **Databases** and confirm that **WideWorldImporters<inject key="deploymentID" enableCopy="false"></inject>** is listed.
+1. In the left menu, select **Databases** and confirm that **<inject key="Database Name" enableCopy="false"/></inject>** is listed.
 
     ![](media/MG-image15.png)
    
@@ -177,9 +180,9 @@ The lab environment has already connected the SQL Server 2016 VM to Azure throug
 
 ## Task 4: Run the Azure Arc migration assessment
 
-In this task, you run a migration assessment and review the database's readiness for Azure SQL Managed Instance and Azure SQL Database.
+In this task, you will run an **Azure Arc migration assessment**, review compatibility results, and confirm the recommended migration target and SKU.
 
-1. On the **<inject key="SQLVM Name" enableCopy="false"/>** Arc-enabled SQL Server resource, in the left menu, under **Migration**, select **Assessments**. From the toolbar, select **Run assessment**. The assessment may take a few minutes to complete.
+1. On the **sqlvm2016-sp3** Arc-enabled SQL Server resource page, in the left menu, under **Migration**, select **Assessments**. From the toolbar, select **Run assessment**. The assessment may take a few minutes to complete.
 
      ![](media/MG-image16.png) 
 
@@ -209,8 +212,8 @@ In this task, you run a migration assessment and review the database's readiness
 
    > **Alternative:** If Azure Arc isn't available in your environment, you can assess the database with **Azure Migrate** instead (discovery and assessment using the Azure Migrate appliance).
 
-## Summary
+### Summary
 
-In this exercise, you prepared the `WideWorldImporters` database on SQL Server 2016 SP3, optionally captured a Query Store baseline, and used the Azure Arc migration assessment to confirm that Azure SQL Managed Instance is the right target.
+In this exercise, you prepared the WideWorldImporters database, reviewed its Azure Arc connection, and assessed its migration readiness. The assessment identified Azure SQL Managed Instance as the suitable target and provided a recommended SKU based on the workload.
 
-### You have successfully completed the exercise. Now click on **Next >>** from the lower right corner to move on to the next exercise.
+#### You have successfully completed the exercise. Select Next >> to continue.
