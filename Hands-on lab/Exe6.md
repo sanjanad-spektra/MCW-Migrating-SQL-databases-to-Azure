@@ -14,7 +14,7 @@ In this exercise, you will protect sensitive columns with **Dynamic Data Masking
 
 ### Task 1: Enable DDM on credit card numbers
 
-In this task, you will apply a dynamic data mask to the credit card number column and confirm a non-privileged user sees only the last four digits.
+In this task, you will create a test user, apply a dynamic data mask to the credit card number column, and verify that the non-privileged user sees only the masked value.
 
 1. In **SQL Server Management Studio (SSMS)**, expand **Databases**, expand **WideWorldImporters**, and then expand **Tables**.
 
@@ -66,7 +66,7 @@ In this task, you will apply a dynamic data mask to the credit card number colum
 
 ### Task 2: Apply DDM to email addresses
 
-In this task, you will apply the built-in email mask to the login email column and confirm it is masked for a non-privileged user.
+In this task, you will apply the built-in **email** data mask to the `LoginEmail` column and verify that the email address is masked for the non-privileged user.
 
 1. Grant access and mask `LoginEmail` in `dbo.Gamer` with the built-in `email()` function (replace **SUFFIX**):
 
