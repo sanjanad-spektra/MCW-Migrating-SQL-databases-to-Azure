@@ -31,7 +31,7 @@ In this task, you will prepare **Azure Blob Storage** for the migration by creat
 
    ![](media/MG-image66.png)
     
-3. On the New container pane, enter **migration** as the container name **(1)**, then select **Create (2)**.
+1. On the New container pane, enter **migration** as the container name **(1)**, then select **Create (2)**.
 
    ![](media/MG-image67.png)
    
