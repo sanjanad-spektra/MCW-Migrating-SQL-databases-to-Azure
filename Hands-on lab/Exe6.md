@@ -100,7 +100,6 @@ In this task, you will learn how **read scale-out** can route read-only reportin
 
 > **Note:** Read scale-out is available when the SQL Managed Instance has a readable secondary replica, such as with the **Business Critical** service tier. If your SQL Managed Instance does not have a readable secondary replica, the connection will remain on the primary database and the application will continue to show `READ_WRITE`. This is expected behavior.
 
-
 1. Open the web application from the **Overview** page of **wwi-web-<inject key="Suffix" enableCopy="false"/>** (**Default domain**) and select **Leaderboard**. Note the status displayed on the page. This is the `Updateability` of the database the app is connected to, and it currently shows **`READ_WRITE`** (the primary replica).
 
 1. On the **wwi-web-<inject key="Suffix" enableCopy="false"/>** App Service, under **Settings**, select **Environment variables**, select the **Connection strings** tab, and select **Advanced edit**.
