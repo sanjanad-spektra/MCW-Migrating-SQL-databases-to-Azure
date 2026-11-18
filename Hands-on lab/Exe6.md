@@ -1,18 +1,18 @@
-## Exercise 6: Enable Dynamic Data Masking and use read scale-out
+# Exercise 6: Secure Sensitive Data with Dynamic Data Masking
 
-**Duration: 30 Minutes**
+### Duration: 30 Minutes
 
-### Overview
+## 📖 Overview
 
 In this exercise, you will protect sensitive columns with **Dynamic Data Masking (DDM)**, which hides sensitive data in query results from users without privilege to see it, and then route the web app's read-only reporting queries to a secondary replica with **read scale-out**.
 
-### Objectives
+## 🎯 Objectives
 
 - **Task 1:** Enable DDM on credit card numbers
 - **Task 2:** Apply DDM to email addresses
 - **Task 3:** Route read-only queries to a secondary replica with read scale-out
 
-## Task 1: Enable DDM on credit card numbers
+### Task 1: Enable DDM on credit card numbers
 
 In this task, you will apply a dynamic data mask to the credit card number column and confirm a non-privileged user sees only the last four digits.
 
@@ -63,7 +63,8 @@ In this task, you will apply a dynamic data mask to the credit card number colum
     ![](media/MG-image123.png)
 
    ![](media/MG-image124.png)
-## Task 2: Apply DDM to email addresses
+
+### Task 2: Apply DDM to email addresses
 
 In this task, you will apply the built-in email mask to the login email column and confirm it is masked for a non-privileged user.
 
@@ -93,11 +94,14 @@ In this task, you will apply the built-in email mask to the login email column a
   
    > The `email()` function shows the first letter and replaces the rest with `XXX@XXXX.com`.
 
-### Task 3: Route read-only reporting to a secondary replica with read scale-out
+### Task 3: Configure read scale-out for read-only reporting
 
-In this task, you enable **read scale-out** for the web app's read-only reporting queries and observe the result. Read scale-out sends read-only connections to a **readable secondary replica** instead of the primary, so reporting queries don't compete with the transactional workload with a single connection-string setting and no code change.
+In this task, you will learn how **read scale-out** can route read-only reporting queries to a readable secondary replica instead of the primary replica. You will configure the web application’s reporting connection with `ApplicationIntent=ReadOnly` and observe how the connection behaves in your environment.
 
-1. Open the web application from the **Overview** page of **wwi-web-<inject key="Suffix" enableCopy="false"/>** (**Default domain**) and select **Leaderboard**. Note the status shown on the page, this is the `Updateability` of the database the app is connected to, and it currently shows **`READ_WRITE`** (the primary).
+> **Note:** Read scale-out is available when the SQL Managed Instance has a readable secondary replica, such as with the **Business Critical** service tier. If your SQL Managed Instance does not have a readable secondary replica, the connection will remain on the primary database and the application will continue to show `READ_WRITE`. This is expected behavior.
+
+
+1. Open the web application from the **Overview** page of **wwi-web-<inject key="Suffix" enableCopy="false"/>** (**Default domain**) and select **Leaderboard**. Note the status displayed on the page. This is the `Updateability` of the database the app is connected to, and it currently shows **`READ_WRITE`** (the primary replica).
 
 1. On the **wwi-web-<inject key="Suffix" enableCopy="false"/>** App Service, under **Settings**, select **Environment variables**, select the **Connection strings** tab, and select **Advanced edit**.
 
@@ -116,18 +120,17 @@ In this task, you enable **read scale-out** for the web app's read-only reportin
 
     ![](media/MG-image196.png)
    
-   - On a **Business Critical** managed instance → the page shows **`READ_ONLY`** — the reporting queries are now served by a read-only secondary replica, leaving the primary free for the live workload.
-     
-   - On a **General Purpose** managed instance → the page remains **`READ_WRITE`** — see the note below.
-  
-   > **Note** - **read scale-out and service tiers:** Read scale-out uses the always-up secondary replicas that are built into the **Business Critical** service tier (the same replicas that provide its high-availability SLA), and it's available at **no extra cost** there. **General Purpose** has a single replica and no readable secondary, so the connection stays on the primary (`READ_WRITE`) even with `ApplicationIntent=ReadOnly`. To see read scale-out route reporting to a secondary replica live, the managed instance must be **Business Critical**.
+     - If the managed instance **has a readable secondary replica** (Business Critical tier), the page shows **`READ_ONLY`** — the reporting query is now served by a read-only secondary replica, leaving the primary free for the transactional workload.
+     - If the managed instance **does not have a readable secondary replica** (for example, General Purpose), the page remains **`READ_WRITE`** — the connection stays on the primary. This is expected behavior.
 
-> **Takeaway:** With one connection-string setting (`ApplicationIntent=ReadOnly`), a Business Critical managed instance offloads read-only reporting to a secondary replica, improving both reporting *and* transactional performance with no extra infrastructure.
+     > **Takeaway:** Read scale-out uses a single connection-string setting (`ApplicationIntent=ReadOnly`) to request a read-only connection. When a readable secondary replica is available, read-only reporting queries can be routed to the secondary replica, helping reduce the reporting workload on the primary.
 
-## Summary
 
-In this exercise, you masked sensitive columns with Dynamic Data Masking and learned how read scale-out routes read-only reporting queries to a secondary replica on the Business Critical tier.
+### 🧾 Summary
 
-## You have successfully completed the lab!
+In this exercise, you protected sensitive data using **Dynamic Data Masking** and configured the web application to use **read scale-out** for read-only reporting queries. You applied masking to credit card numbers and email addresses, configured `ApplicationIntent=ReadOnly`, and verified how the application behaves depending on whether a readable secondary replica is available.
 
-In this **Data Modernization** lab, you migrated an end-of-support SQL Server 2016 database to Azure SQL Managed Instance with current tools: you assessed the server with **Azure Arc**, migrated with both the **Managed Instance link** and **Azure DMS from Blob Storage**, connected the application through **regional VNet integration**, compared performance with **Query Store**, and secured and scaled the database with **Microsoft Defender for SQL**, **Data Discovery & Classification**, **TDE**, **Dynamic Data Masking** and **read scale-out**.
+
+#### You have successfully completed the lab!
+
+In this **Migrating SQL Databases to Azure SQL Managed Instance with Azure Arc** lab, you migrated an end-of-support SQL Server 2016 database to **Azure SQL Managed Instance** using modern migration tools and approaches. You assessed the database with **Azure Arc**, migrated it using both the **Managed Instance link** and **Azure Database Migration Service (DMS) with Blob Storage**, connected the web application to the migrated database, and improved its security and data protection using **Microsoft Defender for SQL**, **Data Discovery & Classification**, **Transparent Data Encryption (TDE)**, and **Dynamic Data Masking**. You also explored **read scale-out** for read-only reporting and observed how the connection behaves based on the availability of a readable secondary replica.
