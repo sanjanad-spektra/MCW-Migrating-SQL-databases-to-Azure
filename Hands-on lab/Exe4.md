@@ -149,4 +149,4 @@ In this task, you will update the App Service connection strings to point to the
 
 In this exercise, you published the **<inject key="Database Name" enableCopy="false"/>** web application to Azure App Service, configured the SQL Managed Instance public endpoint, and updated the App Service connection strings to connect to the migrated database.
 
-### You have successfully completed the exercise. Now click on **Next >>** from the lower right corner to move on to the next exercise.
+### You have successfully completed the exercise. Select Next >> to continue.
