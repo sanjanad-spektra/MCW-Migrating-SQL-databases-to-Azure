@@ -135,4 +135,4 @@ In this task, you will enable **Transparent Data Encryption (TDE)** on the migra
 
 In this exercise, you classified sensitive data in the migrated database, reviewed the **Microsoft Defender for SQL** vulnerability assessment, enabled **Transparent Data Encryption (TDE)**, and rescanned the database to confirm that the TDE vulnerability was resolved.
 
-#### You have successfully completed the exercise. Now click on **Next >>** from the lower right corner to move on to the next exercise.
+#### You have successfully completed the exercise. Select Next >> to continue.
