@@ -17,9 +17,9 @@ In this exercise, you will complete the following tasks:
 
 ## Task 1: Connect to the SQL Server 2016 VM and prepare the database
 
-In this task, you connect to the **<inject key="SQLVM Name" enableCopy="false"/>** VM, confirm the SQL Server build, and configure the `WideWorldImporters` database for migration.
+In this task, you connect to the **<inject key="SQLVM Name" enableCopy="false"/>** VM, confirm the SQL Server build, and configure the `WideWorldImporters<inject key="Suffix" enableCopy="false"/>` database for migration.
 
-1. Click on the Azure portal icon in the lab VM.
+1. On the lab VM desktop, double-click the **Azure Portal** shortcut.
 
     ![](media/azureportal-1.png)
 
@@ -35,7 +35,7 @@ In this task, you connect to the **<inject key="SQLVM Name" enableCopy="false"/>
 
     ![](media/MG-image2.png)
 
-1. On the **sql2016-<inject key="Suffix" enableCopy="false"/>** virtual machine **Overview** page, click **Connect (1)** and then select **Connect (2)** from the drop-down menu.
+1. On the **sql2016-<inject key="Suffix" enableCopy="false"/>** virtual machine. On the **Overview** page, select **Connect (1)**, and then select **Connect (2)** from the drop-down menu.
 
     ![](media/MG-image3.png)
 
@@ -51,7 +51,7 @@ In this task, you connect to the **<inject key="SQLVM Name" enableCopy="false"/>
 
     ![](media/E1T1S8-0701-1.png)
 
-1. Next, on RDP tab, ensure that the **Clipboard** option is enabled, and then select **Connect**.
+1. Next, in the **Remote Desktop Connection** window, ensure that **Clipboard (1)** is enabled, and then select **Connect (2)**.
 
    ![](media/datamod17.png)
 
