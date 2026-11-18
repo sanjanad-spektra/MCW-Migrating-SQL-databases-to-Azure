@@ -112,7 +112,6 @@ In this task, you will select the Azure SQL Managed Instance as the migration ta
 
       ![](media/MG-image48.png)
 
-
 1. On the **New data migration** pane, under **Migration method**, select **Migrate using real-time replication - MI link**. This is the recommended and most performant option for SQL Server 2016 and later. Select **Select**.
 
    ![](media/MG-image49.png)
@@ -125,7 +124,7 @@ In this task, you will select the Azure SQL Managed Instance as the migration ta
 
     ![](media/MG-image51.png)
    
-1. Confirm it succeeds, then select **Next: Review + create**.
+1. Confirm it succeeds, then select **Next: Review + Create >**.
 
    ![](media/MG-image52.png)
 
@@ -193,11 +192,11 @@ In this task, you will complete the cutover to **Azure SQL Managed Instance**, m
 
 1. Navigate back to the **Azure portal** browser page where the **Monitoring the migration** tab is open.
 
-2. On the **Monitoring the migration** tab, confirm the **WideWorldImporters<inject key="Suffix" enableCopy="false"/>** row shows **Migration status: Ready for cutover** and **Connection status: Healthy**.
+2. On the **Monitoring the migration** tab, confirm the **<inject key="Database Name" enableCopy="false"/>** row shows **Migration status: Ready for cutover** and **Connection status: Healthy**.
 
    ![](media/MG-image156.png)
 
-1. On the **Monitor and cutover** page, select the **WideWorldImporters<inject key="Suffix" enableCopy="false"/>** database row.
+1. On the **Monitor and cutover** page, select the **<inject key="Database Name" enableCopy="false"/>** database row.
 
 2. Select **Complete cutover** and, in the **Complete cutover** dialog, select **I confirm that I have stopped all incoming traffic to the source database** and **I want to do a forced failover**. Then select **Complete cutover** to start the cutover.
 
