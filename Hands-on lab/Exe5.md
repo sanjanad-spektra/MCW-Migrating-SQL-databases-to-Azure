@@ -1,12 +1,14 @@
-## Exercise 5: Improve the security posture with Data Discovery & Classification and Microsoft Defender for SQL
+### Exercise 5: Improve the security posture with Data Discovery & Classification and Microsoft Defender for SQL
 
-**Duration: 30 Minutes**
+### Duration: 30 Minutes
 
-### Overview
+## 📖 Overview
 
-In this exercise, you will use the built-in security features of Azure SQL Managed Instance on the migrated database. You will classify sensitive data with **Data Discovery & Classification**, review database vulnerabilities with **Microsoft Defender for SQL**, and enable **Transparent Data Encryption (TDE)** to encrypt the database at rest.
+In this exercise, you will use the built-in security features of Azure SQL Managed Instance to improve the security posture of the migrated database. You will classify sensitive data with **Data Discovery & Classification**, review database vulnerabilities with **Microsoft Defender for SQL**, and enable **Transparent Data Encryption (TDE)** to encrypt the database at rest.
 
-### Objectives
+You will first identify and classify sensitive data, then run a vulnerability assessment to identify security issues, and finally enable TDE and rescan the database to verify that the vulnerability has been resolved.
+
+## 🎯 Objectives
 
 - **Task 1:** Configure Data Discovery & Classification
 - **Task 2:** Review the Microsoft Defender for SQL vulnerability assessment
@@ -14,7 +16,7 @@ In this exercise, you will use the built-in security features of Azure SQL Manag
 
 ## Task 1: Configure Data Discovery & Classification
 
-In this task, you will discover and classify sensitive columns in the migrated database and review the classification report.
+In this task, you will review the classification recommendations for the migrated database, classify sensitive columns, and review the database classification report.
 
 1. In the **Azure portal**, use the search bar to search for **`SQLMI-shared-RG`**.
 
@@ -80,7 +82,7 @@ In this task, you will discover and classify sensitive columns in the migrated d
    
 ## Task 2: Review the Microsoft Defender for SQL vulnerability assessment
 
-In this task, you will run the Microsoft Defender for SQL vulnerability assessment and review the findings, including that TDE is not enabled.
+In this task, you will run the Microsoft Defender for SQL vulnerability assessment, review the findings, and identify the **Transparent Data Encryption (TDE)** vulnerability.
 
 With the **express configuration** (default), scan results are stored by the service — no storage account needed.
 
@@ -106,9 +108,9 @@ With the **express configuration** (default), scan results are stored by the ser
 
 ## Task 3: Enable Transparent Data Encryption and rescan
 
-In this task, you will enable Transparent Data Encryption and rerun the vulnerability scan to confirm the finding is resolved.
+In this task, you will enable **Transparent Data Encryption (TDE)** on the migrated database, verify that encryption is complete, and rerun the vulnerability assessment to confirm that the TDE vulnerability has been resolved.
 
-1. On the **JumpBox** VM, in SSMS on the **SQL MI** connection, run (replace **SUFFIX**):
+1. On the ****<inject key="Sqlvm Name" enableCopy="false"/>**** VM, in SSMS on the **SQL MI** connection, run (replace **SUFFIX**):
 
    ```sql
    USE master;
@@ -137,8 +139,8 @@ In this task, you will enable Transparent Data Encryption and rerun the vulnerab
 
    ![](media/MG-image117.png)
 
-## Summary
+## 🧾 Summary
 
-You classified sensitive data, used the Microsoft Defender for SQL vulnerability assessment to find TDE was off, enabled TDE, and confirmed the fix with a rescan.
+In this exercise, you classified sensitive data in the migrated database, reviewed the **Microsoft Defender for SQL** vulnerability assessment, enabled **Transparent Data Encryption (TDE)**, and rescanned the database to confirm that the TDE vulnerability was resolved.
 
 ### You have successfully completed the exercise. Now click on **Next >>** from the lower right corner to move on to the next exercise.
