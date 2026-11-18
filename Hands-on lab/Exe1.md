@@ -17,7 +17,7 @@ In this exercise, you will complete the following tasks:
 
 ## Task 1: Connect to the SQL Server 2016 VM and prepare the database
 
-In this task, you connect to the **<inject key="SQLVM Name" enableCopy="false"/>** VM, confirm the SQL Server build, and configure the `WideWorldImporters<inject key="Suffix" enableCopy="false"/>` database for migration.
+In this task, you connect to the **<inject key="SQLVM Name" enableCopy="false"/>** VM, confirm the SQL Server build, and configure the `<inject key="Database Name" enableCopy="false"/>` database for migration.
 
 1. On the lab VM desktop, double-click the **Azure Portal** shortcut.
 
