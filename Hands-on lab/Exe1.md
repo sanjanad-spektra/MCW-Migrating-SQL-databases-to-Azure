@@ -31,7 +31,7 @@ In this task, you connect to the **<inject key="SQLVM Name" enableCopy="false"/>
 
     ![](media/MG-image1.png)
 
-1. In the list of resources for your resource group, select the **sql2016-<inject key="Suffix" enableCopy="false"/>** Virtual Machine.
+1. In the list of resources for your resource group, select the **<inject key="Sqlvm Name" enableCopy="false"/>** Virtual Machine.
 
     ![](media/MG-image2.png)
 
