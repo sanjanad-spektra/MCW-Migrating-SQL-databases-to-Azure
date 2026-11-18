@@ -182,9 +182,9 @@ In this task, you will review the SQL Server instance connected through **Azure 
 
 In this task, you will run an **Azure Arc migration assessment**, review compatibility results, and confirm the recommended migration target and SKU.
 
-1. On the **sqlvm2016-sp3** Arc-enabled SQL Server resource page, in the left menu, under **Migration**, select **Assessments**. From the toolbar, select **Run assessment**. The assessment may take a few minutes to complete.
+1. On the **sqlvm2016-sp3** SQL Server resource page, in the left menu, under **Migration**, select **Assessments**. From the toolbar, select **Run assessment**. The assessment may take a few minutes to complete.
 
-     ![](media/MG-image16.png) 
+     ![](media/MG-image210.png) 
 
    >**Note:** Azure Arc also runs assessments automatically on a weekly schedule. The **Run assessment** button runs one on demand, which is what this task needs. If the page shows "No assessment run yet," select **Run assessment** and wait.
 
@@ -194,11 +194,13 @@ In this task, you will run an **Azure Arc migration assessment**, review compati
    - **SQL Server on Azure VM** - Ready
    - **Azure SQL DB** - **Not ready**
 
-      ![](media/MG-image17.png)
+      ![](media/MG-image211.png) 
       
 1. Under the **Azure SQL DB** card, select **View assessment details**. In **Migration target type**, ensure **Azure SQL DB** is selected, and open the **Compatibility** tab. Under **Database compatibility**, note the blocking finding: **"Service Broker feature is not supported in Azure SQL Database"** (Issue). This is why Azure SQL Database is ruled out.
 
-   ![](media/MG-image18.png)
+   ![](media/MG-image214.png)
+    
+   ![](media/MG-image212.png) 
    
 1. Change **Migration target type** to **Azure SQL Managed Instance**.
 
@@ -206,7 +208,7 @@ In this task, you will run an **Azure Arc migration assessment**, review compati
    
 1. Confirm it shows **Ready** with no blocking issues. Then review the **SKU Recommendation** tab for the recommended service tier, vCores and storage, based on the source server's performance data.
 
-    ![](media/MG-image21.png)  
+    ![](media/MG-image213.png) 
 
    >**Note:** The database, including the Service Broker feature, can be migrated as-is, giving WWI a fully managed PaaS database with _near 100% compatibility_, including the features that prevented them from using Azure SQL Database.
 
