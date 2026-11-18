@@ -164,9 +164,9 @@ In this task, you will review the SQL Server instance connected through **Azure 
 
    ![](media/MG-image143.png)
 
-1. Under **Data services**, select **SQL Server instances**, and then select the **sqlvm2016-sp3** instance.
+1. 1. On the **Azure Arc** page, expand **Data services (1)** and select **SQL Server instances (2)**. On the **SQL Server instances** page, select your **<inject key="Resource Group Name" enableCopy="false"/>** in the **Resource group** filter, and then select **sqlvm2016-sp3 (4)**.
 
-    ![](media/MG-image13.png)
+     ![](media/MG-image145.png)
    
 1. On the **Overview** page, review the instance details: version (SQL Server 2016), edition, license type, and host.
 
