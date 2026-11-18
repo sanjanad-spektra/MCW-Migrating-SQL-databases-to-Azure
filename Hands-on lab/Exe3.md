@@ -23,7 +23,7 @@ In this task, you will prepare **Azure Blob Storage** for the migration by creat
 
    ![](media/MG-image62.png)
 
-1. Select sqlmistore<inject key="Suffix" enableCopy="false"/>.
+1. Select **sqlmistore<inject key="Suffix" />**.
 
     ![](media/MG-image65.png)
 
@@ -35,13 +35,15 @@ In this task, you will prepare **Azure Blob Storage** for the migration by creat
 
    ![](media/MG-image67.png)
    
-1. Select the **migration** container, then go to **Settings (1)** > **Shared access tokens (2)**.
+1. Select the **migration** container.
 
     ![](media/MG-image68.png)
 
-    ![](media/MG-image69.png)
+1. Then go to **Settings (1)** > **Shared access tokens (2)**.
+
+   ![](media/MG-image69.png)
    
-1. Under **Permissions**, select **Read**, **Add**, **Create**, **Write**, **Delete**, and **List**.
+1. Under **Permissions**, select **Read**, **Add**, **Create**, **Write** and **Delete**.
 
     ![](media/MG-image70.png)
    
