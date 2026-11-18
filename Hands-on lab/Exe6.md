@@ -16,7 +16,7 @@ In this exercise, you will protect sensitive columns with **Dynamic Data Masking
 
 In this task, you will create a test user, apply a dynamic data mask to the credit card number column, and verify that the non-privileged user sees only the masked value.
 
-1. In **SQL Server Management Studio (SSMS)**, expand **Databases**, expand **WideWorldImporters**, and then expand **Tables**.
+1. In **SQL Server Management Studio (SSMS)**, expand **Databases**, expand **<inject key="Database Name" enableCopy="false"/>**, and then expand **Tables**.
 
    ![](media/MG-image118.png)
 
