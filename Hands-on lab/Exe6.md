@@ -95,9 +95,9 @@ In this task, you will apply the built-in email mask to the login email column a
 
 ### Task 3: Route read-only reporting to a secondary replica with read scale-out
 
-In this task, you enable **read scale-out** for the web app's read-only reporting queries and observe the result. Read scale-out sends read-only connections to a **readable secondary replica** instead of the primary — so reporting queries don't compete with the transactional workload — with a single connection-string setting and no code change.
+In this task, you enable **read scale-out** for the web app's read-only reporting queries and observe the result. Read scale-out sends read-only connections to a **readable secondary replica** instead of the primary, so reporting queries don't compete with the transactional workload with a single connection-string setting and no code change.
 
-1. Open the web application from the **Overview** page of **wwi-web-<inject key="Suffix" enableCopy="false"/>** (**Default domain**) and select **Leaderboard**. Note the status shown on the page — this is the `Updateability` of the database the app is connected to, and it currently shows **`READ_WRITE`** (the primary).
+1. Open the web application from the **Overview** page of **wwi-web-<inject key="Suffix" enableCopy="false"/>** (**Default domain**) and select **Leaderboard**. Note the status shown on the page, this is the `Updateability` of the database the app is connected to, and it currently shows **`READ_WRITE`** (the primary).
 
 1. On the **wwi-web-<inject key="Suffix" enableCopy="false"/>** App Service, under **Settings**, select **Environment variables**, select the **Connection strings** tab, and select **Advanced edit**.
 
@@ -117,9 +117,10 @@ In this task, you enable **read scale-out** for the web app's read-only reportin
     ![](media/MG-image196.png)
    
    - On a **Business Critical** managed instance → the page shows **`READ_ONLY`** — the reporting queries are now served by a read-only secondary replica, leaving the primary free for the live workload.
+     
    - On a **General Purpose** managed instance → the page remains **`READ_WRITE`** — see the note below.
   
-   > **Note — read scale-out and service tiers:** Read scale-out uses the always-up secondary replicas that are built into the **Business Critical** service tier (the same replicas that provide its high-availability SLA), and it's available at **no extra cost** there. **General Purpose** has a single replica and no readable secondary, so the connection stays on the primary (`READ_WRITE`) even with `ApplicationIntent=ReadOnly`. To see read scale-out route reporting to a secondary replica live, the managed instance must be **Business Critical**.
+   > **Note** - **read scale-out and service tiers:** Read scale-out uses the always-up secondary replicas that are built into the **Business Critical** service tier (the same replicas that provide its high-availability SLA), and it's available at **no extra cost** there. **General Purpose** has a single replica and no readable secondary, so the connection stays on the primary (`READ_WRITE`) even with `ApplicationIntent=ReadOnly`. To see read scale-out route reporting to a secondary replica live, the managed instance must be **Business Critical**.
 
 > **Takeaway:** With one connection-string setting (`ApplicationIntent=ReadOnly`), a Business Critical managed instance offloads read-only reporting to a secondary replica, improving both reporting *and* transactional performance with no extra infrastructure.
 
