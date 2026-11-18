@@ -4,7 +4,7 @@
 
 ## 📖 Overview
 
-In this exercise, you will publish the **<inject key="Database Name" enableCopy="false"/>**web application to Azure App Service and connect it to the database migrated to **Azure SQL Managed Instance**. You will configure the managed instance endpoint, update the App Service connection strings, and verify that the web application can connect to and display data from the migrated database.
+In this exercise, you will publish the **<inject key="Database Name" enableCopy="false"/>** web application to Azure App Service and connect it to the database migrated to **Azure SQL Managed Instance**. You will configure the managed instance endpoint, update the App Service connection strings, and verify that the web application can connect to and display data from the migrated database.
 
 You will first publish the web application, then configure the SQL Managed Instance endpoint and update the application connection settings before verifying the application connection.
 
@@ -18,7 +18,7 @@ You will first publish the web application, then configure the SQL Managed Insta
 
 In this task, you will publish the **WideWorldImporters** web application from Visual Studio to the existing Azure App Service.
 
-1. Navigate to your **Lab VM** desktop.
+1. Navigate to your **Jump VM** desktop.
 
 1. In the File Explorer dialog, navigate to the `C:\hands-on-lab\MCW-Migrating-SQL-databases-to-Azure-master\Hands-on lab\lab-files`. In the **lab-files** folder, double-click **WideWorldImporters.sln** to open the solution in **Visual Studio**.
 
@@ -51,7 +51,6 @@ In this task, you will publish the **WideWorldImporters** web application from V
 
     ![](media/MG-image173.png)
 
-
 1. Once logged into **Visual Studio**, in the **Solution Explorer** on the right side, right-click the **WideWorldImporters.Web (1)** project, and then select **Publish (2)** from the context menu.
 
     ![](media/MG-image174.png)
@@ -76,7 +75,7 @@ In this task, you will publish the **WideWorldImporters** web application from V
 
     ![](media/MG-image178.png)
 
-1. Back on the Visual Studio Publish page for the `WideWorldImporters.Web` project, select **Publish** to start the process of publishing your Web API to your Azure API App.
+1. Back on the **Visual Studio Publish** page for the `WideWorldImporters.Web` project, select **Publish** to start the process of publishing your Web API to your Azure API App.
 
     ![](media/MG-image179.png)
 
@@ -97,7 +96,6 @@ In this task, you will enable the **public endpoint** on the SQL Managed Instanc
     ![](media/MG-image186.png)
    
    >**Note:** `sqlmi--cus` is a shared instance, so the public endpoint may already be enabled. If it is already on, leave it as-is and continue — enabling it again is harmless.
-
 
 1. On the same **Networking** blade, copy the **Endpoint** value (the public host **and** port) into Notepad - it has the form **`sqlmi--cus.public.<dns-zone>.database.windows.net,3342`**.
 
@@ -127,7 +125,7 @@ In this task, you will update the App Service connection strings to point to the
 
     ![](media/MG-image183.png)
    
-1. Replace the host with the **public** FQDN you copied in Task 2 — it **must contain `.public.`** and end with **`,3342`** — and replace `SUFFIX` with **<inject key="Suffix" />**. Select **OK**.
+1. Replace the host with the **public** Endpoint FQDN you copied in Task 2 — it **must contain `.public.`** and end with **`,3342`** — and replace `SUFFIX` with **<inject key="Suffix" />**. Select **OK**.
 
    >**Note:** The application reads its connection strings with `GetConnectionString()`, so you only set them under **Connection strings**. `Encrypt=True;TrustServerCertificate=False` makes the app validate the managed instance's certificate.
 
