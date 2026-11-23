@@ -39,7 +39,7 @@ In this task, you will connect to the **<inject key="SQLVM Name" enableCopy="fal
 
     ![](media/MG-image2.png)
 
-1. On the **<inject key="Sqlvm Name" enableCopy="false"/>** virtual machine. On the **Overview** page, select **Connect (1)**, and then select **Connect (2)** from the drop-down menu.
+1. On the **<inject key="Sqlvm Name" enableCopy="false"/>** virtual machine, on the **Overview** page, select **Connect (1)**, and then select **Connect (2)** from the drop-down menu.
 
     ![](media/MG-image3.png)
 
