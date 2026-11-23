@@ -64,7 +64,7 @@ In this task, you will connect to the **<inject key="SQLVM Name" enableCopy="fal
    - **Username**: `sqlmiuser`
    - **Password**: `Password.1234567890`
 
-      ![](media/E1T1S10-1809.png)
+      ![](media/MG-image215.png)
 
 1. On **The identity of the remote computer cannot be verified** pop-up window, click **Yes** to confirm and proceed with connecting to your virtual machine.
 
