@@ -32,7 +32,7 @@ In this task, you will publish the **WideWorldImporters** web application from V
 
     ![](media/MG-image168.png)
 
-    ![](media/MG-image168.png)
+    ![](media/MG-image169.png)
    
 3. Enter the following **Azure account** credentials if prompted:
    
