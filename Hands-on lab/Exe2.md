@@ -147,7 +147,7 @@ In this task, you will select the Azure SQL Managed Instance as the migration ta
 
 In this task, you will verify that changes made to the source database are replicated to SQL Managed Instance in near real time.
 
-1. In SSMS, select **Connect** > **Database Engine**.
+1. Navigate back to SSMS, select **Connect** > **Database Engine**.
 
    ![](media/MG-image57.png)
 
