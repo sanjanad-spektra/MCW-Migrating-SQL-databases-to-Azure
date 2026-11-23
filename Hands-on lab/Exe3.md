@@ -81,7 +81,11 @@ In this task, you will prepare **Azure Blob Storage** for the migration by creat
 
 In this task, you will create a SQL Server credential and back up the **<inject key="Database Name" enableCopy="false"/>** database directly to **Azure Blob Storage**. You will then verify that the backup file is available in the storage container.
 
-1. On the **<inject key="SQLVM Name" enableCopy="false"/>** VM, in SSMS on the source connection, paste the following (replace **SUFFIX** with **<inject key="Suffix" />** and `<SAS-token>`), and **Execute**:
+1. On the **<inject key="SQLVM Name" enableCopy="false"/>** VM, in SSMS on the **source** connection, right-click the **sqlvm2016-sp3** server connection and select **New Query**.
+
+    ![](media/MG-image149.png)
+
+1. Paste the following (replace **SUFFIX** with **<inject key="Suffix" />** and `<SAS-token>`), and **Execute**:
    
     ```sql
     USE master;
@@ -201,7 +205,11 @@ In this task, you will create **Azure Database Migration Service (DMS)** and con
 
 In this task, you will back up the latest transaction log, complete the **DMS cutover**, and verify that the migrated database on Azure SQL Managed Instance is available for read and write operations.
 
-1. Navigate back to SSMS, on the **source** connection, run the following (replace **SUFFIX** with **<inject key="Suffix" />**):
+1. Navigate back to SSMS, on the **source** connection, right-click the **sqlvm2016-sp3** server connection and select **New Query**.
+
+    ![](media/MG-image149.png)
+
+1. Run the following (replace **SUFFIX** with **<inject key="Suffix" />**):
 
    ```sql
    USE WideWorldImportersSUFFIX;
@@ -239,7 +247,11 @@ In this task, you will back up the latest transaction log, complete the **DMS cu
 
      ![](media/MG-image97.png)
 
-1. In SSMS, on the **SQL MI** connection, run the following (replace **SUFFIX** with **<inject key="Suffix" />**):
+1. In SSMS, on the **SQL MI connection** (`sqlmi--cus`), right-click the connection and select **New Query**.
+
+    ![](media/MG-image151.png)
+
+1. run the following (replace **SUFFIX** with **<inject key="Suffix" />**):
 
    ```sql
    SELECT DATABASEPROPERTYEX('WideWorldImportersBSUFFIX','Updateability') AS Updateability;
