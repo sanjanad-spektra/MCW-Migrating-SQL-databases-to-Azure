@@ -182,7 +182,7 @@ In this task, you will review the SQL Server instance connected through **Azure 
 
 In this task, you will run an **Azure Arc migration assessment**, review compatibility results, and confirm the recommended migration target and SKU.
 
-1. On the **sqlvm2016-sp3** SQL Server resource page, in the left menu, under **Migration**, select **Assessments**. From the toolbar, select **Run assessment**. The assessment may take a few minutes to complete.
+1. On the **sqlvm2016-sp3** SQL Server resource page, in the left menu, under **Migration (1)**, select **Assessments (2)**. From the toolbar, select **Run assessment (3)**. The assessment may take a few minutes to complete.
 
      ![](media/MG-image210.png) 
 
