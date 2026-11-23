@@ -154,6 +154,8 @@ In this optional task, you will enable **Query Store** and capture a performance
 
 ### Task 3: Review the Azure Arc-enabled SQL Server
 
+> **Note:** You can perform the Azure portal activities from either the **Jump VM** or the **SQL VM**. The **Jump VM** is already signed in to the Azure portal. If you are using the **SQL VM**, sign in to the **Azure portal** before proceeding with the steps below.
+
 In this task, you will review the SQL Server instance connected through **Azure Arc** and verify that the database is available for assessment.
 
 1. In the **Azure portal**, search for **Azure Arc** and select it.
