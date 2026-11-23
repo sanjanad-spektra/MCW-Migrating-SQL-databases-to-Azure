@@ -99,7 +99,9 @@ In this task, you will enable the **public endpoint** on the SQL Managed Instanc
 
 1. On the same **Networking** blade, copy the **Endpoint** value (the public host **and** port) into Notepad - it has the form **`sqlmi--cus.public.<dns-zone>.database.windows.net,3342`**.
 
-   >**⚠️ The host MUST contain `.public.`** The plain host `sqlmi--cus.<dns-zone>.database.windows.net` (shown on the **Overview** blade) is the **private** endpoint — the App Service **cannot reach it** and you will get a *"socket forbidden / server not accessible"* error. Always copy the **`.public.`** host from the **Networking** blade, and use port **3342** (not the private 1433 used by the MI link).
+    ![](media/MG-image190.png)
+   
+   >**⚠️ The host MUST contain `.public.`** The plain host `sqlmi--cus.<dns-zone>.database.windows.net` (shown on the **Overview** blade) is the **private** endpoint - the App Service **cannot reach it** and you will get a *"socket forbidden / server not accessible"* error. Always copy the **`.public.`** host from the **Networking** blade, and use port **3342** (not the private 1433 used by the MI link).
 
 ### Task 3: Update the connection strings and open the web app
 
