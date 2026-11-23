@@ -172,7 +172,7 @@ In this task, you will review the SQL Server instance connected through **Azure 
 
     ![](media/MG-image14.png)
    
-1. In the left menu, select **Databases** and confirm that **<inject key="Database Name" enableCopy="false"/></inject>** is listed.
+1. In the left menu, expand **Data management (1)** then select **Databases (2)** and confirm that **<inject key="Database Name" enableCopy="false"/></inject> (3)** is listed.
 
     ![](media/MG-image15.png)
    
