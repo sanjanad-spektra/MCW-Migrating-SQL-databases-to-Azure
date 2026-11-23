@@ -188,6 +188,8 @@ In this task, you will run an **Azure Arc migration assessment**, review compati
 
    >**Note:** Azure Arc also runs assessments automatically on a weekly schedule. The **Run assessment** button runs one on demand, which is what this task needs. If the page shows "No assessment run yet," select **Run assessment** and wait.
 
+1. Refresh the page frequently.
+   
 1. When the assessment completes, the **Assessment results** open with a **Migration strategy** of **Modernize to PaaS** and an **Overview** showing three target options side by side:
 
    - **Azure SQL MI** - **Ready** (0 migration issues)
