@@ -201,7 +201,7 @@ In this task, you will create **Azure Database Migration Service (DMS)** and con
 
 In this task, you will back up the latest transaction log, complete the **DMS cutover**, and verify that the migrated database on Azure SQL Managed Instance is available for read and write operations.
 
-1. In SSMS, on the **source** connection, run the following (replace **SUFFIX** with **<inject key="Suffix" />**):
+1. Navigate back to SSMS, on the **source** connection, run the following (replace **SUFFIX** with **<inject key="Suffix" />**):
 
    ```sql
    USE WideWorldImportersSUFFIX;
