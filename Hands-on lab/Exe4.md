@@ -119,15 +119,11 @@ In this task, you will update the App Service connection strings to point to the
 
      ![](media/MG-image183.png)
    
-1. Set the value of both wwiContext and WwiReadOnlyContext by replacing your-sqlmi-public-fqdn-value,3342; with the public endpoint you recorded in the previous task.
+1. Set the value of both wwiContext and WwiReadOnlyContext by replacing **your-sqlmi-public-fqdn-value,3342** with the public endpoint you recorded in the previous task.
 
     ![](media/MG-image218.png)
 
     ![](media/MG-image219.png)
-   
-1. Replace the host with the **public** Endpoint FQDN you copied in Task 2 — it **must contain `.public.`** and end with **`,3342`** — and replace `SUFFIX` with **<inject key="Suffix" />**. Select **OK**.
-
-   >**Note:** The application reads its connection strings with `GetConnectionString()`, so you only set them under **Connection strings**. `Encrypt=True;TrustServerCertificate=False` makes the app validate the managed instance's certificate.
 
 1. Select **Apply**, then **Confirm** when told the app will restart.
 
