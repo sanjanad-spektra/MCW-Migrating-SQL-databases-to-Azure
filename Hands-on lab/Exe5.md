@@ -22,9 +22,9 @@ In this task, you will review the classification recommendations for the migrate
 
      ![](media/MG-image189.png)
    
-6. In the SQL Managed Instance page, expand **Data management (1)** from the left navigation menu. Select **Databases (2)** and in the database search and select **<inject key="Database Name" enableCopy="false"/>**. .
+6. In the SQL Managed Instance page, expand **Data management (1)** from the left navigation menu. Select **Databases (2)** and in the database search and select **<inject key="Database Name" enableCopy="false"/>**.
 
-1. On the database blade, under **Security**, select **Data Discovery & Classification**.
+1. On the database blade, under **Security (1)**, select **Data Discovery & Classification (2)**.
 
     ![](media/MG-image101.png)
 
@@ -56,7 +56,7 @@ In this task, you will review the classification recommendations for the migrate
 
     ![](media/MG-image105.png)
    
-1. Review the **HumanResources - Employee** recommendations (NationalIDNumber, BirthDate) flagged **Confidential - GDPR**. Check **Select all**, select **Accept selected recommendations**, then **Save**.
+1. Review the **HumanResources - Employee** recommendations (NationalIDNumber, BirthDate) flagged **Confidential - GDPR**.
 
     ![](media/MG-image106.png)
 
