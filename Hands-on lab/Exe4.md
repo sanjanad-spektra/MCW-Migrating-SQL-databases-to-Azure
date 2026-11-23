@@ -119,13 +119,11 @@ In this task, you will update the App Service connection strings to point to the
 
      ![](media/MG-image183.png)
    
-1. Set the value of both `wwiContext` and `WwiReadOnlyContext` to the following:
+1. Set the value of both wwiContext and WwiReadOnlyContext by replacing your-sqlmi-public-fqdn-value,3342; with the public endpoint you recorded in the previous task.
 
-    ```
-    Server=tcp:sqlmi--cus.public.<dns-zone>.database.windows.net,3342;Database=WideWorldImportersSUFFIX;User ID=contosoadmin;Password=IAE5fAijit0w^rDM;Encrypt=True;TrustServerCertificate=False;
-    ```
+    ![](media/MG-image218.png)
 
-    ![](media/MG-image183.png)
+    ![](media/MG-image219.png)
    
 1. Replace the host with the **public** Endpoint FQDN you copied in Task 2 — it **must contain `.public.`** and end with **`,3342`** — and replace `SUFFIX` with **<inject key="Suffix" />**. Select **OK**.
 
