@@ -86,7 +86,7 @@ In this task, you will connect to the **<inject key="SQLVM Name" enableCopy="fal
 
    ![](media/MG-image8.png)
    
-1. Paste the following script and (replace SUFFIX with <inject key="Suffix" enableCopy="false"/>) and then select **Execute**. The script confirms the SQL Server build, sets the recovery model to **FULL**, and enables **Service Broker**.
+1. Paste the following script and (replace SUFFIX with **<inject key="Suffix" />**) and then select **Execute**. The script confirms the SQL Server build, sets the recovery model to **FULL**, and enables **Service Broker**.
 
     ```sql
     -- Build 13.0.7xxx = SQL Server 2016 SP3 + Azure Connect pack; Edition must be Developer/Standard/Enterprise
@@ -116,7 +116,7 @@ In this task, you will connect to the **<inject key="SQLVM Name" enableCopy="fal
 
 In this optional task, you will enable **Query Store** and capture a performance baseline to compare query performance before and after migration.
 
-1. In SSMS, select **New Query**, paste the following script and(replace SUFFIX with <inject key="Suffix" enableCopy="false"/>) then select **Execute** to enable Query Store:
+1. In SSMS, select **New Query**, paste the following script and(replace SUFFIX with **<inject key="Suffix" />**) then select **Execute** to enable Query Store:
 
     ```sql
     USE master;
@@ -128,7 +128,7 @@ In this optional task, you will enable **Query Store** and capture a performance
     ```
    ![](media/MG-image33.png)
     
-1. Select **New Query**, paste the following sample workload, and (replace SUFFIX with <inject key="Suffix" enableCopy="false"/>) then select **Execute**. The `GO 50` batch separator runs each query 50 times.
+1. Select **New Query**, paste the following sample workload, and (replace SUFFIX with **<inject key="Suffix" />**) then select **Execute**. The `GO 50` batch separator runs each query 50 times.
 
     ```sql
     USE WideWorldImportersSUFFIX;
