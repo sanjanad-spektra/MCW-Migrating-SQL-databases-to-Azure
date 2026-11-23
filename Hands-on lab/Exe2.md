@@ -64,7 +64,7 @@ The source SQL Server prerequisites for the Managed Instance link are already co
 
     ![](media/MG-image133.png)
    
-1. Run the following command, replacing **<sqlmi-fqdn>** with the **FQDN** retrieved in Task 1:
+1. Run the following command, replacing <sqlmi-fqdn> with the **FQDN** retrieved in Task 1:
 
     ```PowerShell
     Test-NetConnection -ComputerName <sqlmi-fqdn> -Port 5022
