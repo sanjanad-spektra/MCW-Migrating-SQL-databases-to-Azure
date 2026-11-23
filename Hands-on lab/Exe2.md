@@ -135,7 +135,7 @@ In this task, you will select the Azure SQL Managed Instance as the migration ta
 
    ![](media/MG-image53.png)
    
-1. On the **Database migration** pane, select the **Monitor and cutover** tile.
+1. After you select **Start migration**, you are automatically returned to the **Database migration** pane. Select **Monitor migration** to monitor the migration progress.
 
     ![](media/MG-image54.png)
 
