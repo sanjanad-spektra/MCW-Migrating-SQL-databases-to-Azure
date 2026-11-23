@@ -34,7 +34,7 @@ In this task, you will publish the **WideWorldImporters** web application from V
 
     ![](media/MG-image169.png)
    
-3. Enter the following **Azure account** credentials if prompted:
+3. Enter the following **Azure account** credentials when prompted:
    
    * Email/Username: <inject key="AzureAdUserEmail"></inject>
    * Temporary Access Pass: <inject key="AzureAdUserPassword"></inject>
