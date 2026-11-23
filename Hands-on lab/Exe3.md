@@ -43,9 +43,9 @@ In this task, you will prepare **Azure Blob Storage** for the migration by creat
 
    ![](media/MG-image69.png)
    
-1. Under **Permissions**, select **Read**, **Add**, **Create**, **Write** and **Delete**.
+1. Under **Permissions**, select **Read**, **Add**, **Create**, **Write**, **Delete** and **List**.
 
-    ![](media/MG-image70.png)
+    ![](media/MG-image217.png)
    
 1. Set the **Expiry** to **two days from now (1)**, select **HTTPS** and **HTTP (2)**, then select **Generate SAS token and URL (3)**.
 
@@ -57,7 +57,7 @@ In this task, you will prepare **Azure Blob Storage** for the migration by creat
 
 1. Select **sqlmistore<inject key="Suffix" enableCopy="false"/> | Containers** to navigate back to the storage account page, then select **Access Control (IAM)** from the left navigation pane.
 
-    ![](media/MG-image200.png)
+    ![](media/MG-image216.png)
    
 1. Select **+ Add**, then select **Add role assignment**.
 
