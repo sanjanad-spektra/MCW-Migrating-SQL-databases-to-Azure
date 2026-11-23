@@ -84,7 +84,10 @@ In this task, you will select the Azure SQL Managed Instance as the migration ta
 
     ![](media/MG-image12.png)
 
-1. On the **Azure Arc** page, expand **Data services (1)** and select **SQL Server instances (2)**. On the **SQL Server instances** page, select your **<inject key="Resource Group Name" enableCopy="false"/>** in the **Resource group** filter, and then select **sqlvm2016-sp3 (4)**.
+1. On the **Azure Arc** page, navigate back to **sqlvm2016-sp3 | Assessments** blade.
+   
+   **>Note:** If you missed navigating to the Azure Arc page, follow these steps to continue the flow:
+    On the **Azure Arc** page, expand **Data services (1)** and select **SQL Server instances (2)**. On the **SQL Server instances** page, select your **<inject key="Resource Group Name" enableCopy="false"/>** in the **Resource group** filter, and then select **sqlvm2016-sp3 (4)**.
 
    ![](media/MG-image145.png)
    
