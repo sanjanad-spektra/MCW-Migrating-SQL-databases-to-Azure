@@ -55,7 +55,7 @@ In this task, you will connect to the **<inject key="SQLVM Name" enableCopy="fal
 
     ![](media/E1T1S8-0701-1.png)
 
-1. Next, in the **Remote Desktop Connection** window, ensure that **Clipboard (1)** is enabled, and then select **Connect (2)**.
+1. Next, in the **Remote Desktop Connection security warning** window, ensure that **Clipboard (1)** is enabled, and then select **Connect (2)**.
 
    ![](media/datamod17.png)
 
