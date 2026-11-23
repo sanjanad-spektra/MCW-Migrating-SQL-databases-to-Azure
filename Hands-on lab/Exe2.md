@@ -115,7 +115,7 @@ In this task, you will select the Azure SQL Managed Instance as the migration ta
 
       ![](media/MG-image48.png)
 
-1. On the **New data migration** pane, under **Migration method**, select **Migrate using real-time replication - MI link**. This is the recommended and most performant option for SQL Server 2016 and later. Select **Select**.
+1. On the **New data migration** pane, under **Migration method**, select **Migrate using real-time replication - MI link (1)**. This is the recommended and most performant option for SQL Server 2016 and later. Select **Select (2)**.
 
    ![](media/MG-image49.png)
 
