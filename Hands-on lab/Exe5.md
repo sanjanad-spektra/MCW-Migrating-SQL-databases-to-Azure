@@ -76,7 +76,7 @@ In this task, you will review the classification recommendations for the migrate
 
 In this task, you will run the Microsoft Defender for SQL vulnerability assessment, review the findings, and identify the **Transparent Data Encryption (TDE)** vulnerability.
 
-With the **express configuration** (default), scan results are stored by the service — no storage account needed.
+With the **express configuration** (default), scan results are stored by the service - no storage account needed.
 
 1. On the database blade, under **Security**, select **Microsoft Defender for Cloud**. Confirm **Microsoft Defender for SQL** is **Enabled**.
 
